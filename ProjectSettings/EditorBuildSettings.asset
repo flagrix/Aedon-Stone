@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ChoixJoueurs.unity
     guid: 8a5f57a30cbc2e0449d2271e890e1e97
   - enabled: 1
+    path: Assets/Scenes/ChoixMode.unity
+    guid: f744b09fba0995d41940da3703f582cf
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
