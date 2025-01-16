@@ -12,6 +12,20 @@ public class Inventory : MonoBehaviour
     {
         instance = this; //Pour pouvoir faire appel a inventory de partout NE PAS TOUCHER!!!!!
     }
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            addRune(1);
+            addPotion(1);
+            HealthBar.instance.SetActualHealth(20);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            addRune(-1);
+            addPotion(-1);
+            HealthBar.instance.SetActualHealth(-20);
+        }}
 
     public void addRune(int newRune)
     {
