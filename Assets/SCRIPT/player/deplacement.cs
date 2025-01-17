@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     // Handle camera rotation
     if (canMove)
     {
-        rotationX += Input.GetAxis("Mouse Y") * lookSpeed;
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -(lookXLimit+10), lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
