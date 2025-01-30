@@ -2725,6 +2725,11 @@ MonoBehaviour:
   crouchHeight: 1
   crouchSpeed: 3
   crouchTransitionSpeed: 15
+  footstepAudioSource: {fileID: 1126086482}
+  walkSound: {fileID: 8300000, guid: 05a3b2aa7f17a3b4ea3f90af9030018c, type: 3}
+  runSound: {fileID: 0}
+  footstepIntervalWalk: 0.5
+  footstepIntervalRun: 0.3
 --- !u!136 &1126086477
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2854,7 +2859,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.74
   m_Pitch: 1
   Loop: 0
