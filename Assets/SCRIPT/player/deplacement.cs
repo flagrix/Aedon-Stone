@@ -17,6 +17,13 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed = 3f;
     public float crouchTransitionSpeed = 15f; // Speed of crouch height transition
 
+    public AudioSource footstepAudioSource;  // Composant AudioSource pour les bruits de pas
+    public AudioClip walkSound;              // Son pour la marche
+    public AudioClip runSound;               // Son pour la course
+    public float footstepIntervalWalk = 0.5f;  // Temps entre chaque bruit de pas en marchant
+    public float footstepIntervalRun = 0.3f;   // Temps entre chaque bruit de pas en courant
+    private float footstepTimer = 0f;          // Timer pour contrôler les sons
+
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
     private CharacterController characterController;
@@ -118,14 +125,45 @@ public class PlayerMovement : MonoBehaviour
 
     // Move the character
     characterController.Move(moveDirection * Time.deltaTime);
+    PlayFootstepSound();
 
-    // Handle camera rotation
-    if (canMove)
+        // Handle camera rotation
+        if (canMove)
     {
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -(lookXLimit+10), lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
     }
-  }
+        
+    }
+
+    void PlayFootstepSound()
+    {
+        // Vérifie si le joueur touche le sol et appuie sur une touche de déplacement
+        if (characterController.isGrounded && (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
+        {
+            footstepTimer -= Time.deltaTime; // Réduit le timer
+
+            if (footstepTimer <= 0f)  // Vérifie si on peut jouer un son
+            {
+                // Détermine le bon son à jouer (marche ou course)
+                footstepAudioSource.clip = isCurrentlyRunning ? runSound : walkSound;
+
+                // Ne joue le son que si l'AudioSource n'est pas déjà en lecture
+                if (!footstepAudioSource.isPlaying)
+                {
+                    footstepAudioSource.Play();
+                }
+
+                // Réinitialise le timer selon la vitesse de déplacement
+                footstepTimer = isCurrentlyRunning ? footstepIntervalRun : footstepIntervalWalk;
+            }
+        }
+        else
+        {
+            // Arrête le son si le joueur ne bouge plus ou est en l'air
+            footstepAudioSource.Stop();
+        }
+    }
 }
