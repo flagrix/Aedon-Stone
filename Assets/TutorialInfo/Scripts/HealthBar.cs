@@ -1,13 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
+
+
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
     public int actual_health = 100;
     public static HealthBar instance;
+    
     private void Awake()
     {
         instance = this;
+    }
+
+    void Update()
+    {
+        if (actual_health <= 0)
+        {
+            PlayerMovement.instance.Death();
+            PlayerMovement.instance.isRespawning = true;
+        }
+
     }
 
     public void SetMaxHealth(int health)
@@ -32,4 +45,16 @@ public class HealthBar : MonoBehaviour
             actual_health += health;
         SetHealth(actual_health);
     }
+
+    /**public void Death()
+    {
+        if (PlayerMovement.instance != null)
+        {
+            Debug.Log("sjbd");
+            PlayerMovement.instance.enabled = false;
+            Camera.main.transform.SetParent(null);
+            PlayerMovement.instance.gameObject.SetActive(false);
+            PlayerMovement.instance.PlayerRespawn();
+        }
+    }**/
 }

@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; //Pour pouvoir faire appel a inventory de partout NE PAS TOUCHER!!!!!
+        instance = this; //Pour pouvoir faire appel a inventory de partout
     }
     public void Update()
     {
