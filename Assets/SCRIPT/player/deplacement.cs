@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void Death()
     {
-        if (instance != null && !isRespawning)
+        if (instance != null && !isRespawning && !GameOver.instance.isGameOver)
         {
             Debug.Log("Le joueur est mort, lancement du respawn...");
             isRespawning = true;
