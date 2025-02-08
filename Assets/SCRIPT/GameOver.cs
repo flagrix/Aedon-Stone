@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+
+    public AudioSource GameOverSoundSource;  
+    public AudioClip GameOverSound;
+
     public GameObject GameOverUI;
     public static GameOver instance;
     public bool isGameOver = false;
@@ -25,6 +29,8 @@ public class GameOver : MonoBehaviour
         isGameOver = true;
         PlayerMovement.instance.enabled = false;
         Camera.main.transform.SetParent(null);
+        GameOverSoundSource.clip = GameOverSound;
+        GameOverSoundSource.Play();
         StartCoroutine(FadeInGameOverUI());
 
 

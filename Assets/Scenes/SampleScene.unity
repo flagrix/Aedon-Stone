@@ -539,6 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb7faeb1638f164ea5986b8c69ab84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameOverSoundSource: {fileID: 227697164}
+  GameOverSound: {fileID: 8300000, guid: 5fa44bf3a6aea414e9a3180bc972406d, type: 3}
   GameOverUI: {fileID: 748646069}
   isGameOver: 0
   gameOverCanvas: {fileID: 748646071}
