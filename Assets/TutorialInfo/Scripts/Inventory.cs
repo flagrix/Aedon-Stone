@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
             runes += newRune;
             runesText.text = runes.ToString();
         }
-        if (runes > 9)
+        if (runes > 9 && !GameOver.instance.isGameOver)
             GameOver.instance.EndGame();
     }
     public void addPotion(int newpotion)

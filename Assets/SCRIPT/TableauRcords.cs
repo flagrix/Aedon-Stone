@@ -26,16 +26,27 @@ public class TableauRcords : MonoBehaviour
     [SerializeField] private GameObject Tableau;
     [SerializeField] private GameObject Fond;
     [SerializeField] private Button Croix;
+
+    public static TableauRcords instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        AffichageScores();
+        for (int i = 0; i < 7; i++)
+        {
+            RecordSolo[i] = PlayerPrefs.GetInt("RecordSolo_" + i, -1); // -1 si aucune valeur enregistrée
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void Awake()
+    {
+            instance = this;
+
     }
 
     public void NewScoreSolo(int score)
@@ -45,11 +56,24 @@ public class TableauRcords : MonoBehaviour
             {
                 RecordSolo.RemoveAt(6);
                 RecordSolo.Add(score);
-                for (int y = 5; y > i; y--)
+                for (int y = 5; y >= i; y--)
                 {
                     (RecordSolo[y], RecordSolo[y + 1]) = (RecordSolo[y + 1], RecordSolo[y]);
                 }
+                PlayerPrefs.SetInt("RecordSolo_" + i, RecordSolo[i]);
+                PlayerPrefs.Save(); // Important pour enregistrer sur le disque
+                break;
             }
+    }
+    public void ResetScores()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            PlayerPrefs.SetInt("RecordSolo_" + i, -1);
+            PlayerPrefs.SetInt("RecordDuo_" + i, -1);
+        }
+        PlayerPrefs.Save(); // N'oublie pas pour enregistrer les changements
+        Debug.Log("Scores réinitialisés dans PlayerPrefs !");
     }
 
     public void NewScoreDuo(int score)
@@ -58,15 +82,12 @@ public class TableauRcords : MonoBehaviour
             if (score > RecordDuo[i])
             {
                 RecordDuo.RemoveAt(6);
-                RecordDuo.Add(score);
-                for (int y = 5; y > i; y--)
-                {
-                    (RecordDuo[y], RecordDuo[y + 1]) = (RecordDuo[y + 1], RecordDuo[y]);
-                }
+                RecordDuo.Insert(i, score);
+                break;
             }
     }
 
-    private void AffichageScores()
+    public void AffichageScores()
     {
         ColorBlock colors = Histoire.colors;
         colors.normalColor = new Color(0.3f, 0.3f, 0.3f); // Assombrir les boutons
@@ -98,55 +119,61 @@ public class TableauRcords : MonoBehaviour
         FifthDuo.gameObject.SetActive(true);
         SixthDuo.gameObject.SetActive(true);
         SeventhDuo.gameObject.SetActive(true);
+        Debug.Log($"{RecordSolo[0]}");
         if (RecordSolo[0] == -1)
         {
+            Debug.Log("Mauvais affichage");
             FirstSolo.text = ".........";
         }
-        else FirstSolo.text = RecordSolo[0].ToString();
+        else
+        {
+            FirstSolo.text = RecordSolo[0].ToString() + " pts";
+            Debug.Log("Bon affichage");
+        }
         if (RecordSolo[1] == -1)
             SecondSolo.text = ".........";
-        else SecondSolo.text = RecordSolo[1].ToString();
+        else SecondSolo.text = RecordSolo[1].ToString() +  " pts";
         if (RecordSolo[2] == -1)
             ThirdSolo.text = ".........";
-        else ThirdSolo.text = RecordSolo[2].ToString();
+        else ThirdSolo.text = RecordSolo[2].ToString() + " pts";
         if (RecordSolo[3] == -1)
             FourthSolo.text = ".........";
-        else FourthSolo.text = RecordSolo[3].ToString();
+        else FourthSolo.text = RecordSolo[3].ToString() + " pts";
         if (RecordSolo[4] == -1)
             FifthSolo.text = ".........";
-        else FifthSolo.text = RecordSolo[4].ToString();
+        else FifthSolo.text = RecordSolo[4].ToString() + " pts";
         if (RecordSolo[5] == -1)
             SixthSolo.text = ".........";
-        else SixthSolo.text = RecordSolo[5].ToString();
+        else SixthSolo.text = RecordSolo[5].ToString() + " pts";
         if (RecordSolo[6] == -1)
             SeventhSolo.text = ".........";
-        else SeventhSolo.text = RecordSolo[6].ToString();
+        else SeventhSolo.text = RecordSolo[6].ToString() + " pts";
         if (RecordDuo[0] == -1)
         {
             FirstDuo.text = ".........";
         }
-        else FirstDuo.text = RecordDuo[0].ToString();
+        else FirstDuo.text = RecordDuo[0].ToString() + " pts";
         if (RecordDuo[1] == -1)
             SecondDuo.text = ".........";
-        else SecondDuo.text = RecordDuo[1].ToString();
+        else SecondDuo.text = RecordDuo[1].ToString() + " pts";
         if (RecordDuo[2] == -1)
             ThirdDuo.text = ".........";
-        else ThirdDuo.text = RecordDuo[2].ToString();
+        else ThirdDuo.text = RecordDuo[2].ToString() + " pts";
         if (RecordDuo[3] == -1)
             FourthDuo.text = ".........";
-        else FourthDuo.text = RecordDuo[3].ToString();
+        else FourthDuo.text = RecordDuo[3].ToString() + " pts";
         if (RecordDuo[4] == -1)
             FifthDuo.text = ".........";
-        else FifthDuo.text = RecordDuo[4].ToString();
+        else FifthDuo.text = RecordDuo[4].ToString() + " pts";
         if (RecordDuo[5] == -1)
             SixthDuo.text = ".........";
-        else SixthDuo.text = RecordDuo[5].ToString();
+        else SixthDuo.text = RecordDuo[5].ToString() + " pts";
         if (RecordDuo[6] == -1)
             SeventhDuo.text = ".........";
-        else SeventhDuo.text = RecordDuo[6].ToString();
+        else SeventhDuo.text = RecordDuo[6].ToString() + " pts";
     }
 
-    private void Croix_Rouge()
+    public void Croix_Rouge()
     {
         Tableau.SetActive(false);
         Croix.gameObject.SetActive(false);
@@ -164,5 +191,19 @@ public class TableauRcords : MonoBehaviour
         FifthDuo.gameObject.SetActive(false);
         SixthDuo.gameObject.SetActive(false);
         SeventhDuo.gameObject.SetActive(false);
+        Histoire.interactable = true;
+        ColorBlock colors = Histoire.colors;
+        colors.normalColor = Color.white; // Rétablir la couleur d'origine
+        Histoire.colors = colors;
+        ColorBlock colors_rec = Record.colors;
+        colors_rec.normalColor = Color.white; 
+        Record.colors = colors_rec;
+        Record.interactable = true;
+        ColorBlock colors_inf = Infini.colors;
+        colors_inf.normalColor = Color.white;
+        Infini.colors = colors_inf;
+        Infini.interactable = true;
+        Image fondImage = Fond.GetComponent<Image>();
+        fondImage.color = Color.white;
     }
 }

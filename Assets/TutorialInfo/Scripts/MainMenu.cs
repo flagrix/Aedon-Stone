@@ -10,9 +10,10 @@ public class MainMenu : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Garde la musique entre les scènes
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
     }
     private void Start()
     {
@@ -44,6 +45,10 @@ public class MainMenu : MonoBehaviour
             {
                 audiosource.Stop(); 
             }
+        }
+        else if (!audiosource.isPlaying) // Reprend la musique si elle a été arrêtée
+        {
+            audiosource.Play();
         }
     }
 }

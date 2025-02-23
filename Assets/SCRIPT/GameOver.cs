@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
     public static GameOver instance;
     public bool isGameOver = false;
     public CanvasGroup gameOverCanvas;
+
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +27,8 @@ public class GameOver : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("jhsbdfojqhsdbf");
+        TableauRcords.instance.NewScoreSolo(100);
         isGameOver = true;
         PlayerMovement.instance.enabled = false;
         Camera.main.transform.SetParent(null);
@@ -62,6 +65,7 @@ public class GameOver : MonoBehaviour
     public void MainMenuButton()
     {
         SceneManager.LoadScene(0);
+        isGameOver = false;
         GameOverUI.SetActive(false);
     }
 
