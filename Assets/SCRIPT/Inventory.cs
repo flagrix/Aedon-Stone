@@ -18,13 +18,15 @@ public class Inventory : MonoBehaviour
         {
             addRune(1);
             addPotion(1);
-            HealthBar.instance.SetActualHealth(20);
         }
         if (Input.GetMouseButtonDown(1))
         {
             addRune(-1);
-            addPotion(-1);
             HealthBar.instance.SetActualHealth(-20);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            UsePotion();
         }
     }
 
@@ -49,8 +51,15 @@ public class Inventory : MonoBehaviour
             potions += newpotion;
             potionsText.text = potions.ToString();
         }
+    }
 
-
+    public void UsePotion()
+    {
+        if (potions > 0 && !GameOver.instance.isGameOver)
+        {
+            addPotion(-1);
+            HealthBar.instance.SetActualHealth(40);
+        }
     }
 }
 
