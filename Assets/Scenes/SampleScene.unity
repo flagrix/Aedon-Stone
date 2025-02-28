@@ -722,14 +722,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWave: 50
-  countdown: 0
-  waveNumber: 0
   waveCountTimer: {fileID: 1490948599}
   waveAnnouncement: {fileID: 762556355}
   announcementDuration: 2
   WazeAudioSource: {fileID: 227697164}
   new_wave: {fileID: 8300000, guid: 5a02f18b730dca948ad41b08b1c47e0b, type: 3}
-  announcementTimer: 0
 --- !u!143 &227697162
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2601,14 +2598,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 645194493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1824eadf8a96eca45aa919a7cad40e84, type: 3}
+  m_Script: {fileID: 11500000, guid: ea3d2b8e68d0c1a468d93b340cd6a372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 645194496}
   actual_health: 100
   damageImage: {fileID: 1020466533}
-  flashDuration: 1
-  flashTimer: 0
+  flashDuration: 0.7
 --- !u!114 &645194496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5595,14 +5591,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWave: 50
-  countdown: 0
-  waveNumber: 0
   waveCountTimer: {fileID: 1490948599}
   waveAnnouncement: {fileID: 762556355}
   announcementDuration: 2
   WazeAudioSource: {fileID: 1490948601}
   new_wave: {fileID: 8300000, guid: 5a02f18b730dca948ad41b08b1c47e0b, type: 3}
-  announcementTimer: 0
 --- !u!114 &1490948599
 MonoBehaviour:
   m_ObjectHideFlags: 0
