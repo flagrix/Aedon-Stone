@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //countdown = timeBetweenWave;
-        respawnannoncement.gameObject.SetActive(false); // Masquer l'annonce au départ
+        respawnannoncement.gameObject.SetActive(false); // Masquer l'annonce au dï¿½part
         TimeRespawnCount.gameObject.SetActive(false);
     }
 
@@ -60,14 +60,17 @@ public class GameManager : MonoBehaviour
         TimeRespawnCount.gameObject.SetActive(false);
         Debug.Log("Respawn du joueur !");
         player.transform.position = player.respawnPoint; // Replace le joueur au point de respawn
-        player.gameObject.SetActive(true); // Réactive l'objet joueur
-        player.enabled = true; // Réactive le script de mouvement du joueur
+        player.gameObject.SetActive(true); // Rï¿½active l'objet joueur
+        player.enabled = true; // Rï¿½active le script de mouvement du joueur
 
-        // Configure la caméra en mode première personne
-        Camera.main.transform.SetParent(player.transform); // Rattache la caméra au joueur
-        Camera.main.transform.localPosition = Vector3.zero; // Positionne la caméra au centre du joueur (première personne)
-        Camera.main.transform.localRotation = Quaternion.identity; // Réinitialise la rotation de la caméra
-        HealthBar.instance.SetActualHealth(100);
+        // Configure la camï¿½ra en mode premiï¿½re personne
+        Camera.main.transform.SetParent(player.transform); // Rattache la camï¿½ra au joueur
+        Camera.main.transform.localPosition = Vector3.zero; // Positionne la camï¿½ra au centre du joueur (premiï¿½re personne)
+        Camera.main.transform.localRotation = Quaternion.identity; // Rï¿½initialise la rotation de la camï¿½ra
+        if (HealthBar.instance != null)
+        {
+            HealthBar.instance.SetActualHealth(100);
+        }
         if (timeBetweenRespawn < 30f)
             timeBetweenRespawn += 5f;
         countdown = 0f;
