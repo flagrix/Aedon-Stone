@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isRespawning = false;
     public Camera playerCamera;
     public float walkSpeed = 3f;
-    public float runSpeed = 6f;
+    public float runSpeed = 8f;
     public float jumpPower = 7f;
     public float gravity = 20f;
     public float lookSpeed = 2f;
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip runSound;               // Son pour la course
     public float footstepIntervalWalk = 0.5f;  // Temps entre chaque bruit de pas en marchant
     public float footstepIntervalRun = 0.3f;   // Temps entre chaque bruit de pas en courant
-    private float footstepTimer = 0f;          // Timer pour contrôler les sons
+    private float footstepTimer = 0f;          // Timer pour contrï¿½ler les sons
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -42,12 +42,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isCurrentlyRunning = false; // Tracks running status
     private float targetHeight; // Target height for crouching/standing
 
-    public float attackRange = 10f; // Portée de l'attaque
-    public int attackDamage = 40; // Dégâts infligés par l'attaque
-    public LayerMask enemyLayer; // Layer pour détecter les ennemis
+    public float attackRange = 10f; // Portï¿½e de l'attaque
+    public int attackDamage = 40; // Dï¿½gï¿½ts infligï¿½s par l'attaque
+    public LayerMask enemyLayer; // Layer pour dï¿½tecter les ennemis
 
-    public float attackCooldown = 0.75f; // Délai de 1 seconde entre les attaques
-    private float lastAttackTime = 0f; // Temps de la dernière attaque
+    public float attackCooldown = 0.75f; // Dï¿½lai de 1 seconde entre les attaques
+    private float lastAttackTime = 0f; // Temps de la derniï¿½re attaque
 
     void Start()
     {
@@ -81,10 +81,10 @@ public class PlayerMovement : MonoBehaviour
         // Gestion de l'attaque
         if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time - lastAttackTime >= attackCooldown) // Vérifie si le cooldown est écoulé
+            if (Time.time - lastAttackTime >= attackCooldown) // Vï¿½rifie si le cooldown est ï¿½coulï¿½
             {
                 Attack();
-                lastAttackTime = Time.time; // Met à jour le temps de la dernière attaque
+                lastAttackTime = Time.time; // Met ï¿½ jour le temps de la derniï¿½re attaque
             }
         }
         // Smoothly adjust height
@@ -166,29 +166,29 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayFootstepSound()
     {
-        // Vérifie si le joueur touche le sol et appuie sur une touche de déplacement
+        // Vï¿½rifie si le joueur touche le sol et appuie sur une touche de dï¿½placement
         if (characterController.isGrounded && (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
         {
-            footstepTimer -= Time.deltaTime; // Réduit le timer
+            footstepTimer -= Time.deltaTime; // Rï¿½duit le timer
 
-            if (footstepTimer <= 0f)  // Vérifie si on peut jouer un son
+            if (footstepTimer <= 0f)  // Vï¿½rifie si on peut jouer un son
             {
-                // Détermine le bon son à jouer (marche ou course)
+                // Dï¿½termine le bon son ï¿½ jouer (marche ou course)
                 footstepAudioSource.clip = isCurrentlyRunning ? runSound : walkSound;
 
-                // Ne joue le son que si l'AudioSource n'est pas déjà en lecture
+                // Ne joue le son que si l'AudioSource n'est pas dï¿½jï¿½ en lecture
                 if (!footstepAudioSource.isPlaying)
                 {
                     footstepAudioSource.Play();
                 }
 
-                // Réinitialise le timer selon la vitesse de déplacement
+                // Rï¿½initialise le timer selon la vitesse de dï¿½placement
                 footstepTimer = isCurrentlyRunning ? footstepIntervalRun : footstepIntervalWalk;
             }
         }
         else
         {
-            // Arrête le son si le joueur ne bouge plus ou est en l'air
+            // Arrï¿½te le son si le joueur ne bouge plus ou est en l'air
             footstepAudioSource.Stop();
         }
     }
@@ -199,11 +199,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Le joueur est mort, lancement du respawn...");
             isRespawning = true;
-            instance.enabled = false; // Désactive le script de mouvement du joueur
-            Camera.main.transform.SetParent(null); // Détache la caméra du joueur
-            gameObject.SetActive(false); // Désactive l'objet joueur
+            instance.enabled = false; // Dï¿½sactive le script de mouvement du joueur
+            Camera.main.transform.SetParent(null); // Dï¿½tache la camï¿½ra du joueur
+            gameObject.SetActive(false); // Dï¿½sactive l'objet joueur
 
-            // Appeler la méthode de respawn sur un autre objet (par exemple, un GameManager)
+            // Appeler la mï¿½thode de respawn sur un autre objet (par exemple, un GameManager)
             GameManager.Instance.StartRespawnCoroutine(this);
             
         }
@@ -211,18 +211,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Attack()
     {
-        // Raycast pour détecter les ennemis devant le joueur
-        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Centre de l'écran
+        // Raycast pour dï¿½tecter les ennemis devant le joueur
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Centre de l'ï¿½cran
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
         {
-            // Vérifier si l'objet touché est un Qwertiens
+            // Vï¿½rifier si l'objet touchï¿½ est un Qwertiens
             QwertiensBasic qwertiens = hit.collider.GetComponent<QwertiensBasic>();
             if (qwertiens != null)
             {
                 qwertiens.SetHealth(-attackDamage);
-                Debug.Log("Qwertiens touché ! PV restants : ");
+                Debug.Log("Qwertiens touchï¿½ ! PV restants : ");
             }
         }
     }
