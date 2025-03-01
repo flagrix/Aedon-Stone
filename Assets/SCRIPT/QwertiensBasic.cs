@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class QwertiensBasic : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class QwertiensBasic : MonoBehaviour
     public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
 
     private Vector3 lastTargetPosition;
-
+    public Slider healthBar;
     public static QwertiensBasic instance;
 
     private int Health = 100;
@@ -50,6 +51,10 @@ public class QwertiensBasic : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
+        }
+        if (healthBar != null)
+        {
+            healthBar.value = Health;
         }
     }
 }
