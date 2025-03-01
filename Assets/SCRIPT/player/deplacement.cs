@@ -42,6 +42,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isCurrentlyRunning = false; // Tracks running status
     private float targetHeight; // Target height for crouching/standing
 
+    public float attackRange = 10f; // Portée de l'attaque
+    public int attackDamage = 40; // Dégâts infligés par l'attaque
+    public LayerMask enemyLayer; // Layer pour détecter les ennemis
+
+    public float attackCooldown = 0.75f; // Délai de 1 seconde entre les attaques
+    private float lastAttackTime = 0f; // Temps de la dernière attaque
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -71,6 +78,15 @@ public class PlayerMovement : MonoBehaviour
             targetHeight = defaultHeight;
         }
 
+        // Gestion de l'attaque
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time - lastAttackTime >= attackCooldown) // Vérifie si le cooldown est écoulé
+            {
+                Attack();
+                lastAttackTime = Time.time; // Met à jour le temps de la dernière attaque
+            }
+        }
         // Smoothly adjust height
         characterController.height = Mathf.Lerp(characterController.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
 
@@ -190,6 +206,24 @@ public class PlayerMovement : MonoBehaviour
             // Appeler la méthode de respawn sur un autre objet (par exemple, un GameManager)
             GameManager.Instance.StartRespawnCoroutine(this);
             
+        }
+    }
+
+    void Attack()
+    {
+        // Raycast pour détecter les ennemis devant le joueur
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Centre de l'écran
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
+        {
+            // Vérifier si l'objet touché est un Qwertiens
+            QwertiensBasic qwertiens = hit.collider.GetComponent<QwertiensBasic>();
+            if (qwertiens != null)
+            {
+                qwertiens.SetHealth(-attackDamage);
+                Debug.Log("Qwertiens touché ! PV restants : ");
+            }
         }
     }
 

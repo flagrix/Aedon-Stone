@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             addRune(1);
             addPotion(1);

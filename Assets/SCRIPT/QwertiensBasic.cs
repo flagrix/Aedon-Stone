@@ -8,6 +8,15 @@ public class QwertiensBasic : MonoBehaviour
 
     private Vector3 lastTargetPosition;
 
+    public static QwertiensBasic instance;
+
+    private int Health = 100;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     void Update()
     {
         if (PlayerMovement.instance != null)
@@ -32,6 +41,15 @@ public class QwertiensBasic : MonoBehaviour
                 // Arrêter le mouvement si l'agent est dans la portée minimale
                 agent2.ResetPath();
             }
+        }
+    }
+
+    public void SetHealth(int i)
+    {
+        Health += i;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
