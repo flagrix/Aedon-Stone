@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    PhotonView view;
     public Vector3 respawnPoint;
     public bool isRespawning = false;
     public Camera playerCamera;
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip runSound;               // Son pour la course
     public float footstepIntervalWalk = 0.5f;  // Temps entre chaque bruit de pas en marchant
     public float footstepIntervalRun = 0.3f;   // Temps entre chaque bruit de pas en courant
-    private float footstepTimer = 0f;          // Timer pour contrôler les sons
+    private float footstepTimer = 0f;          // Timer pour contrï¿½ler les sons
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        view = GetComponent<PhotonView>();
 
         // Set initial height
         targetHeight = defaultHeight;
@@ -54,125 +57,130 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Get movements axes
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-
-        // Determine if the player is grounded
-        bool isGrounded = characterController.isGrounded;
-
-        // Crouch logic (press and hold)
-        if (Input.GetKey(KeyCode.LeftControl) && canMove)
+        if (view.IsMine)
         {
-            targetHeight = crouchHeight;
-        }
-        else
-        {
-            targetHeight = defaultHeight;
-        }
 
-        // Smoothly adjust height
-        characterController.height = Mathf.Lerp(characterController.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
+            Camera.main.gameObject.SetActive(true);
+            //Get movements axes
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Adjust speed while crouching
-        bool isCrouching = Mathf.Abs(characterController.height - crouchHeight) < 0.1f;
-        if (isCrouching)
-        {
-            isCurrentlyRunning = false; // Cannot run while crouching
-        }
+            // Determine if the player is grounded
+            bool isGrounded = characterController.isGrounded;
 
-        // Determine movement speed
-        if (Input.GetKey(KeyCode.LeftShift) && isGrounded && !isCrouching)
-        {
-            isCurrentlyRunning = true; // Start running if grounded and shift is held
-        }
-        else if (isGrounded)
-        {
-            isCurrentlyRunning = false; // Stop running if grounded and shift is not held
-        }
-        //Determine in which speed the player will go
-        float currentSpeed = isCrouching ? crouchSpeed : (isCurrentlyRunning ? runSpeed : walkSpeed);
-        float curSpeedX = canMove ? currentSpeed * Input.GetAxis("Vertical") : 0; //Get input of W and S (return 1 or -1) 
-        float curSpeedY = canMove ? currentSpeed * Input.GetAxis("Horizontal") : 0;//Get input of A and D (return 1 or -1)
-
-        // Preserve Y-axis movement
-        float movementDirectionY = moveDirection.y;
-
-        if (isGrounded)
-        {
-            // Update movement direction when grounded
-            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        }
-        else
-        {
-            // Maintain momentum while airborne
-            Vector3 horizontalVelocity = new Vector3(moveDirection.x, 0, moveDirection.z);
-            Vector3 inputVelocity = (forward * curSpeedX) + (right * curSpeedY);
-
-            // Add input to current horizontal velocity
-            if (inputVelocity != Vector3.zero)
+            // Crouch logic (press and hold)
+            if (Input.GetKey(KeyCode.LeftControl) && canMove)
             {
-                horizontalVelocity = inputVelocity;
+                targetHeight = crouchHeight;
+            }
+            else
+            {
+                targetHeight = defaultHeight;
             }
 
-            moveDirection = horizontalVelocity;
-        }
+            // Smoothly adjust height
+            characterController.height = Mathf.Lerp(characterController.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
 
-        // Apply Y-axis movement
-        moveDirection.y = movementDirectionY;
+            // Adjust speed while crouching
+            bool isCrouching = Mathf.Abs(characterController.height - crouchHeight) < 0.1f;
+            if (isCrouching)
+            {
+                isCurrentlyRunning = false; // Cannot run while crouching
+            }
 
-        // Jump logic
-        if (Input.GetButton("Jump") && canMove && isGrounded)
-        {
-            moveDirection.y = jumpPower;
-        }
+            // Determine movement speed
+            if (Input.GetKey(KeyCode.LeftShift) && isGrounded && !isCrouching)
+            {
+                isCurrentlyRunning = true; // Start running if grounded and shift is held
+            }
+            else if (isGrounded)
+            {
+                isCurrentlyRunning = false; // Stop running if grounded and shift is not held
+            }
+            //Determine in which speed the player will go
+            float currentSpeed = isCrouching ? crouchSpeed : (isCurrentlyRunning ? runSpeed : walkSpeed);
+            float curSpeedX = canMove ? currentSpeed * Input.GetAxis("Vertical") : 0; //Get input of W and S (return 1 or -1) 
+            float curSpeedY = canMove ? currentSpeed * Input.GetAxis("Horizontal") : 0;//Get input of A and D (return 1 or -1)
 
-        // Apply gravity if not grounded
-        if (!isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+            // Preserve Y-axis movement
+            float movementDirectionY = moveDirection.y;
 
-        // Move the character
-        characterController.Move(moveDirection * Time.deltaTime);
-        PlayFootstepSound();
+            if (isGrounded)
+            {
+                // Update movement direction when grounded
+                moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+            }
+            else
+            {
+                // Maintain momentum while airborne
+                Vector3 horizontalVelocity = new Vector3(moveDirection.x, 0, moveDirection.z);
+                Vector3 inputVelocity = (forward * curSpeedX) + (right * curSpeedY);
 
-        // Handle camera rotation
-        if (canMove)
-        {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -(lookXLimit + 10), lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+                // Add input to current horizontal velocity
+                if (inputVelocity != Vector3.zero)
+                {
+                    horizontalVelocity = inputVelocity;
+                }
+
+                moveDirection = horizontalVelocity;
+            }
+
+            // Apply Y-axis movement
+            moveDirection.y = movementDirectionY;
+
+            // Jump logic
+            if (Input.GetButton("Jump") && canMove && isGrounded)
+            {
+                moveDirection.y = jumpPower;
+            }
+
+            // Apply gravity if not grounded
+            if (!isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            // Move the character
+            characterController.Move(moveDirection * Time.deltaTime);
+            PlayFootstepSound();
+
+            // Handle camera rotation
+            if (canMove)
+            {
+                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX = Mathf.Clamp(rotationX, -(lookXLimit + 10), lookXLimit);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
         }
 
     }
 
     void PlayFootstepSound()
     {
-        // Vérifie si le joueur touche le sol et appuie sur une touche de déplacement
+        // Vï¿½rifie si le joueur touche le sol et appuie sur une touche de dï¿½placement
         if (characterController.isGrounded && (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
         {
-            footstepTimer -= Time.deltaTime; // Réduit le timer
+            footstepTimer -= Time.deltaTime; // Rï¿½duit le timer
 
-            if (footstepTimer <= 0f)  // Vérifie si on peut jouer un son
+            if (footstepTimer <= 0f)  // Vï¿½rifie si on peut jouer un son
             {
-                // Détermine le bon son à jouer (marche ou course)
+                // Dï¿½termine le bon son ï¿½ jouer (marche ou course)
                 footstepAudioSource.clip = isCurrentlyRunning ? runSound : walkSound;
 
-                // Ne joue le son que si l'AudioSource n'est pas déjà en lecture
+                // Ne joue le son que si l'AudioSource n'est pas dï¿½jï¿½ en lecture
                 if (!footstepAudioSource.isPlaying)
                 {
                     footstepAudioSource.Play();
                 }
 
-                // Réinitialise le timer selon la vitesse de déplacement
+                // Rï¿½initialise le timer selon la vitesse de dï¿½placement
                 footstepTimer = isCurrentlyRunning ? footstepIntervalRun : footstepIntervalWalk;
             }
         }
         else
         {
-            // Arrête le son si le joueur ne bouge plus ou est en l'air
+            // Arrï¿½te le son si le joueur ne bouge plus ou est en l'air
             footstepAudioSource.Stop();
         }
     }
@@ -183,11 +191,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Le joueur est mort, lancement du respawn...");
             isRespawning = true;
-            instance.enabled = false; // Désactive le script de mouvement du joueur
-            Camera.main.transform.SetParent(null); // Détache la caméra du joueur
-            gameObject.SetActive(false); // Désactive l'objet joueur
+            instance.enabled = false; // Dï¿½sactive le script de mouvement du joueur
+            Camera.main.transform.SetParent(null); // Dï¿½tache la camï¿½ra du joueur
+            gameObject.SetActive(false); // Dï¿½sactive l'objet joueur
 
-            // Appeler la méthode de respawn sur un autre objet (par exemple, un GameManager)
+            // Appeler la mï¿½thode de respawn sur un autre objet (par exemple, un GameManager)
             GameManager.Instance.StartRespawnCoroutine(this);
             
         }
