@@ -33,7 +33,8 @@ public class WaveSpawner : MonoBehaviour {
 
     IEnumerator SpawnWave()
     {
-        waveIndex++;
+        if (waveIndex < 3)
+            waveIndex++;
 
         for (int i = 0; i < waveIndex; i++)
         {

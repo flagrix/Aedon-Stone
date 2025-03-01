@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenRespawn = 10f;
     [SerializeField] private Text respawnannoncement;
     [SerializeField] private Text TimeRespawnCount;
+    [SerializeField] private GameObject Réticule;
 
     private float countdown = 0f;
 
@@ -53,9 +54,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator RespawnCoroutine(PlayerMovement player)
     {
         Debug.Log("Attente de 10 secondes avant le respawn...");
+        Réticule.gameObject.SetActive(false);
         respawnannoncement.gameObject.SetActive(true);
         TimeRespawnCount.gameObject.SetActive(true);
         yield return new WaitForSeconds(timeBetweenRespawn);
+        Réticule.gameObject.SetActive(true);
         respawnannoncement.gameObject.SetActive(false);
         TimeRespawnCount.gameObject.SetActive(false);
         Debug.Log("Respawn du joueur !");
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
 
         // Configure la cam�ra en mode premi�re personne
         Camera.main.transform.SetParent(player.transform); // Rattache la cam�ra au joueur
-        Camera.main.transform.localPosition = Vector3.zero; // Positionne la cam�ra au centre du joueur (premi�re personne)
+        Camera.main.transform.localPosition = new Vector3(0.33f, 0.7f, -0.151f); // Positionne la cam�ra au centre du joueur (premi�re personne)
         Camera.main.transform.localRotation = Quaternion.identity; // R�initialise la rotation de la cam�ra
         if (HealthBar.instance != null)
         {

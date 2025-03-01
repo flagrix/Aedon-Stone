@@ -13,7 +13,7 @@ public class CompteurTemps : MonoBehaviour
     [SerializeField] private Text waveAnnouncement; // Texte pour afficher "VAGUE X"
     [SerializeField] private float announcementDuration = 10f; // Temps d'affichage de l'annonce
 
-    public AudioSource WazeAudioSource;  // Composant AudioSource pour les bruits de pas
+    public AudioSource WazeAudioSource;
     public AudioClip new_wave;
 
     private float announcementTimer = 0f;
@@ -48,8 +48,11 @@ public class CompteurTemps : MonoBehaviour
 
     void StartNewWave()
     {
-        WazeAudioSource.clip = new_wave;
-        WazeAudioSource.Play();
+        if (!GameOver.instance.isGameOver)
+        {
+            WazeAudioSource.clip = new_wave;
+            WazeAudioSource.Play();
+        }
         waveNumber++;
         timeBetweenWave += 10f; // Augmente le temps entre les vagues
         countdown = timeBetweenWave;

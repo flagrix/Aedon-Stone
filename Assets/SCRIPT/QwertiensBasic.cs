@@ -9,6 +9,9 @@ public class QwertiensBasic : MonoBehaviour
 
     private Vector3 lastTargetPosition;
     public Slider healthBar;
+    public int attackDamage = 10;
+    public float attackCooldown = 4f; 
+    private float lastAttackTime;
     public static QwertiensBasic instance;
 
     private int Health = 100;
@@ -41,6 +44,8 @@ public class QwertiensBasic : MonoBehaviour
             {
                 // Arrêter le mouvement si l'agent est dans la portée minimale
                 agent2.ResetPath();
+                if (!GameOver.instance.isGameOver)
+                    AttackPlayer();
             }
         }
     }
@@ -51,10 +56,27 @@ public class QwertiensBasic : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
+            Inventory.instance.addRune(2);
         }
         if (healthBar != null)
         {
             healthBar.value = Health;
         }
     }
+
+    private void AttackPlayer()
+    {
+        if (Time.time - lastAttackTime >= attackCooldown)
+        {
+            if (HealthBar.instance != null)
+            {
+                HealthBar.instance.SetActualHealth(-attackDamage);
+                Debug.Log("Qwertien attaque le joueur !");
+            }
+
+            // Mettre à jour le temps de la dernière attaque
+            lastAttackTime = Time.time;
+        }
+    }
+
 }
