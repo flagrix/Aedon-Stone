@@ -15,6 +15,17 @@ public class MusicManager : MonoBehaviour
     StartCoroutine(PlayMusicSequence());
 }
 
+    void Update()
+    {
+        Debug.Log("update");
+        if (GameOver.instance.isGameOver)
+        {
+            Debug.Log("test");
+            audioSource.Stop();
+
+        }
+    }
+
 
     IEnumerator PlayMusicSequence()
     {
