@@ -218,11 +218,15 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
         {
             // V�rifier si l'objet touch� est un Qwertiens
-            QwertiensBasic qwertiens = hit.collider.GetComponent<QwertiensBasic>();
-            if (qwertiens != null)
+            QwertiensBasic qwertien = hit.collider.GetComponent<QwertiensBasic>();
+            FastQwertien fastqwertien = hit.collider.GetComponent<FastQwertien>();
+            if (qwertien != null)
             {
-                qwertiens.SetHealth(-attackDamage);
-                Debug.Log("Qwertiens touch� ! PV restants : ");
+                qwertien.SetHealth(-attackDamage);
+            }
+            if (fastqwertien != null)
+            {
+                fastqwertien.SetHealth(-attackDamage);
             }
         }
     }

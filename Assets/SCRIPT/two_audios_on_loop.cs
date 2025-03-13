@@ -4,27 +4,40 @@ using System.Collections;
 public class MusicManager : MonoBehaviour
 {
     public AudioSource audioSource;
+    public static MusicManager instance; // Singleton instance
 
-    void Start()
-{
-    if (audioSource == null)
+    void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    StartCoroutine(PlayMusicSequence());
-}
-
-    void Update()
-    {
-        Debug.Log("update");
-        if (GameOver.instance.isGameOver)
+        if (instance == null)
         {
-            Debug.Log("test");
-            audioSource.Stop();
-
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Garde le MusicManager entre les scènes
+        }
+        else
+        {
+            Destroy(gameObject); // Évite les doublons
         }
     }
+
+    void Start()
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        StartCoroutine(PlayMusicSequence());
+    }
+
+    public void StopMusic()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            Debug.Log("Musique de fond arrêtée.");
+        }
+    }
+
 
 
     IEnumerator PlayMusicSequence()

@@ -48,8 +48,6 @@ public class Inventory : MonoBehaviour
             potions += newpotion;
             potionsText.text = potions.ToString();
         }
-        if (potions > 9 && !GameOver.instance.isGameOver)
-            GameOver.instance.EndGame();
     }
 
     public void UsePotion()

@@ -32,6 +32,7 @@ public class GameOver : MonoBehaviour
         Debug.Log("jhsbdfojqhsdbf");
         TableauRcords.instance.NewScoreSolo(100);
         isGameOver = true;
+        MusicManager.instance.StopMusic();
         PlayerMovement.instance.enabled = false;
         Camera.main.transform.SetParent(null);
         GameOverSoundSource.clip = GameOverSound;
