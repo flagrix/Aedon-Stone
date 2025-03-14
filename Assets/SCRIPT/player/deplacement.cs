@@ -220,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
             // V�rifier si l'objet touch� est un Qwertiens
             QwertiensBasic qwertien = hit.collider.GetComponent<QwertiensBasic>();
             FastQwertien fastqwertien = hit.collider.GetComponent<FastQwertien>();
+            FatQwertien fatqwertien = hit.collider.GetComponent<FatQwertien>();
             if (qwertien != null)
             {
                 qwertien.SetHealth(-attackDamage);
@@ -227,6 +228,10 @@ public class PlayerMovement : MonoBehaviour
             if (fastqwertien != null)
             {
                 fastqwertien.SetHealth(-attackDamage);
+            }
+            if (fatqwertien != null)
+            {
+                fatqwertien.SetHealth(-attackDamage);
             }
         }
     }

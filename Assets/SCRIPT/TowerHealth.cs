@@ -3,7 +3,7 @@ using UnityEngine;
 public class TowerHealth : MonoBehaviour
 {
     public static TowerHealth instance;
-    private int health = 100;
+    public int health = 100;
 
     private void Awake()
     {
