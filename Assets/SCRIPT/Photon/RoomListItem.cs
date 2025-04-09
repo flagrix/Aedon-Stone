@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class RoomListItem : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
-    RoomInfo roomInfo;
+    public RoomInfo roomInfo;
     public void Setup(RoomInfo _roomInfo)
     {
         roomInfo = _roomInfo;

@@ -16,6 +16,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform roomListContent;
     [SerializeField] GameObject roomListPrefab;
     [SerializeField] GameObject playerListPrefab;
+    [SerializeField] GameObject startGameButton;
 
     void Awake()
     {
@@ -29,7 +30,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("OnConnectedToMaster");
-       PhotonNetwork.JoinLobby(); 
+        PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
@@ -46,6 +48,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(roomNameInputField.text);
         MenuManager.Instance.OpenMenu("Loading");
     }
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(3);
+    }
 
     public override void OnJoinedRoom()
     {
@@ -53,11 +59,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
         Player[] players = PhotonNetwork.PlayerList;
 
+
+        foreach (Transform t in playerListContent)
+        {
+            Destroy(t.gameObject);
+        }
+
         for (int i = 0; i < players.Length; i++)
         {
             Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
 
         }
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -91,6 +109,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < roomList.Count; i++)
         {
+            if (roomList[i].RemovedFromList)
+            {
+                continue;
+            }
             Instantiate(roomListPrefab, roomListContent).GetComponent<RoomListItem>().Setup(roomList[i]);
         }
     }
