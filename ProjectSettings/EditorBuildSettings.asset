@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loadingscene.unity
+    guid: d2ffd0a16dc336245a5175a88555b9f2
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 74e86be1adcef8140a654a0d05b3460c
   - enabled: 1
@@ -14,12 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChoixMode.unity
     guid: f744b09fba0995d41940da3703f582cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Loadingscene.unity
-    guid: d2ffd0a16dc336245a5175a88555b9f2
+    path: Assets/Scenes/place holder cause of  missing prefabs.unity
+    guid: d279f7544189e3349b78cb42cb29b499
+  - enabled: 1
+    path: Assets/Scenes/Jeu multi.unity
+    guid: bdcd1f6e60642cd42aa05364f557fde9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
