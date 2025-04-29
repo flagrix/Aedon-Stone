@@ -1253,7 +1253,7 @@ GameObject:
   - component: {fileID: 818761551}
   - component: {fileID: 818761550}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button LeavRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2113,7 +2113,7 @@ GameObject:
   - component: {fileID: 1418890041}
   - component: {fileID: 1418890040}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button StartGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

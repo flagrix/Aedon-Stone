@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
     public static GameOver instance;
     public bool isGameOver = false;
     public CanvasGroup gameOverCanvas;
-    [SerializeField] private GameObject Réticule;
+    [SerializeField] private GameObject RÃ©ticule;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class GameOver : MonoBehaviour
 
     public void EndGame()
     {
-        Réticule.gameObject.SetActive(false);
+        RÃ©ticule.gameObject.SetActive(false);
         Debug.Log("jhsbdfojqhsdbf");
         TableauRcords.instance.NewScoreSolo(100);
         isGameOver = true;

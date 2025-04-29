@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FatQwertien : MonoBehaviour
 {
     public NavMeshAgent agent2;
-    public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
+    public float stopDistance = 8F; // Distance minimale avant d'arrÃªter la poursuite
 
     private Vector3 lastTargetPosition;
     public Slider healthBar;
@@ -37,10 +37,10 @@ public class FatQwertien : MonoBehaviour
                 targetPos = new Vector3(414.6f, 2f, 626.3f);
             }
 
-            // Vérifier la distance entre l'agent et le joueur
+            // VÃ©rifier la distance entre l'agent et le joueur
             float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
 
-            // Si la distance est supérieure à la distance minimale ou que la cible a changé, recalculer le chemin
+            // Si la distance est supÃ©rieure Ã  la distance minimale ou que la cible a changÃ©, recalculer le chemin
             if (distanceToPlayer > stopDistance)
             {
                 if (targetPos != lastTargetPosition)
@@ -86,7 +86,7 @@ public class FatQwertien : MonoBehaviour
                 Debug.Log("Qwertien attaque le joueur !");
             }
 
-            // Mettre à jour le temps de la dernière attaque
+            // Mettre Ã  jour le temps de la derniÃ¨re attaque
             lastAttackTime = Time.time;
         }
     }
@@ -101,7 +101,7 @@ public class FatQwertien : MonoBehaviour
                 Debug.Log("Qwertien attaque la tour !");
             }
 
-            // Mettre à jour le temps de la dernière attaque
+            // Mettre Ã  jour le temps de la derniÃ¨re attaque
             lastAttackTime = Time.time;
         }
     }

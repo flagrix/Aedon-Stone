@@ -30,7 +30,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if(scene.buildIndex == 5)
+        if(scene.name == "Jeu multi" )
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
         }
