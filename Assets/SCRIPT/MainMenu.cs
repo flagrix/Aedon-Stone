@@ -23,23 +23,23 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("ChoixJoueurs");
     }
 
     public void MenuJoueur()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("ChoixMode");
     }
 
     public void MenuMode()
     {
         
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("SampleScene");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex == 3) 
+        if (scene.name == "SampleScene") 
         {
             if (audiosource.isPlaying)
             {
