@@ -6,6 +6,7 @@ using System.IO;
 public class PlayerManager : MonoBehaviour
 {
     PhotonView Hp;
+    GameObject controller;
 
     private void Awake()
     {
@@ -23,6 +24,13 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void CreateController()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), Vector3.zero,Quaternion.identity);
+        Transform spawnpoint = SpawnManager.instance.GetSpawnPoint();
+        controller = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnpoint.position,spawnpoint.rotation, 0, new object[]{Hp.ViewID});
+    }
+
+    public void Die()
+    {
+        PhotonNetwork.Destroy(controller);
+        CreateController();
     }
 }

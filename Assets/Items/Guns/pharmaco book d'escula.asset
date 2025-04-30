@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344d3f077702f15499f6dce71d18b414, type: 3}
   m_Name: pharmaco book d'escula
   m_EditorClassIdentifier: 
-  itemId: 
+  itemName: book medic
+  damage: 70

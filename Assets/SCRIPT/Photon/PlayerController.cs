@@ -1,10 +1,10 @@
-using ExitGames.Client.Photon;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Unity.VisualScripting;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 {
     private PhotonView photonView;
     private CharacterController characterController;
@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Camera playerCamera;
     
     [Header("Items options")]
-    public Item[] items;
-    public int itemIndex;
-    public int prevItemIndex = -1;
+    [SerializeField] Item[] items;
+    int itemIndex;
+    int prevItemIndex = -1;
     
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public LayerMask enemyLayer;
     public float attackCooldown = 0.75f;
     private float lastAttackTime = 0f;
+    const float maxHealth = 100f;
+    float currHealth = maxHealth;
     
     [Header("Crouch Settings")]
     public float defaultHeight = 2f;
@@ -57,13 +59,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public float crouchTransitionSpeed = 15f; // Speed of crouch height transition
 
     private float targetHeight; // Target height for crouching/standing
-
+    PlayerManager playerManager;
 
 
     void Awake()
     {
         photonView = GetComponent<PhotonView>();
         characterController = GetComponent<CharacterController>();
+        playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
     }
 
     void Start()
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (playerCamera != null)
             {
+                Destroy(GetComponentInChildren<Camera>().gameObject);
                 AudioListener listener = playerCamera.GetComponent<AudioListener>();
                 if (listener != null) listener.enabled = false;
                 playerCamera.enabled = false;
@@ -93,40 +97,40 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (Input.GetKeyDown((i + 1).ToString()))
-            {
-                EquipItem(i);
-                break;
-            }
-        }
-
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
-        {
-            if (itemIndex >= items.Length - 1)
-            {
-                EquipItem(0);
-            }
-            else
-            {
-                EquipItem(itemIndex +1);
-            }
-        }
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
-        {
-            if (itemIndex <= 0)
-            {
-                EquipItem(items.Length - 1);
-            }
-            else
-            {
-                EquipItem(itemIndex - 1);
-            }
-        }
-
         if (photonView.IsMine)
         {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (Input.GetKeyDown((i + 1).ToString()))
+                {
+                    EquipItem(i);
+                    break;
+                }
+            }
+            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
+
+            if (scroll > 0f)
+            {
+                int nextIndex = (itemIndex + 1) % items.Length;
+                EquipItem(nextIndex);
+            }
+            else if (scroll < 0f)
+            {
+                int prevIndex = (itemIndex - 1 + items.Length) % items.Length;
+                EquipItem(prevIndex);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Mouse Down");
+                items[itemIndex].Use();
+            }
+
+            if (transform.position.y < -10f) //Die if you fall out
+            {
+                Die();
+            }
+            
             HandleMovement();
             HandleCamera();
             HandleAttack();
@@ -187,9 +191,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             footstepTimer = Input.GetKey(KeyCode.LeftShift) ? footstepIntervalRun : footstepIntervalWalk;
         }
     }
-
-
-
     private void HandleMovement()
     {
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -302,5 +303,27 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             networkedPosition = (Vector3)stream.ReceiveNext();
             networkedRotation = (Quaternion)stream.ReceiveNext();
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+            photonView.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
+        if (!photonView.IsMine) return;
+        
+        currHealth -= damage;
+        if (currHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        playerManager.Die();
     }
 }
