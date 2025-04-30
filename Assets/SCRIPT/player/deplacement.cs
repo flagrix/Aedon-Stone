@@ -221,6 +221,7 @@ public class PlayerMovement : MonoBehaviour
             QwertiensBasic qwertien = hit.collider.GetComponent<QwertiensBasic>();
             FastQwertien fastqwertien = hit.collider.GetComponent<FastQwertien>();
             FatQwertien fatqwertien = hit.collider.GetComponent<FatQwertien>();
+            HealQwertien healqwertien = hit.collider.GetComponent<HealQwertien>();
             if (qwertien != null)
             {
                 qwertien.SetHealth(-attackDamage);
@@ -232,6 +233,10 @@ public class PlayerMovement : MonoBehaviour
             if (fatqwertien != null)
             {
                 fatqwertien.SetHealth(-attackDamage);
+            }
+            if (healqwertien != null)
+            {
+                healqwertien.SetHealth(-attackDamage);
             }
         }
     }
