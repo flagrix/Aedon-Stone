@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 respawnPoint;
     public bool isRespawning = false;
     public Camera playerCamera;
-    public float walkSpeed = 3f;
-    public float runSpeed = 8f;
+    public float walkSpeed = 8f;
+    public float runSpeed = 16f;
     public float jumpPower = 7f;
     public float gravity = 20f;
     public float lookSpeed = 2f;

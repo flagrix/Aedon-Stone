@@ -503,6 +503,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98179a1645120c84fa7ce002053ec984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomNameInputField: {fileID: 0}
+  errorText: {fileID: 0}
+  roomNameText: {fileID: 0}
+  playerListContent: {fileID: 0}
+  roomListContent: {fileID: 0}
+  roomListPrefab: {fileID: 0}
+  playerListPrefab: {fileID: 0}
+  startGameButton: {fileID: 0}
 --- !u!114 &583669397
 MonoBehaviour:
   m_ObjectHideFlags: 0
