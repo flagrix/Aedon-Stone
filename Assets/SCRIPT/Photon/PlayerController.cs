@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Update()
     {
+
         if (photonView.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.C))
@@ -387,8 +388,21 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         healthBar.SetActualHealth((int)amount);
     }
 
+    public void SetActive(bool active)
+    {
+        enabled = active;
+        characterController.enabled = active;
+
+        if (playerCamera != null)
+        {
+            playerCamera.enabled = active;
+            playerCamera.GetComponent<AudioListener>().enabled = active;
+        }
+    }
     void Die()
     {
-        playerManager.Die();
+        Debug.Log("dead");
+        SetActive(false);
+        playerManager.StartRespawn();
     }
 }
