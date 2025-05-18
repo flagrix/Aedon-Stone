@@ -9,6 +9,18 @@ public class SingleShotGun : Gun
         Shoot();
     }
 
+    void Awake()
+    {
+        if (cam == null)
+        {
+            cam = Camera.main;
+            if (cam == null)
+            {
+                Debug.LogError("Aucune caméra principale trouvée ! Assigne une caméra au script SingleShotGun.");
+            }
+        }
+    }
+
     void Shoot()
     {
         Ray ray = cam.ScreenPointToRay(new Vector3(0.5f, 0.5f) * new Vector2(Screen.width, Screen.height));
