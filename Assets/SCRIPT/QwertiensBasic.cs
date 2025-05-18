@@ -56,7 +56,6 @@ public class QwertiensBasic : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
-            Inventory.instance.addRune(2);
         }
         if (healthBar != null)
         {
@@ -68,11 +67,11 @@ public class QwertiensBasic : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            if (HealthBar.instance != null)
+            /**if (HealthBar.instance != null)
             {
                 HealthBar.instance.SetActualHealth(-attackDamage);
                 Debug.Log("Qwertien attaque le joueur !");
-            }
+            }**/
 
             // Mettre à jour le temps de la dernière attaque
             lastAttackTime = Time.time;

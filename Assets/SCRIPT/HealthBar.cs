@@ -1,31 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
     public int actual_health = 100;
-    public static HealthBar instance;
 
     [Header("Damage Flash Settings")]
     public Image damageImage; // Image rouge qui recouvre l'écran
     public float flashDuration = 0.7f; // Durée du flash en secondes
     private float flashTimer;
 
-    private void Awake()
+    private PlayerMovement playerMovement;
+
+    private void Start()
     {
-        instance = this;
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        if (actual_health <= 0)
+        // Mort si plus de vie
+        if (actual_health <= 0 && playerMovement != null)
         {
-            PlayerMovement.instance.Death();
-            PlayerMovement.instance.isRespawning = true;
+            playerMovement.Death();
+            playerMovement.isRespawning = true;
         }
 
+        // Flash rouge
         if (flashTimer > 0)
         {
             damageImage.gameObject.SetActive(true);
@@ -38,7 +40,6 @@ public class HealthBar : MonoBehaviour
             damageImage.gameObject.SetActive(false);
             damageImage.color = new Color(1f, 0f, 0f, 0f); // Caché
         }
-
     }
 
     public void SetMaxHealth(int health)
@@ -47,34 +48,25 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
     }
 
-    // Update is called once per frame
     public void SetHealth(int health)
     {
         slider.value = health;
-        
     }
 
-    public void SetActualHealth(int health)
+    public void SetActualHealth(int delta)
     {
-        // Si le joueur perd de la vie, activer le flash rouge
-        if (health < 0 && actual_health > 0)
+        if (delta < 0 && actual_health > 0)
         {
             TriggerDamageFlash();
         }
-        if (actual_health + health <= 0)
-            actual_health = 0;
-        else if (actual_health + health > 100)
-            actual_health = 100;
-        else
-            actual_health += health;
+
+        actual_health = Mathf.Clamp(actual_health + delta, 0, 100);
         SetHealth(actual_health);
-        
     }
 
     private void TriggerDamageFlash()
     {
-        
         flashTimer = flashDuration;
-        damageImage.color = new Color(1f, 0f, 0f, 1f); // Plein rouge
+        damageImage.color = new Color(1f, 0f, 0f, 1f);
     }
 }

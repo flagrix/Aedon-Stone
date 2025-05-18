@@ -51,7 +51,6 @@ public class FastQwertien : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
-            Inventory.instance.addRune(2);
         }
         if (healthBar != null)
         {
@@ -63,7 +62,7 @@ public class FastQwertien : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            if (HealthBar.instance != null)
+            if (TowerHealth.instance != null)
             {
                 TowerHealth.instance.SetHealth(-attackDamage);
                 Debug.Log("Qwertien attaque la tour !");

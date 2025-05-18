@@ -23,7 +23,7 @@ public class FatQwertien : MonoBehaviour
 
     void Update()
     {
-        float interetjoueur =  -Vector3.Distance(agent2.transform.position, PlayerMovement.instance.GetPlayerPosition()) - HealthBar.instance.actual_health;
+        float interetjoueur = -Vector3.Distance(agent2.transform.position, PlayerMovement.instance.GetPlayerPosition());// - HealthBar.instance.actual_health;
         float interettour = -Vector3.Distance(agent2.transform.position, new Vector3(414.6f, 2f, 626.3f)) -  TowerHealth.instance.health;
         if (PlayerMovement.instance != null)
         {
@@ -68,7 +68,6 @@ public class FatQwertien : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(gameObject);
-            Inventory.instance.addRune(2);
         }
         if (healthBar != null)
         {
@@ -80,11 +79,11 @@ public class FatQwertien : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            if (HealthBar.instance != null)
+            /**if (HealthBar.instance != null)
             {
                 HealthBar.instance.SetActualHealth(-attackDamage);
                 Debug.Log("Qwertien attaque le joueur !");
-            }
+            }**/
 
             // Mettre à jour le temps de la dernière attaque
             lastAttackTime = Time.time;
@@ -95,7 +94,7 @@ public class FatQwertien : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            if (HealthBar.instance != null)
+            if (TowerHealth.instance != null)
             {
                 TowerHealth.instance.SetHealth(-attackDamage);
                 Debug.Log("Qwertien attaque la tour !");

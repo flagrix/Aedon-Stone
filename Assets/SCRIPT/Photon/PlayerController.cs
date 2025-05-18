@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     PlayerManager playerManager;
 
     private HealthBar healthBar; // pour la barre de vie locale
+    private Inventory inventory; //pour l'inventaire local
 
 
     void Awake()
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         photonView = GetComponent<PhotonView>();
         characterController = GetComponent<CharacterController>();
         playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
+        inventory = GetComponentInChildren<Inventory>();
+        healthBar = GetComponentInChildren<HealthBar>();
     }
 
     void Start()
@@ -114,6 +117,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             if (Input.GetKeyDown(KeyCode.C))
             {
                 TakeDamage(20f);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                inventory.addPotion(1);
+            }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                inventory.UsePotion();
             }
             for (int i = 0; i < items.Length; i++)
             {

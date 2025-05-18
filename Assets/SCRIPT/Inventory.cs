@@ -1,29 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 public class Inventory : MonoBehaviour
 {
     public int runes;
     public int potions;
     public Text runesText; //pour afficher les runes
     public Text potionsText;
-    public static Inventory instance;
+    private Photon.Pun.PhotonView photonView;
 
+    private HealthBar healthBar;
     private void Awake()
     {
-        instance = this; //Pour pouvoir faire appel a inventory de partout
-    }
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            addPotion(1);
-        }
-        
+        photonView = GetComponent<Photon.Pun.PhotonView>();
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            UsePotion();
-        }
+
+    }
+    private void Start()
+    {
+        healthBar = GetComponentInParent<Transform>().GetComponentInChildren<HealthBar>();
+    }
+    private void Update()
+    {
+        if (photonView == null || !photonView.IsMine) return;
+
     }
 
     public void addRune(int newRune)
@@ -50,10 +50,10 @@ public class Inventory : MonoBehaviour
 
     public void UsePotion()
     {
-        if (potions > 0 && !GameOver.instance.isGameOver)
+        if (potions > 0)
         {
             addPotion(-1);
-            HealthBar.instance.SetActualHealth(40);
+            healthBar.SetActualHealth(40);
         }
     }
 }

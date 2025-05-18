@@ -70,10 +70,10 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.SetParent(player.transform); // Rattache la cam�ra au joueur
         Camera.main.transform.localPosition = new Vector3(0.33f, 0.7f, -0.151f); // Positionne la cam�ra au centre du joueur (premi�re personne)
         Camera.main.transform.localRotation = Quaternion.identity; // R�initialise la rotation de la cam�ra
-        if (HealthBar.instance != null)
+        /**if (HealthBar.instance != null)
         {
             HealthBar.instance.SetActualHealth(100);
-        }
+        }**/
         if (timeBetweenRespawn < 30f)
             timeBetweenRespawn += 5f;
         countdown = 0f;
