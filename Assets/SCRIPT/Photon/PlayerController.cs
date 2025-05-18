@@ -16,12 +16,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private Quaternion networkedRotation;
 
     public Camera playerCamera;
-    
+
     [Header("Items options")]
     [SerializeField] Item[] items;
     int itemIndex;
     int prevItemIndex = -1;
-    
+
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
     public float runSpeed = 8f;
@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private float lastAttackTime = 0f;
     const float maxHealth = 100f;
     float currHealth = maxHealth;
-    
+
+    [Header("Animation Settings")]
+    Animator Animator;
+
     [Header("Crouch Settings")]
     public float defaultHeight = 2f;
     public float crouchHeight = 1f;
@@ -71,6 +74,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Start()
     {
+        Animator = GetComponent<Animator>();
+        Animator.SetBool("MortEnSah", false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -92,7 +97,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 playerCamera.enabled = false;
             }
         }
-        
     }
 
     void Update()
@@ -128,13 +132,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
             if (transform.position.y < -10f) //Die if you fall out
             {
+                Animator.SetBool("MortEnSah", true);
                 Die();
             }
-            
+
             HandleMovement();
             HandleCamera();
             HandleAttack();
             PlayFootstepSound();
+            Animator.SetBool("JaiMal", false);
         }
 
         else
@@ -143,15 +149,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             transform.position = Vector3.Lerp(transform.position, networkedPosition, Time.deltaTime * 10f);
             transform.rotation = Quaternion.Lerp(transform.rotation, networkedRotation, Time.deltaTime * 10f);
         }
-        
-
     }
     private void HandleAttack()
     {
-        if (Input.GetMouseButtonDown(0)) // Clic gauche
+        Animator.SetBool("MoiJeBagarre", false);
+        if (Input.GetMouseButtonDown(0)) // Clic gauche (marche pas)
         {
+            
             if (Time.time - lastAttackTime >= attackCooldown)
             {
+                Animator.SetBool("MoiJeBagarre", true);
                 Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
                 RaycastHit hit;
 
@@ -191,8 +198,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             footstepTimer = Input.GetKey(KeyCode.LeftShift) ? footstepIntervalRun : footstepIntervalWalk;
         }
     }
+
+
+
     private void HandleMovement()
     {
+        Animator.SetBool("SAUTE", false);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -204,7 +215,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
         Vector3 targetDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        // Crouch logic (press and hold)
         if (Input.GetKey(KeyCode.LeftControl) && canMove)
         {
             targetHeight = crouchHeight;
@@ -214,22 +224,43 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             targetHeight = defaultHeight;
         }
 
-// Smoothly adjust height
+        // Smoothly adjust height
         characterController.height = Mathf.Lerp(characterController.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
 
-// Adjust speed while crouching
+        // Adjust speed while crouching
 
         if (isCrouching)
         {
             isRunning = false; // Cannot run while crouching
         }
-        
+
         if (isGrounded)
         {
             moveDirection = targetDirection;
+            if (targetDirection != Vector3.zero)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Animator.SetBool("EnMarche", false);
+                    Animator.SetBool("CoursForest", true);
+                }
+                else
+                {
+                    Animator.SetBool("EnMarche", true);
+                    Animator.SetBool("CoursForest", false);
+                }
+            }
+            else
+            {
+                Animator.SetBool("EnMarche", false);
+                Animator.SetBool("CoursForest", false);
+            }
 
             if (Input.GetButton("Jump") && canMove)
             {
+                Animator.SetBool("EnMarche", false);
+                Animator.SetBool("CoursForest", false);
+                Animator.SetBool("SAUTE", true);
                 moveDirection.y = jumpPower;
             }
         }
@@ -244,7 +275,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
         characterController.Move(moveDirection * Time.deltaTime);
     }
-
     void EquipItem(int _index)
     {
         if (_index == prevItemIndex)
@@ -252,14 +282,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             return;
         }
         itemIndex = _index;
-        
+
         items[itemIndex].itemGameObject.SetActive(true);
 
         if (prevItemIndex != -1)
         {
             items[prevItemIndex].itemGameObject.SetActive(false);
         }
-        
+
         prevItemIndex = itemIndex;
 
         if (photonView.IsMine)
@@ -299,25 +329,27 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         }
         else
         {
-            // R�ception de la position d'un autre joueur
+            // Réception de la position d'un autre joueur
             networkedPosition = (Vector3)stream.ReceiveNext();
             networkedRotation = (Quaternion)stream.ReceiveNext();
         }
     }
+    
 
     public void TakeDamage(float damage)
     {
-            photonView.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+        photonView.RPC("RPC_TakeDamage", RpcTarget.All, damage);
     }
 
     [PunRPC]
     void RPC_TakeDamage(float damage)
     {
         if (!photonView.IsMine) return;
-        
+        Animator.SetBool("JaiMal", true);
         currHealth -= damage;
         if (currHealth <= 0)
         {
+            Animator.SetBool("MortEnSah", true);
             Die();
         }
     }
