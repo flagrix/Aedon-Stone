@@ -381,6 +381,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         }
     }
 
+    public void Heal(float amount)
+    {
+        currHealth = Mathf.Clamp(currHealth + amount, 0, maxHealth);
+        healthBar.SetActualHealth((int)amount);
+    }
+
     void Die()
     {
         playerManager.Die();

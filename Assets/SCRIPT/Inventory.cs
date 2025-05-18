@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public Text potionsText;
     private Photon.Pun.PhotonView photonView;
 
-    private HealthBar healthBar;
+    public HealthBar healthBar;
     private void Awake()
     {
         photonView = GetComponent<Photon.Pun.PhotonView>();
@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     }
     private void Start()
     {
-        healthBar = GetComponentInParent<Transform>().GetComponentInChildren<HealthBar>();
+        
     }
     private void Update()
     {
@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         if (potions > 0)
         {
             addPotion(-1);
-            healthBar.SetActualHealth(40);
+            GetComponentInParent<PlayerController>().Heal(40);
         }
     }
 }

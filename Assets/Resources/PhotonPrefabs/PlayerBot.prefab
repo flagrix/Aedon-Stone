@@ -2486,6 +2486,7 @@ MonoBehaviour:
   potions: 0
   runesText: {fileID: 4406699168514668276}
   potionsText: {fileID: 8577506505105601326}
+  healthBar: {fileID: 7740429515957503004}
 --- !u!1 &6587531290191370927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,10 +2624,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6626750066743761956}
   - {fileID: 3364115372095257886}
   - {fileID: 1181755505593638734}
   - {fileID: 7750769467465771691}
+  - {fileID: 6626750066743761956}
   m_Father: {fileID: 4111427471511617259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

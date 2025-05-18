@@ -64,6 +64,7 @@ public class HealthBar : MonoBehaviour
         SetHealth(actual_health);
     }
 
+  
     private void TriggerDamageFlash()
     {
         flashTimer = flashDuration;
