@@ -17,9 +17,16 @@ public class MainMenu : MonoBehaviour
     }
     private void Start()
     {
-        audiosource.clip = musique[0];
-        audiosource.loop = true;
-        audiosource.Play();
+        if (musique != null && musique.Length > 0)
+        {
+            audiosource.clip = musique[0];
+            audiosource.loop = true;
+            audiosource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Le tableau 'musique' est vide ou non assigné dans l'inspecteur.");
+        }
     }
     public void StartGame()
     {
@@ -31,15 +38,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("ChoixMode");
     }
 
-    public void MenuMode()
+    public void OnePlayer()
     {
-        
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void TwoPlayer()
+    {
+        SceneManager.LoadScene("Loadingscene");
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "SampleScene") 
+        if (scene.name == "SampleScene" || scene.name == "Jeu multi") 
         {
             if (audiosource.isPlaying)
             {
