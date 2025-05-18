@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.007843138, g: 0.027450982, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
@@ -911,6 +911,10 @@ PrefabInstance:
     - target: {fileID: 621783976192959208, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
       propertyPath: m_Name
       value: Cloud_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414685859875996477, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1905,6 +1909,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be14557fe610b04199c121cda68e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  timeBetweenWaves: 20
 --- !u!4 &227697159
 Transform:
   m_ObjectHideFlags: 0
@@ -1932,6 +1939,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad4be71914d604409d499ce93226715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenWave: 50
+  waveCountTimer: {fileID: 0}
+  waveAnnouncement: {fileID: 0}
+  announcementDuration: 10
+  WazeAudioSource: {fileID: 0}
+  new_wave: {fileID: 0}
 --- !u!143 &227697162
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2100,6 +2113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be14557fe610b04199c121cda68e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  timeBetweenWaves: 20
 --- !u!114 &227697167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2552,10 @@ PrefabInstance:
     - target: {fileID: 621783976192959208, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
       propertyPath: m_Name
       value: Cloud_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414685859875996477, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3421,6 +3441,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d6ce7ceb710e409dd323a6c67b0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runes: 0
+  potions: 0
+  runesText: {fileID: 0}
+  potionsText: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -10357,6 +10382,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad4be71914d604409d499ce93226715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenWave: 50
+  waveCountTimer: {fileID: 0}
+  waveAnnouncement: {fileID: 0}
+  announcementDuration: 10
+  WazeAudioSource: {fileID: 0}
+  new_wave: {fileID: 0}
 --- !u!114 &1490948599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11216,6 +11247,10 @@ PrefabInstance:
     - target: {fileID: 621783976192959208, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
       propertyPath: m_Name
       value: Cloud_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414685859875996477, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12746,6 +12781,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cloud_02 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1414685859875996477, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13504,6 +13543,10 @@ PrefabInstance:
     - target: {fileID: 621783976192959208, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
       propertyPath: m_Name
       value: Cloud_02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1414685859875996477, guid: bf844bfd018262648a0eb171fbc25349, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

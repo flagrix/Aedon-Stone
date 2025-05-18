@@ -3,12 +3,20 @@ using UnityEngine;
 public class AudioListenersManager : MonoBehaviour
 {
     void Awake()
+{
+    AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+    if (listeners.Length > 1)
     {
-        AudioListener[] listeners = FindObjectsOfType<AudioListener>();
-        if (listeners.Length > 1)
+        AudioListener listener = GetComponent<AudioListener>();
+        if (listener != null)
         {
-            // DÈsactive ce AudioListener car il y en a dÈj‡ un
-            GetComponent<AudioListener>().enabled = false;
+            listener.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning($"Pas d'AudioListener attach√© √† {gameObject.name}, impossible de le d√©sactiver.");
         }
     }
+}
+
 }
