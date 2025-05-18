@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private float targetHeight; // Target height for crouching/standing
     PlayerManager playerManager;
 
+    private HealthBar healthBar; // pour la barre de vie locale
+
 
     void Awake()
     {
@@ -86,6 +88,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (photonView.IsMine)
         {
             EquipItem(0);
+            healthBar = FindObjectOfType<HealthBar>();
+            if (healthBar != null)
+            {
+                healthBar.SetMaxHealth((int)maxHealth);
+                healthBar.SetHealth((int)currHealth);
+            }
         }
         else
         {
@@ -103,6 +111,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     {
         if (photonView.IsMine)
         {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                TakeDamage(20f);
+            }
             for (int i = 0; i < items.Length; i++)
             {
                 if (Input.GetKeyDown((i + 1).ToString()))
@@ -347,6 +359,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (!photonView.IsMine) return;
         Animator.SetBool("JaiMal", true);
         currHealth -= damage;
+
+        if (healthBar != null)
+            healthBar.SetActualHealth(-(int)damage); // négatif = perte de vie
+
         if (currHealth <= 0)
         {
             Animator.SetBool("MortEnSah", true);

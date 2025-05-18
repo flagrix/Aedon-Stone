@@ -18,10 +18,8 @@ public class Inventory : MonoBehaviour
         {
             addPotion(1);
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            HealthBar.instance.SetActualHealth(-20);
-        }
+        
+
         if (Input.GetKeyDown(KeyCode.G))
         {
             UsePotion();

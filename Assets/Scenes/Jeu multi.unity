@@ -23559,7 +23559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613302289}
   - component: {fileID: 613302291}
-  - component: {fileID: 613302290}
+  - component: {fileID: 613302292}
   m_Layer: 5
   m_Name: TowerBar
   m_TagString: Untagged
@@ -23589,22 +23589,6 @@ RectTransform:
   m_AnchoredPosition: {x: -600, y: 282}
   m_SizeDelta: {x: 450, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &613302290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613302288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea3d2b8e68d0c1a468d93b340cd6a372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 613302291}
-  actual_health: 100
-  damageImage: {fileID: 804644541}
-  flashDuration: 0.7
 --- !u!114 &613302291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23656,6 +23640,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &613302292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613302288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23dafab62e9963e49a95e00904206542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  slider: {fileID: 613302291}
 --- !u!1001 &615588068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38999,7 +38997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1106924416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65362,7 +65360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1867415624
 RectTransform:
   m_ObjectHideFlags: 0
