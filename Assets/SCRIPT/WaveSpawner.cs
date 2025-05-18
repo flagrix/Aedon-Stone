@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Photon.Pun;
+using System.IO;
 
 public class WaveSpawner : MonoBehaviour {
 
@@ -16,7 +18,7 @@ public class WaveSpawner : MonoBehaviour {
 
     private float countdown = 2f;
 
-    private int waveIndex=0;
+    private int waveIndex = 0;
 
     
 
@@ -46,6 +48,6 @@ public class WaveSpawner : MonoBehaviour {
 
     void SpawnEnemy()
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien"), spawnPoint.position,spawnPoint.rotation, 0);
     }
 }
