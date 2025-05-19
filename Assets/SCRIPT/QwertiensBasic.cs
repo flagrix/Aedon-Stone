@@ -1,61 +1,84 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class QwertiensBasic : MonoBehaviour
+public class QwertiensBasic : MonoBehaviourPunCallbacks
 {
     public NavMeshAgent agent2;
-    public float stopDistance = 0F; // Distance minimale avant d'arrêter la poursuite
+    public float stopDistance = 8F; // Distance minimale avant d'arrÃªter la poursuite
 
     private Vector3 lastTargetPosition;
     public Slider healthBar;
     public int attackDamage = 10;
     public float attackCooldown = 4f; 
     private float lastAttackTime;
-    public static QwertiensBasic instance;
+
+    private GameObject currentTarget;
 
     private int Health = 100;
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        
     }
+    void Start()
+    {
 
+        agent2 = GetComponent<NavMeshAgent>();
+        agent2.speed = 3f;
+        Debug.Log("sndv");
+        InvokeRepeating(nameof(FindClosestPlayer), 0f, 1f); // Cherche une cible toutes les secondes
+    }
     void Update()
     {
-            // Récupérer la position actuelle du joueur
-            Vector3 targetPos = new Vector3(-73f, 0f, 929.3f);
-            if (NavMesh.SamplePosition(targetPos, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
-            {
-                Debug.Log("Point valide trouvé à " + hit.position);
+        if (currentTarget != null)
+        {
+            float distance = Vector3.Distance(transform.position, currentTarget.transform.position);
 
+            if (distance > stopDistance)
+            {
+                // Poursuit le joueur
+                agent2.isStopped = false;
+                agent2.SetDestination(currentTarget.transform.position);
             }
             else
             {
-                Debug.LogWarning("Aucun point valide sur le NavMesh autour de " + targetPos);
-            }
+                // ArrÃªte de bouger
+                agent2.isStopped = true;
 
-            // Vérifier la distance entre l'agent et le joueur
-            float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
-
-            // Si la distance est supérieure à la distance minimale ou que la cible a changé, recalculer le chemin
-            if (distanceToPlayer > stopDistance)
-            {
-                if (targetPos != lastTargetPosition)
+                // Attaque si le cooldown est terminÃ©
+                if (Time.time - lastAttackTime >= attackCooldown)
                 {
-                    agent2.SetDestination(targetPos);
-                    lastTargetPosition = targetPos;
+                    AttackPlayer();
+                    lastAttackTime = Time.time;
                 }
             }
-            else
-            {
-                // Arrêter le mouvement si l'agent est dans la portée minimale
-                agent2.ResetPath();
-                if (!GameOver.instance.isGameOver)
-                    AttackPlayer();
-            }
+        }
+
     }
 
+    void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float minDistance = Mathf.Infinity;
+        GameObject closest = null;
+
+        foreach (GameObject player in players)
+        {
+            // Ignore les joueurs morts ou dÃ©sactivÃ©s
+            if (!player.activeInHierarchy)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = player;
+            }
+        }
+
+        currentTarget = closest;
+    }
     public void SetHealth(int i)
     {
         Health += i;
@@ -71,17 +94,18 @@ public class QwertiensBasic : MonoBehaviour
 
     private void AttackPlayer()
     {
-        if (Time.time - lastAttackTime >= attackCooldown)
+        if (currentTarget != null)
         {
-            /**if (HealthBar.instance != null)
-            {
-                HealthBar.instance.SetActualHealth(-attackDamage);
-                Debug.Log("Qwertien attaque le joueur !");
-            }**/
+            IDamageable damageable = currentTarget.GetComponent<IDamageable>();
+            PhotonView targetPhotonView = currentTarget.GetComponent<PhotonView>();
 
-            // Mettre à jour le temps de la dernière attaque
+            if (damageable != null && targetPhotonView != null && targetPhotonView.IsMine)
+            {
+                damageable.TakeDamage(attackDamage);
+                Debug.Log("ðŸ’¥ Qwertien attaque et inflige des degats !");
+            }
+
             lastAttackTime = Time.time;
         }
     }
-
 }
