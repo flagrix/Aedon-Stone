@@ -2952,7 +2952,7 @@ GameObject:
   - component: {fileID: 5292350238873806595}
   m_Layer: 0
   m_Name: PlayerBot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
