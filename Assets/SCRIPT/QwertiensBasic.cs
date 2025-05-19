@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class QwertiensBasic : MonoBehaviour
 {
     public NavMeshAgent agent2;
-    public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
+    public float stopDistance = 0F; // Distance minimale avant d'arrêter la poursuite
 
     private Vector3 lastTargetPosition;
     public Slider healthBar;
@@ -23,10 +23,17 @@ public class QwertiensBasic : MonoBehaviour
 
     void Update()
     {
-        if (PlayerMovement.instance != null)
-        {
             // Récupérer la position actuelle du joueur
-            Vector3 targetPos = PlayerMovement.instance.GetPlayerPosition();
+            Vector3 targetPos = new Vector3(-73f, 0f, 929.3f);
+            if (NavMesh.SamplePosition(targetPos, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
+            {
+                Debug.Log("Point valide trouvé à " + hit.position);
+
+            }
+            else
+            {
+                Debug.LogWarning("Aucun point valide sur le NavMesh autour de " + targetPos);
+            }
 
             // Vérifier la distance entre l'agent et le joueur
             float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
@@ -47,7 +54,6 @@ public class QwertiensBasic : MonoBehaviour
                 if (!GameOver.instance.isGameOver)
                     AttackPlayer();
             }
-        }
     }
 
     public void SetHealth(int i)
