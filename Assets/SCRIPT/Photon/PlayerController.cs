@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         // D�sactiver cam�ra et audio des autres joueurs
         if (photonView.IsMine)
         {
-            EquipItem(0);
+            ///EquipItem(0);
             healthBar = FindObjectOfType<HealthBar>();
             if (healthBar != null)
             {
