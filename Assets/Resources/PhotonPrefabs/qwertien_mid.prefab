@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4138686076249924491
+--- !u!1 &3062723338299922754
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7028565705250442651}
-  - component: {fileID: 6399615908023601001}
-  - component: {fileID: 3660727666142529917}
-  - component: {fileID: 7444468178273982225}
-  - component: {fileID: -7489716112669691773}
-  - component: {fileID: 1120962215713307414}
+  - component: {fileID: 2465012145208037327}
+  - component: {fileID: 5755209892694371351}
+  - component: {fileID: 2646933830496282468}
+  - component: {fileID: 5598947340276192580}
+  - component: {fileID: 9179629285400889980}
+  - component: {fileID: -5987282206126174127}
   m_Layer: 0
-  m_Name: qwertien
-  m_TagString: Enemy
+  m_Name: qwertien_mid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7028565705250442651
+--- !u!4 &2465012145208037327
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -149, y: 358, z: -1118}
+  m_LocalPosition: {x: -893.088, y: -55.24548, z: 346.74097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6399615908023601001
+--- !u!33 &5755209892694371351
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3660727666142529917
+--- !u!23 &2646933830496282468
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7444468178273982225
+--- !u!136 &5598947340276192580
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -112,26 +112,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7489716112669691773
+--- !u!114 &9179629285400889980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c45f9292db91643a3351bd4ef2323c, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fb36702434eef458adbf8c86ba5878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
---- !u!114 &1120962215713307414
+--- !u!114 &-5987282206126174127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138686076249924491}
+  m_GameObject: {fileID: 3062723338299922754}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
@@ -142,9 +142,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
-  ObservedComponents:
-  - {fileID: 0}
+  observableSearch: 2
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
