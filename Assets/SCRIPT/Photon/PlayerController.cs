@@ -2,7 +2,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Unity.VisualScripting;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 {
@@ -16,11 +15,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private Quaternion networkedRotation;
 
     public Camera playerCamera;
-
-    [Header("Items options")]
-    [SerializeField] Item[] items;
-    int itemIndex;
-    int prevItemIndex = -1;
+    
 
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
@@ -126,32 +121,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             if (Input.GetKeyDown(KeyCode.G))
             {
                 inventory.UsePotion();
-            }
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (Input.GetKeyDown((i + 1).ToString()))
-                {
-                    EquipItem(i);
-                    break;
-                }
-            }
-            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-
-            if (scroll > 0f)
-            {
-                int nextIndex = (itemIndex + 1) % items.Length;
-                EquipItem(nextIndex);
-            }
-            else if (scroll < 0f)
-            {
-                int prevIndex = (itemIndex - 1 + items.Length) % items.Length;
-                EquipItem(prevIndex);
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Mouse Down");
-                items[itemIndex].Use();
             }
 
             if (transform.position.y < -10f) //Die if you fall out
@@ -299,38 +268,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
         characterController.Move(moveDirection * Time.deltaTime);
     }
-    void EquipItem(int _index)
-    {
-        if (_index == prevItemIndex)
-        {
-            return;
-        }
-        itemIndex = _index;
-
-        items[itemIndex].itemGameObject.SetActive(true);
-
-        if (prevItemIndex != -1)
-        {
-            items[prevItemIndex].itemGameObject.SetActive(false);
-        }
-
-        prevItemIndex = itemIndex;
-
-        if (photonView.IsMine)
-        {
-            Hashtable hash = new Hashtable();
-            hash.Add("itemIndex", itemIndex);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        }
-    }
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-        if (!photonView.IsMine && targetPlayer == photonView.Owner)
-        {
-            EquipItem((int)changedProps["itemIndex"]);
-        }
-    }
+    
 
     private void HandleCamera()
     {

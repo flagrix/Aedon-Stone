@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public class NewMonoBehaviourScript : MonoBehaviour
 {
-    public ItemInfo itemInfo;
-    public GameObject itemGameObject;
-
-    public abstract void Use();
+    public ItemSO itemScriptableObject;
 }

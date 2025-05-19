@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -8,7 +9,6 @@ public class Inventory : MonoBehaviour
     public Text runesText; //pour afficher les runes
     public Text potionsText;
     private Photon.Pun.PhotonView photonView;
-
     public HealthBar healthBar;
     private void Awake()
     {
