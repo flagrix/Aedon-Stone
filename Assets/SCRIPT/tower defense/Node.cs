@@ -1,5 +1,8 @@
 using UnityEngine;
-
+using System.Collections;
+using UnityEngine.UI;
+using Photon.Pun;
+using System.IO;
 public class Node : MonoBehaviour {
 
     public Color hoverColor;
@@ -17,14 +20,15 @@ public class Node : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if(turret != null)
+        if (turret != null)
         {
             Debug.Log("Impossible de construire ici, il y a déjà une tourelle.");
             return;
         }
 
         GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        turret = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), transform.position + positionOffset, transform.rotation, 0);
+        
     }
 
     private void OnMouseEnter()

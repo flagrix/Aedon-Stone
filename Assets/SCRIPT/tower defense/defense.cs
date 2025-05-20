@@ -1,5 +1,8 @@
 using UnityEngine;
-
+using System.Collections;
+using UnityEngine.UI;
+using Photon.Pun;
+using System.IO;
 public class defense : MonoBehaviour {
 
     private Transform target;
@@ -71,7 +74,7 @@ if(target == null)
 
     void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "boulet_de_canon"), firePoint.position,firePoint.rotation, 0);;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if(bullet != null)
