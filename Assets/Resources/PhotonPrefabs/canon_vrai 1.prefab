@@ -87,6 +87,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4026634971062697464, guid: 7f959264df5071b42828ad91018e4f96, type: 3}
   firePoint: {fileID: 5343886112171069930}
   Damage: 50
+  lineRenderer: {fileID: 0}
+  useLaser: 0
+  damageOverTime: 20
+  slowAmount: 0.5
 --- !u!114 &4259785534815498741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnnemyMid : ennemy {
 
-    public float speed = 10f;
+   
 
     private Transform target;
     private int waypointIndex = 0;

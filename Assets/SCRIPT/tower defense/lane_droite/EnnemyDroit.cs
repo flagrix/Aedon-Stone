@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnnemyDroit : ennemy {
 
-    public float speed = 10f;
 
     private Transform target;
     private int waypointIndex = 0;

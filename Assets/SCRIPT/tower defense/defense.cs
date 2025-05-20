@@ -6,6 +6,7 @@ using System.IO;
 public class defense : MonoBehaviour {
 
     private Transform target;
+    private ennemy targetEnemy;
     public float range = 15f;
 
     public string enemyTag = "Enemy";
@@ -21,6 +22,13 @@ public class defense : MonoBehaviour {
     public Transform firePoint;
     
     public float Damage = 50f;
+
+    public LineRenderer lineRenderer;
+    public bool useLaser;
+
+    public int damageOverTime = 20;
+    public float slowAmount = 0.5f;
+
 
 // Use this for initialization
     void Start () {
@@ -43,9 +51,10 @@ public class defense : MonoBehaviour {
             }
         }
 
-        if(nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            targetEnemy = target.GetComponent<ennemy>();
         }
         else
         {
@@ -53,26 +62,62 @@ public class defense : MonoBehaviour {
         }
     }
 
-// Update is called once per frame
-void Update () {
-if(target == null)
+    // Update is called once per frame
+    void Update()
+    {
+        if (target == null)
         {
+             if (useLaser)
+            {
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                }
+            }
             return;
         }
 
+        LockOnTarget();
+        if (useLaser)
+        {
+            Laser();
+        }
+        else
+        {
+            if (fireCountdown <= 0f)
+            {
+                Shoot();
+                fireCountdown = 1 / fireRate;
+            }
+
+            fireCountdown -= Time.deltaTime;
+        }
+    }
+
+
+    void Laser()
+    {
+        targetEnemy.TakeDammage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+
+        if(lineRenderer.enabled == false)
+        {
+            lineRenderer.enabled = true;
+        }
+
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, target.position);
+
+        Vector3 dir = firePoint.position - target.position;
+    }
+
+    void LockOnTarget()
+    {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-        if(fireCountdown <= 0f)
-        {
-            Shoot();
-            fireCountdown = 1 / fireRate;
-        }
-
-        fireCountdown -= Time.deltaTime;
-}
+    }
 
     void Shoot()
     {
