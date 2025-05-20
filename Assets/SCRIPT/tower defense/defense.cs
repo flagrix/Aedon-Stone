@@ -19,9 +19,11 @@ public class defense : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public Transform firePoint;
+    
+    public float Damage = 50f;
 
 // Use this for initialization
-void Start () {
+    void Start () {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 }
 
@@ -79,6 +81,7 @@ if(target == null)
 
         if(bullet != null)
         {
+            bullet.damage = Damage;
             bullet.Seek(target);
         }
     }

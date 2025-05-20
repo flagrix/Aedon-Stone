@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class EnnemyDroit : MonoBehaviour {
+public class EnnemyDroit : ennemy {
 
     public float speed = 10f;
 
     private Transform target;
     private int waypointIndex = 0;
-
     void Start()
     {
         target = Waypoints_lane_droite.points[0];
@@ -34,5 +33,4 @@ public class EnnemyDroit : MonoBehaviour {
         waypointIndex++;
         target = Waypoints_lane_droite.points[waypointIndex];
     }
-
 }
