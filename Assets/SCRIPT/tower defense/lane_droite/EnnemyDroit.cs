@@ -1,9 +1,7 @@
 using UnityEngine;
 
 public class EnnemyDroit : ennemy {
-
-
-    private Transform target;
+     private Transform target;
     private int waypointIndex = 0;
     void Start()
     {

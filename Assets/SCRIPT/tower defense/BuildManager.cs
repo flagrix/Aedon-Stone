@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class BuildManager : MonoBehaviour {
+public class BuildManager : MonoBehaviour
+{
 
     #region Singleton
     public static BuildManager instance;
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Debug.LogError("Il y a déjà un BuildManager dans la scène !");
             return;
@@ -18,16 +19,16 @@ public class BuildManager : MonoBehaviour {
 
     public GameObject standardTurretPrefab;
 
-    private void Start()
-    {
-        turretToBuild = standardTurretPrefab;
-    }
-
     private GameObject turretToBuild;
 
     public GameObject GetTurretToBuild()
     {
         return turretToBuild;
+    }
+
+    public void SetTurretToBuild(GameObject turret)
+    {
+        turretToBuild = turret;
     }
 
 }
