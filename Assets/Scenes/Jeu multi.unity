@@ -13093,6 +13093,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be14557fe610b04199c121cda68e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 7028565705250442651, guid: 92b369708a0c1774f88b988cba9694b8, type: 3}
+  spawnPoint: {fileID: 960206065}
+  timeBetweenWaves: 20
 --- !u!4 &301278190
 Transform:
   m_ObjectHideFlags: 0
@@ -13150,6 +13153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd4e5a3c9dc7443ac5d62bc7006909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standardTurretPrefab: {fileID: 3225055507136774675, guid: 46e064d2acf3a984199fc9809e3aa44a, type: 3}
 --- !u!1001 &301671230
 PrefabInstance:
   m_ObjectHideFlags: 0
