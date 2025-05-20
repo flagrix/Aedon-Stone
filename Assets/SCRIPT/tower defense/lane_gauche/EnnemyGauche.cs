@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnnemyGauche : MonoBehaviour {
+public class EnnemyGauche : ennemy {
 
     public float speed = 10f;
 
@@ -11,13 +11,12 @@ public class EnnemyGauche : MonoBehaviour {
     {
         target = Waypoints_lane_gauche.points[0];
     }
-
     private void Update()
     {
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
-        if(Vector3.Distance(transform.position, target.position) <= 0.3f)
+        if (Vector3.Distance(transform.position, target.position) <= 0.3f)
         {
             GetNextWaypoint();
         }
@@ -34,5 +33,4 @@ public class EnnemyGauche : MonoBehaviour {
         waypointIndex++;
         target = Waypoints_lane_gauche.points[waypointIndex];
     }
- 
-}
+ }

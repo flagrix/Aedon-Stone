@@ -1,38 +1,23 @@
 using UnityEngine;
 
-public class ennemy : MonoBehaviour {
-
-    public float speed = 10f;
-
-    private Transform target;
-    private int waypointIndex = 0;
-
-    void Start()
+public class ennemy : MonoBehaviour
+{
+     public int health = 100;
+    public void TakeDammage(int amount)
     {
-        target = Waypoints.points[0];
-    }
+        health -= amount;
 
-    private void Update()
-    {
-        Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-
-        if(Vector3.Distance(transform.position, target.position) <= 0.3f)
+        if (health <= 0)
         {
-            GetNextWaypoint();
+            Die();
         }
     }
-
-    private void GetNextWaypoint()
+    
+     private void Die()
     {
-        if(waypointIndex >= Waypoints.points.Length - 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        waypointIndex++;
-        target = Waypoints.points[waypointIndex];
+        Destroy(gameObject);
     }
+
+
 
 }

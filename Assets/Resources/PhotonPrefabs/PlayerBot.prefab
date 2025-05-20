@@ -4156,14 +4156,14 @@ MonoBehaviour:
   Axe_item: {fileID: 6883364378233409188}
   LongSword_item: {fileID: 7787866307481780230}
   PharmacoBook_item: {fileID: 7233295460256861647}
-  Arbalete_item: {fileID: 7375762372974473724}
+  Arbalete_item: {fileID: 5992164415958169570, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
   FlameBook_item: {fileID: 7233295460256861647}
   Hallebarde_item: {fileID: 31389016762688026}
   HammerItemPrefab: {fileID: 659655910780025627, guid: 4ae38e46d87439c4e954ef8748d19eb1, type: 3}
   AxeItemPrefab: {fileID: 659655910780025627, guid: 4ae38e46d87439c4e954ef8748d19eb1, type: 3}
   LongSwordItemPrefab: {fileID: 5825585985126533364, guid: e340b5b38f0095e43a21c28c4352a2be, type: 3}
   PharmacoBookItemPrefab: {fileID: 3880795220011919504, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
-  ArbaleteItemPrefab: {fileID: 8707339492673408495, guid: d6c5b167c61ede54eb8b530ed801834d, type: 3}
+  ArbaleteItemPrefab: {fileID: 5992164415958169570, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
   FlameBookItemPrefab: {fileID: 3880795220011919504, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
   HallebardeItemPrefab: {fileID: 6359179168470748645, guid: 68aa0f3c0afd67c479617802cfda2797, type: 3}
   inventorySlotImage:

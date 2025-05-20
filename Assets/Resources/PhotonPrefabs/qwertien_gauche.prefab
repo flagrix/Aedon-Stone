@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6893349832122721185}
   - component: {fileID: 7924447947189551041}
   - component: {fileID: 3072072216715230969}
-  - component: {fileID: 3940057635797804264}
   - component: {fileID: -1600273520512828774}
+  - component: {fileID: 9077603453654565877}
   m_Layer: 0
   m_Name: qwertien_gauche
   m_TagString: Untagged
@@ -112,19 +112,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3940057635797804264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3494116336089559058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804eea5d4f7e1b644acc54397181c121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
 --- !u!114 &-1600273520512828774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,3 +134,17 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &9077603453654565877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494116336089559058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804eea5d4f7e1b644acc54397181c121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  speed: 10
