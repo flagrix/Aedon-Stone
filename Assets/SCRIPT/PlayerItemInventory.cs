@@ -6,6 +6,9 @@ public class PlayerItemInventory : MonoBehaviour
     [Header("General")]
     public List<itemType> inventoryList;
     public int selectedItem = 0;
+    public float playerReach;
+    [SerializeField] private GameObject throwItem_GameObject;
+    
     
     [Space(20)] [Header("Keys")]
     [Header("Keys")]
@@ -22,8 +25,24 @@ public class PlayerItemInventory : MonoBehaviour
     [SerializeField] GameObject Arbalete_item;
     [SerializeField] GameObject FlameBook_item;
     [SerializeField] GameObject Hallebarde_item;
-    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { } ;
+    
+    [Space(20)]
+    [Header("Item Prefabs")]
+    [SerializeField] GameObject HammerItemPrefab;
+    [SerializeField] GameObject AxeItemPrefab;
+    [SerializeField] GameObject LongSwordItemPrefab;
+    [SerializeField] GameObject PharmacoBookItemPrefab;
+    [SerializeField] GameObject ArbaleteItemPrefab;
+    [SerializeField] GameObject FlameBookItemPrefab;
+    [SerializeField] GameObject HallebardeItemPrefab;   
+    
 
+    [SerializeField] Camera cam;
+    [SerializeField] GameObject pickUpItem_gameobject;
+    
+    
+    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { } ;
+    private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
     void Start()
     {
         itemSetActive.Add(itemType.Hammer, Hammer_item);
@@ -34,11 +53,58 @@ public class PlayerItemInventory : MonoBehaviour
         itemSetActive.Add(itemType.FlameBook, FlameBook_item);
         itemSetActive.Add(itemType.Hallebarde, Hallebarde_item);
         
+        itemInstanciate.Add(itemType.Hammer, HammerItemPrefab);
+        itemInstanciate.Add(itemType.Axe, AxeItemPrefab);
+        itemInstanciate.Add(itemType.LongSword, LongSwordItemPrefab);
+        itemInstanciate.Add(itemType.PharmacoBook, PharmacoBookItemPrefab);
+        itemInstanciate.Add(itemType.Arbalete, ArbaleteItemPrefab);
+        itemInstanciate.Add(itemType.FlameBook, FlameBookItemPrefab);
+        itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);
+        
         NewItemSelected();
     }
     
     void Update()
     {
+        //Item Pickup
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, playerReach))
+        {
+            IPickable item = hitInfo.collider.GetComponent<IPickable>();
+            if (item != null)
+            {
+                pickUpItem_gameobject.SetActive(true);
+                if (Input.GetKey(pickItemKey) && inventoryList.Count < 4)
+                {
+                    inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.itemType);
+                    item.PickItem();
+                }
+            }
+            else
+            {
+                pickUpItem_gameobject.SetActive(false);
+            }
+        }
+        else
+        {
+            pickUpItem_gameobject.SetActive(false);
+        }
+        //Item Throw
+
+        if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1 && inventoryList[selectedItem] != itemType.Hammer)
+        {
+            Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
+            inventoryList.RemoveAt(selectedItem);
+            if (selectedItem != 0)
+            {
+                selectedItem--;
+            }
+            NewItemSelected();
+        }
+        
+        //Item selection
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
         {
             selectedItem = 0;
@@ -73,4 +139,9 @@ public class PlayerItemInventory : MonoBehaviour
         
         selctedObject.SetActive(true);
     }
+}
+
+public interface IPickable
+{
+    void PickItem();
 }
