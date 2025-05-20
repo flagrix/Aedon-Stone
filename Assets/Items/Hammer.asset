@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e144375078102e44999f573955ec679e, type: 3}
   cooldown: 0.5
   itemType: 0

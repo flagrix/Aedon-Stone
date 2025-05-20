@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 187c45abbc6d7894d97d0d7315da8d17, type: 3}
   cooldown: 1
   itemType: 1

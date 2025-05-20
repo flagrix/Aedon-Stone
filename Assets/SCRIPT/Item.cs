@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public ItemSO itemScriptableObject;
 }

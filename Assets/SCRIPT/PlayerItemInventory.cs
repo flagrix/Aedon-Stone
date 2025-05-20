@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerItemInventory : MonoBehaviour
 {
@@ -36,7 +38,12 @@ public class PlayerItemInventory : MonoBehaviour
     [SerializeField] GameObject FlameBookItemPrefab;
     [SerializeField] GameObject HallebardeItemPrefab;   
     
-
+    [Space(20)]
+    [Header("UI")]
+    [SerializeField] Image[] inventorySlotImage = new Image[4];
+    [SerializeField] Image[] inventoryBackgroundImage = new Image[4];
+    [SerializeField] Sprite emptySlotSprite;
+    
     [SerializeField] Camera cam;
     [SerializeField] GameObject pickUpItem_gameobject;
     
@@ -70,13 +77,13 @@ public class PlayerItemInventory : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, playerReach))
+        if (Physics.Raycast(ray, out hitInfo, playerReach)&& inventoryList.Count < 4)
         {
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
                 pickUpItem_gameobject.SetActive(true);
-                if (Input.GetKey(pickItemKey) && inventoryList.Count < 4)
+                if (Input.GetKey(pickItemKey))
                 {
                     inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.itemType);
                     item.PickItem();
@@ -102,6 +109,33 @@ public class PlayerItemInventory : MonoBehaviour
                 selectedItem--;
             }
             NewItemSelected();
+        }
+        //UI
+        for (int i = 0; i < 4; i++)
+        {
+            if (i < inventoryList.Count)
+            {
+                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.sprite;
+            }
+            else
+            {
+                inventorySlotImage[i].sprite = emptySlotSprite;
+            }
+        }
+
+        int a = 0;
+        foreach (var VARIABLE in inventoryBackgroundImage)
+        {
+            if (a == selectedItem)
+            {
+                VARIABLE.color = Color.green;
+            }
+            else
+            {
+                VARIABLE.color = Color.red;
+            }
+
+            a++;
         }
         
         //Item selection

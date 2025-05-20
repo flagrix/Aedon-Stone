@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: Hallebarde
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 6a9e89a4abfd1374688eb940e5885271, type: 3}
   cooldown: 5
   itemType: 6
