@@ -1,18 +1,22 @@
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class PlayerItemInventory : MonoBehaviour
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+public class PlayerItemInventory : MonoBehaviourPunCallbacks
 {
     [Header("General")]
     public List<itemType> inventoryList;
     public int selectedItem = 0;
     public float playerReach;
-    [SerializeField] private GameObject throwItem_GameObject;
+    [SerializeField] GameObject throwItem_GameObject;
+    [SerializeField] PhotonView PV;
     
     
-    [Space(20)] [Header("Keys")]
+    [Space(20)]
     [Header("Keys")]
     [SerializeField]KeyCode throwItemKey;
 
@@ -50,8 +54,14 @@ public class PlayerItemInventory : MonoBehaviour
     
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { } ;
     private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
+
+    void Awake()
+    {
+       
+    }
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         itemSetActive.Add(itemType.Hammer, Hammer_item);
         itemSetActive.Add(itemType.Axe, Axe_item);
         itemSetActive.Add(itemType.LongSword, LongSword_item);
@@ -67,12 +77,17 @@ public class PlayerItemInventory : MonoBehaviour
         itemInstanciate.Add(itemType.Arbalete, ArbaleteItemPrefab);
         itemInstanciate.Add(itemType.FlameBook, FlameBookItemPrefab);
         itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);
-        
+        if (PV.IsMine)
+        {
+            selectedItem = 0;
+            NewItemSelected();
+        }
         NewItemSelected();
     }
     
     void Update()
     {
+        if(!PV.IsMine)return;
         //Item Pickup
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         
@@ -172,6 +187,23 @@ public class PlayerItemInventory : MonoBehaviour
         GameObject selctedObject = itemSetActive[inventoryList[selectedItem]];
         
         selctedObject.SetActive(true);
+
+        if (PV.IsMine)
+        {
+            Hashtable hash = new Hashtable();
+            hash.Add("selectedItem",selectedItem );
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if (changedProps.ContainsKey("selectedItem") && targetPlayer == PV.Owner)
+        {
+           selectedItem= (int)changedProps["selectedItem"];
+           if(!PV.IsMine) 
+               NewItemSelected();
+        } 
     }
 }
 

@@ -4150,6 +4150,7 @@ MonoBehaviour:
   selectedItem: 0
   playerReach: 3
   throwItem_GameObject: {fileID: 4049118844549538882}
+  PV: {fileID: 0}
   throwItemKey: 103
   pickItemKey: 101
   Hammer_item: {fileID: 6883364378233409188}
