@@ -611,7 +611,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -90}
-  m_SizeDelta: {x: 600, y: 110.1}
+  m_SizeDelta: {x: 805.5, y: 542}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1556454810864077476
 CanvasRenderer:
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3fd94fa12d6db9c4bb2169e8dd93fdd8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8785f2b5c15638b46889dbe8d942f926, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1243,7 +1243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 345, y: -55}
+  m_AnchoredPosition: {x: 460.9, y: -268}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2947259651872364745
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2162,7 +2162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 215, y: -55}
+  m_AnchoredPosition: {x: 334, y: -266.6}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9134605375751839001
@@ -2239,7 +2239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 475, y: -55}
+  m_AnchoredPosition: {x: 589.7, y: -268.7}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2722319756340674239
@@ -2881,7 +2881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85, y: -55}
+  m_AnchoredPosition: {x: 204.9, y: -265.7}
   m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5683813701521034125
@@ -4177,7 +4177,7 @@ MonoBehaviour:
   - {fileID: 6046321901414978835}
   - {fileID: 7694255708618873400}
   - {fileID: 2275657084624821174}
-  emptySlotSprite: {fileID: 0}
+  emptySlotSprite: {fileID: 21300000, guid: fe84748d53ced724ea8fc451879f689e, type: 3}
   cam: {fileID: 1899751493347373057}
   pickUpItem_gameobject: {fileID: 110185582897690411}
 --- !u!1001 &913929411427835723

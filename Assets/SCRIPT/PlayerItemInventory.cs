@@ -159,17 +159,17 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             selectedItem = 0;
             NewItemSelected();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
         {
             selectedItem = 1;
             NewItemSelected();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
         {
             selectedItem = 2;
             NewItemSelected();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
         {
             selectedItem = 3;
             NewItemSelected();
