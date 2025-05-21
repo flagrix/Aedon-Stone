@@ -197,6 +197,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private void HandleMovement()
     {
         Animator.SetBool("SAUTE", false);
+        photonView.RPC("RPC_Saute", RpcTarget.Others, false);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -225,6 +226,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (isCrouching)
         {
             isRunning = false; // Cannot run while crouching
+            Animator.SetBool("EnMarche", true);
+            photonView.RPC("RPC_SetRunning", RpcTarget.Others, true);
+            Animator.SetBool("CoursForest", false);
+            photonView.RPC("RPC_Cours", RpcTarget.Others, false);
         }
 
         if (isGrounded)
@@ -263,6 +268,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 Animator.SetBool("CoursForest", false);
                 photonView.RPC("RPC_Cours", RpcTarget.Others, false);
                 Animator.SetBool("SAUTE", true);
+                photonView.RPC("RPC_Saute", RpcTarget.Others, true);
                 moveDirection.y = jumpPower;
             }
         }
@@ -361,6 +367,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     void RPC_Cours(bool isRunning) 
     {
         Animator.SetBool("CoursForest", isRunning);
+    }
+    void RPC_Saute(bool isRunning)
+    {
+        Animator.SetBool("SAUTE", isRunning);
     }
 
 }
