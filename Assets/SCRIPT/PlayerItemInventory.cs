@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,13 +25,13 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     
     [Space(20)]
     [Header("Item gameobjects")]
-    [SerializeField] GameObject Hammer_item;
-    [SerializeField] GameObject Axe_item;
-    [SerializeField] GameObject LongSword_item;
-    [SerializeField] GameObject PharmacoBook_item;
-    [SerializeField] GameObject Arbalete_item;
-    [SerializeField] GameObject FlameBook_item;
-    [SerializeField] GameObject Hallebarde_item;
+    [SerializeField] Item Hammer_item;
+    [SerializeField] Item Axe_item;
+    [SerializeField] Item LongSword_item;
+    [SerializeField] Item PharmacoBook_item;
+    [SerializeField] Item Arbalete_item;
+    [SerializeField] Item FlameBook_item;
+    [SerializeField] Item Hallebarde_item;
     
     [Space(20)]
     [Header("Item Prefabs")]
@@ -52,7 +53,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField] GameObject pickUpItem_gameobject;
     
     
-    private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { } ;
+    private Dictionary<itemType, Item> itemSetActive = new Dictionary<itemType, Item>() { } ;
     private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
 
     void Awake()
@@ -174,17 +175,26 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             selectedItem = 3;
             NewItemSelected();
         }
+        
+        //Weapons Use
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Mouse Down");
+             itemSetActive[inventoryList[selectedItem]].Use();
+        }
+        
     }
     private void NewItemSelected()
     {
-        Hammer_item.SetActive(false);
-        Axe_item.SetActive(false);
-        LongSword_item.SetActive(false);
-        PharmacoBook_item.SetActive(false);
-        Arbalete_item.SetActive(false);
-        FlameBook_item.SetActive(false);
-        Hallebarde_item.SetActive(false);
-        GameObject selctedObject = itemSetActive[inventoryList[selectedItem]];
+        Hammer_item.ItemGameobjects.SetActive(false);
+        Axe_item.ItemGameobjects.SetActive(false);
+        LongSword_item.ItemGameobjects.SetActive(false);
+        PharmacoBook_item.ItemGameobjects.SetActive(false);
+        Arbalete_item.ItemGameobjects.SetActive(false);
+        FlameBook_item.ItemGameobjects.SetActive(false);
+        Hallebarde_item.ItemGameobjects.SetActive(false);
+        GameObject selctedObject = itemSetActive[inventoryList[selectedItem]].ItemGameobjects;
         
         selctedObject.SetActive(true);
 
