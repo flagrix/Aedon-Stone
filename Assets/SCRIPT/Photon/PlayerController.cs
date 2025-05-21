@@ -364,10 +364,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     {
         Animator.SetBool("EnMarche", isRunning);
     }
+    [PunRPC]
     void RPC_Cours(bool isRunning) 
     {
         Animator.SetBool("CoursForest", isRunning);
     }
+    [PunRPC]
     void RPC_Saute(bool isRunning)
     {
         Animator.SetBool("SAUTE", isRunning);
