@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: FlameBook
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: d04a2a298060ac345a9f4311e967e55a, type: 3}
+  sprite: {fileID: 21300000, guid: 758713ce8a229c4449daceaa48640451, type: 3}
   cooldown: 15
   itemType: 5
