@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 healthBar.SetMaxHealth((int)maxHealth);
                 healthBar.SetHealth((int)currHealth);
             }
+            
         }
         else
         {

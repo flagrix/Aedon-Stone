@@ -2044,12 +2044,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4049118844549538882}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.89, y: 1.74, z: 4.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.58725107, y: 0.7071002, z: 0.3938731, w: -0.0030853748}
+  m_LocalPosition: {x: 0.047281902, y: 0.36169624, z: 0.3654582}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.080000006}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 802859578337097888}
+  m_Father: {fileID: 4516474336432627587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4147345778088871197
 GameObject:
@@ -2731,6 +2731,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 897547474685406905}
   - {fileID: 802859578337097888}
   - {fileID: 1260941748607474414}
   - {fileID: 8010218500821751669}
@@ -3078,6 +3079,8 @@ MonoBehaviour:
   runesText: {fileID: 0}
   potionsText: {fileID: 8577506505105601326}
   healthBar: {fileID: 7740429515957503004}
+  WazeAudioSource: {fileID: 0}
+  potion: {fileID: 0}
 --- !u!1 &6587531290191370927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,10 +3991,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}
     - {fileID: 65702495048144492, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 897547474685406905}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}
       insertIndex: -1
