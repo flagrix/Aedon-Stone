@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -29,8 +29,11 @@ public class defense : MonoBehaviour {
     public int damageOverTime = 20;
     public float slowAmount = 0.5f;
 
+    public AudioSource WazeAudioSource;
+    public AudioClip TDE_sound;
 
-// Use this for initialization
+
+    // Use this for initialization
     void Start () {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 }
@@ -74,6 +77,12 @@ public class defense : MonoBehaviour {
                     lineRenderer.enabled = false;
                 }
             }
+
+            if (WazeAudioSource.isPlaying)
+            {
+                Debug.Log("Stop laser sound (plus de cible)");
+                WazeAudioSource.Stop(); // 🔊 on arrête bien le son ici aussi
+            }
             return;
         }
 
@@ -81,9 +90,23 @@ public class defense : MonoBehaviour {
         if (useLaser)
         {
             Laser();
+            if (WazeAudioSource.clip != TDE_sound)
+            {
+                WazeAudioSource.clip = TDE_sound;
+            }
+
+            if (!WazeAudioSource.isPlaying)
+            {
+                WazeAudioSource.Play();
+            }
         }
         else
         {
+            if (WazeAudioSource.isPlaying)
+            {
+                Debug.Log("arrete son tde");
+                WazeAudioSource.Stop();
+            }
             if (fireCountdown <= 0f)
             {
                 Shoot();

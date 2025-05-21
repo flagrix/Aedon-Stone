@@ -10,6 +10,10 @@ public class Inventory : MonoBehaviour
     public Text potionsText;
     private Photon.Pun.PhotonView photonView;
     public HealthBar healthBar;
+
+    public AudioSource WazeAudioSource;
+    public AudioClip potion;
+
     private void Awake()
     {
         photonView = GetComponent<Photon.Pun.PhotonView>();
@@ -54,6 +58,8 @@ public class Inventory : MonoBehaviour
         {
             addPotion(-1);
             GetComponentInParent<PlayerController>().Heal(40);
+            WazeAudioSource.clip = potion ;
+            WazeAudioSource.Play();
         }
     }
 }
