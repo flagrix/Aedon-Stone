@@ -67,7 +67,7 @@ public class HealQwertien : MonoBehaviour
             {
                 // Arrêter le mouvement si l'agent est dans la portée minimale
                 agent2.ResetPath();
-                if (!GameOver.instance.isGameOver)
+                //if (!GameOver.instance.isGameOver)
                     AttackPlayer();
             }
             if (Time.time - lastHealTime >= HealCooldown)

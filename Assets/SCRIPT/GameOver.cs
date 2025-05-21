@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameOver : MonoBehaviour
 {
@@ -9,20 +10,26 @@ public class GameOver : MonoBehaviour
     public AudioClip GameOverSound;
 
     public GameObject GameOverUI;
-    public static GameOver instance;
     public bool isGameOver = false;
     public CanvasGroup gameOverCanvas;
     [SerializeField] private GameObject Réticule;
 
     private void Awake()
     {
-        if (instance == null)
+    }
+
+    void Start()
+    {
+        
+    }
+    void Update()
+    {
+        Debug.Log("Update appelé");
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            Debug.Log("ok");
+            TriggerGameOver();
+            EndGame();
         }
     }
 
@@ -30,11 +37,19 @@ public class GameOver : MonoBehaviour
     {
         Réticule.gameObject.SetActive(false);
         Debug.Log("jhsbdfojqhsdbf");
-        TableauRcords.instance.NewScoreSolo(100);
+        //TableauRcords.instance.NewScoreSolo(100);
         isGameOver = true;
-        MusicManager.instance.StopMusic();
-        PlayerMovement.instance.enabled = false;
-        Camera.main.transform.SetParent(null);
+        //MusicManager.instance.StopMusic();
+        //PlayerMovement.instance.enabled = false;
+        //Camera.main.transform.SetParent(null);
+        foreach (var player in FindObjectsOfType<PlayerManager>())
+        {
+            if (player.GetComponent<PhotonView>().IsMine)
+            {
+                player.isGameOver = true;
+                break;
+            }
+        }
         GameOverSoundSource.clip = GameOverSound;
         GameOverSoundSource.Play();
         StartCoroutine(FadeInGameOverUI());
@@ -44,22 +59,44 @@ public class GameOver : MonoBehaviour
         Cursor.visible = true;
     }
 
+
+    void TriggerGameOver()
+    {
+
+        GameOverUI.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Désactiver les contrôles pour le joueur local
+        foreach (var player in FindObjectsOfType<PlayerController>())
+        {
+            if (player.photonView.IsMine)
+            {
+                player.SetGameOverState(true);
+            }
+        }
+    }
+
+
     IEnumerator FadeInGameOverUI()
     {
         GameOverUI.SetActive(true);
         gameOverCanvas.interactable = true;
         gameOverCanvas.blocksRaycasts = true;
+        Réticule.SetActive(false);
 
         float alpha = 0f;
         while (alpha < 1f)
         {
-            alpha += Time.deltaTime;
+            alpha += Time.unscaledDeltaTime;  
             gameOverCanvas.alpha = alpha;
             yield return null;
         }
     }
 
-        public void QuitterButton()
+
+    public void QuitterButton()
     {
         Application.Quit();
         GameOverUI.SetActive(false);

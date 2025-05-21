@@ -53,7 +53,7 @@ public class FatQwertien : MonoBehaviour
             {
 
                 agent2.ResetPath();
-                if (!GameOver.instance.isGameOver)
+                //if (!GameOver.instance.isGameOver)
                     if (interetjoueur > interettour)
                         AttackPlayer();
                     else AttackTower();

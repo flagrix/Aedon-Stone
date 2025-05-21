@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private Quaternion networkedRotation;
 
     public Camera playerCamera;
-    
+
+    private bool isGameOverState = false;
 
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
@@ -108,7 +109,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Update()
     {
-
+        if (!photonView.IsMine || isGameOverState)
+            return;
         if (photonView.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.C))
@@ -288,7 +290,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     private void HandleCamera()
     {
-        if (!canMove) return;
+        if (!canMove || isGameOverState) return;
 
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
@@ -374,6 +376,23 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     void RPC_Saute(bool isRunning)
     {
         Animator.SetBool("SAUTE", isRunning);
+    }
+
+    public void SetGameOverState(bool isOver)
+    {
+        isGameOverState = isOver;
+        canMove = !isOver;  // bloque la possibilité de bouger quand game over
+
+        if (isOver)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
 }

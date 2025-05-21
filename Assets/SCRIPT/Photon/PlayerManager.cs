@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
     private float countdown = 0f;
     private float respawnStartTime;
 
+    public bool isGameOver = false;
+
     private void Awake()
     {
         Hp = GetComponent<PhotonView>();
@@ -37,6 +39,10 @@ public class PlayerManager : MonoBehaviour
         if (isRespawning && Hp.IsMine)
         {
             UpdateCountdown();
+        }
+        if (Hp.IsMine && isGameOver && Reticule.activeSelf)
+        {
+            Reticule.SetActive(false);
         }
     }
 

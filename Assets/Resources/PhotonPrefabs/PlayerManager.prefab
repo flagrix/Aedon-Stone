@@ -432,6 +432,7 @@ MonoBehaviour:
   respawnannoncement: {fileID: 4906093984845164723}
   TimeRespawnCount: {fileID: 5042544701713497277}
   Reticule: {fileID: 7251041805298666091}
+  isGameOver: 0
 --- !u!1 &7251041805298666091
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2069354389308565072
 RectTransform:
   m_ObjectHideFlags: 0

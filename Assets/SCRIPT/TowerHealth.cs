@@ -18,7 +18,7 @@ public class TowerHealth : MonoBehaviour
         health = i;
         if (health <= 0)
         {
-            GameOver.instance.EndGame();
+            //GameOver.instance.EndGame();
         }
         
     }
