@@ -25,25 +25,37 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        foreach (var player in FindObjectsOfType<Inventory>())
-        {
-            if (player.photonView.IsMine)
-            {
-                player.selectedNode = this; 
-                player.ShowPanel(); // Affiche son propre panel
-                break;
-            }
-        }
         if (turret != null)
         {
             Debug.Log("Impossible de construire ici, il y a déjà une tourelle.");
             return;
         }
+        else
+        {
+            foreach (var player in FindObjectsOfType<Inventory>())
+            {
+                if (player.photonView.IsMine)
+                {
+                    player.selectedNode = this;
+                    player.ShowPanel(); // Affiche son propre panel
+                    break;
+                }
+            }
+        }
+        
     }
 
     private void OnMouseEnter()
     {
-        rend.material.color = hoverColor;
+        if (turret != null)
+        {
+            return;
+        }
+        else
+        {
+            rend.material.color = hoverColor;
+        }
+        
     }
 
     private void OnMouseExit()
