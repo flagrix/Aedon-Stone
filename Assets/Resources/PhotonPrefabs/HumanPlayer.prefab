@@ -1102,6 +1102,7 @@ MonoBehaviour:
   potions: 0
   runesText: {fileID: 0}
   potionsText: {fileID: 8854100495494825107}
+  inv: {fileID: 0}
   healthBar: {fileID: 0}
   WazeAudioSource: {fileID: 8968197981631033105}
   potion: {fileID: 8300000, guid: 2608dc4e6c12c8e4cae81726ddfcc0e0, type: 3}
