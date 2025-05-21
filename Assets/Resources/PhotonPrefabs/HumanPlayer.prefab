@@ -966,13 +966,15 @@ MonoBehaviour:
   potions: 0
   runesText: {fileID: 0}
   potionsText: {fileID: 8854100495494825107}
-  healthBar: {fileID: 9076448817293661832}
+  healthBar: {fileID: 0}
   WazeAudioSource: {fileID: 8968197981631033105}
   potion: {fileID: 8300000, guid: 2608dc4e6c12c8e4cae81726ddfcc0e0, type: 3}
   panelToShow: {fileID: 8761578463361456209}
   turretPrefab: {fileID: 3225055507136774675, guid: 46e064d2acf3a984199fc9809e3aa44a, type: 3}
   tde: {fileID: 789108424468720901, guid: f5a7c663dc0d21b43bb66fc8831a929f, type: 3}
   balliste: {fileID: 671122222603546772, guid: 75eab17873b5bd348adb4b0b893e5b28, type: 3}
+  playerHUD: {fileID: 6273376082723608202}
+  playerHUD2: {fileID: 618053530110900628}
 --- !u!82 &8968197981631033105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1899,6 +1901,7 @@ GameObject:
   - component: {fileID: 7028846162118373132}
   - component: {fileID: 4816503870339816729}
   - component: {fileID: 8392610345625016559}
+  - component: {fileID: 5868413780857935143}
   m_Layer: 0
   m_Name: HumanPlayer
   m_TagString: Untagged
@@ -2225,6 +2228,23 @@ MonoBehaviour:
   emptySlotSprite: {fileID: 21300000, guid: fe84748d53ced724ea8fc451879f689e, type: 3}
   cam: {fileID: 6809417956900630428}
   pickUpItem_gameobject: {fileID: 5504618128696358679}
+--- !u!114 &5868413780857935143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3d2b8e68d0c1a468d93b340cd6a372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 5515934558681496333}
+  actual_health: 100
+  damageImage: {fileID: 1592462243675123325}
+  flashDuration: 0.7
+  playerHUD: {fileID: 2616900023049953234}
 --- !u!1 &1789272960074739661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,7 +3178,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2657121612812560731}
   - component: {fileID: 5515934558681496333}
-  - component: {fileID: 9076448817293661832}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -3239,22 +3258,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9076448817293661832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2616900023049953234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea3d2b8e68d0c1a468d93b340cd6a372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5515934558681496333}
-  actual_health: 100
-  damageImage: {fileID: 1592462243675123325}
-  flashDuration: 0.7
 --- !u!1 &2636142813307060092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8945,6 +8948,7 @@ GameObject:
   - component: {fileID: 8252887808076171567}
   - component: {fileID: 8488160285054476862}
   - component: {fileID: 2942628671809041451}
+  - component: {fileID: 9019470901316448497}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -9044,6 +9048,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9019470901316448497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834127243217798025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7882480027140924350
 GameObject:
   m_ObjectHideFlags: 0
