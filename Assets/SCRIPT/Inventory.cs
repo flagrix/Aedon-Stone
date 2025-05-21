@@ -19,6 +19,8 @@ public class Inventory : MonoBehaviourPun
 
     public GameObject panelToShow;
 
+    public GameObject panel_amélioration_canon;
+
     public GameObject turretPrefab;
 
     public GameObject tde;
@@ -29,17 +31,29 @@ public class Inventory : MonoBehaviourPun
 
     public GameObject playerHUD2;
 
-    private int cout_canon=350;
+    private int cout_canon = 350;
+    private int cout_tde = 700;
 
-    private int cout_tde=700;
+    private int cout_baliste = 500;
+    private int cout_amélioration_canon = 200;
+    public int level_canon = 0;
 
-    private int cout_baliste=500;
+    public int damage_augmentation_canon=20;
 
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
 
         panelToShow.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void ShowPanelAmeliorationcanon()
+    {
+        if (!photonView.IsMine) return;
+
+        panel_amélioration_canon.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -120,7 +134,7 @@ public class Inventory : MonoBehaviourPun
         panelToShow.SetActive(false); // Ferme le panel si tu veux
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
     }
 
     public void BuildTde()
@@ -145,28 +159,44 @@ public class Inventory : MonoBehaviourPun
         Cursor.visible = false;
     }
 
-   public void Buildballiste()
-{
-    if (selectedNode == null) return;
-
-    if (selectedNode.turret != null)
+    public void Buildballiste()
     {
-        Debug.Log("Une tourelle existe déjà ici.");
-        return;
-    }
-    if (cout_baliste <= Inventory_global.runes)
-    {
-        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
-        selectedNode.turret = turret;
-        Debug.Log("Tourelle construite sur " + selectedNode.name);
-        inv.addRune(-cout_baliste);
-    }
-    
-    panelToShow.SetActive(false); // Ferme le panel si tu veux
-    Cursor.lockState = CursorLockMode.Locked;
-    Cursor.visible = false;
-}
+        if (selectedNode == null) return;
 
+        if (selectedNode.turret != null)
+        {
+            Debug.Log("Une tourelle existe déjà ici.");
+            return;
+        }
+        if (cout_baliste <= Inventory_global.runes)
+        {
+            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+            selectedNode.turret = turret;
+            Debug.Log("Tourelle construite sur " + selectedNode.name);
+            inv.addRune(-cout_baliste);
+        }
+
+        panelToShow.SetActive(false); // Ferme le panel si tu veux
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void Ameliorer_canon()
+    {
+        if (cout_amélioration_canon <= Inventory_global.runes)
+        {
+            selectedNode.turret.GetComponent<defense>().add_Damage(damage_augmentation_canon * level_canon);
+            if (level_canon == 3 || level_canon == 5)
+            {
+                selectedNode.turret.GetComponent<defense>().add_range(5);
+            }
+            level_canon += 1;
+            inv.addRune(-cout_amélioration_canon);
+        }
+        panel_amélioration_canon.SetActive(false); // Ferme le panel si tu veux
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
 }
 

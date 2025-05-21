@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
-public class defense : MonoBehaviour {
+public class defense : MonoBehaviour
+{
 
     private Transform target;
     private ennemy targetEnemy;
@@ -20,7 +21,7 @@ public class defense : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public Transform firePoint;
-    
+
     public float Damage = 50f;
 
     public LineRenderer lineRenderer;
@@ -39,9 +40,10 @@ public class defense : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-}
+    }
 
     void UpdateTarget()
     {
@@ -52,7 +54,7 @@ public class defense : MonoBehaviour {
         foreach (GameObject enemy in ennemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if(distanceToEnemy < shortestDistance)
+            if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
@@ -75,7 +77,7 @@ public class defense : MonoBehaviour {
     {
         if (target == null)
         {
-             if (useLaser)
+            if (useLaser)
             {
                 if (lineRenderer.enabled)
                 {
@@ -83,10 +85,10 @@ public class defense : MonoBehaviour {
                 }
             }
 
-            if (WazeAudioSource.isPlaying && WazeAudioSource.clip == TDE_sound )
+            if (WazeAudioSource.isPlaying && WazeAudioSource.clip == TDE_sound)
             {
                 Debug.Log("Stop laser sound (plus de cible)");
-                WazeAudioSource.Stop(); 
+                WazeAudioSource.Stop();
             }
             return;
         }
@@ -128,7 +130,7 @@ public class defense : MonoBehaviour {
         targetEnemy.TakeDammage(damageOverTime * Time.deltaTime);
         targetEnemy.Slow(slowAmount);
 
-        if(lineRenderer.enabled == false)
+        if (lineRenderer.enabled == false)
         {
             lineRenderer.enabled = true;
         }
@@ -162,11 +164,11 @@ public class defense : MonoBehaviour {
             }
             GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "fleche"), firePoint.position, firePoint.rotation, 0);
             Bullet bullet = bulletGO.GetComponent<Bullet>();
-            if(bullet != null)
-        {
-            bullet.damage = Damage;
-            bullet.Seek(target);
-        }
+            if (bullet != null)
+            {
+                bullet.damage = Damage;
+                bullet.Seek(target);
+            }
         }
         else if (isCanon)
         {
@@ -193,5 +195,15 @@ public class defense : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    public void add_Damage(int d)
+    {
+        Damage = Damage + d;
+    }
+
+    public void add_range(int r)
+    {
+        Damage = Damage + r;
     }
 }
