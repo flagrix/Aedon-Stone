@@ -95,6 +95,9 @@ MonoBehaviour:
   WazeAudioSource: {fileID: 796348810723799588}
   TDE_sound: {fileID: 8300000, guid: f6a0513bb693ef6499592777e8870da1, type: 3}
   canon_sound: {fileID: 8300000, guid: 60f71de7c73e33b4e87dc7b1def0e9db, type: 3}
+  balise_sound: {fileID: 8300000, guid: 18413a6805730194a90f179796860152, type: 3}
+  isCanon: 1
+  isBalise: 0
 --- !u!114 &4259785534815498741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +144,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

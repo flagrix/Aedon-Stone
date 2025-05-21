@@ -32,6 +32,10 @@ public class defense : MonoBehaviour {
     public AudioSource WazeAudioSource;
     public AudioClip TDE_sound;
     public AudioClip canon_sound;
+    public AudioClip balise_sound;
+
+    public bool isCanon = true;
+    public bool isBalise = false;
 
 
     // Use this for initialization
@@ -145,6 +149,30 @@ public class defense : MonoBehaviour {
 
     void Shoot()
     {
+        if (isBalise)
+        {
+            if (WazeAudioSource.clip != balise_sound)
+            {
+                WazeAudioSource.clip = balise_sound;
+            }
+
+            if (!WazeAudioSource.isPlaying)
+            {
+                WazeAudioSource.Play();
+            }
+        }
+        else if (isCanon)
+        {
+            if (WazeAudioSource.clip != canon_sound)
+            {
+                WazeAudioSource.clip = canon_sound;
+            }
+
+            if (!WazeAudioSource.isPlaying)
+            {
+                WazeAudioSource.Play();
+            }
+        }
         GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "boulet_de_canon"), firePoint.position,firePoint.rotation, 0);;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
