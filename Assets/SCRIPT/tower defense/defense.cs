@@ -31,6 +31,7 @@ public class defense : MonoBehaviour {
 
     public AudioSource WazeAudioSource;
     public AudioClip TDE_sound;
+    public AudioClip canon_sound;
 
 
     // Use this for initialization
