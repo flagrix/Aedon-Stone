@@ -3,7 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
-public class Node : MonoBehaviour {
+public class Node : MonoBehaviour
+{
+    [HideInInspector]
+    public Node selectedNode;
+    public Vector3 positionOffset;
 
     public Color hoverColor;
 
@@ -13,8 +17,6 @@ public class Node : MonoBehaviour {
 
     private BuildManager buildManager;
 
-    public GameObject panelToShow;
-    public GameObject Reticule;
 
     private void Start()
     {
@@ -25,12 +27,14 @@ public class Node : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (panelToShow != null)
+        foreach (var player in FindObjectsOfType<Inventory>())
         {
-            panelToShow.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Reticule.SetActive(false);
+            if (player.photonView.IsMine)
+            {
+                player.selectedNode = this; 
+                player.ShowPanel(); // Affiche son propre panel
+                break;
+            }
         }
         if (turret != null)
         {
@@ -48,5 +52,6 @@ public class Node : MonoBehaviour {
     {
         rend.material.color = startColor;
     }
+
 
 }
