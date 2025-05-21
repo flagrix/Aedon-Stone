@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ennemy : MonoBehaviour
 {
+    public int worth = 50;
     public float startSpeed = 10;
     public float speed;
     public float startHealth = 100;
@@ -25,6 +26,15 @@ public class ennemy : MonoBehaviour
 
     private void Die()
     {
+        Inventory_global inv = FindObjectOfType<Inventory_global>();
+        if (inv != null)
+        {
+            inv.addRune(worth);
+        }
+        else
+        {
+            Debug.LogWarning("Inventory_global non trouvé !");
+        }
         isDead = true;
         Destroy(gameObject);
     }

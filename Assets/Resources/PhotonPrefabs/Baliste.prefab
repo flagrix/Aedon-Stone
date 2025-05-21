@@ -51,7 +51,7 @@ MonoBehaviour:
   enemyTag: Enemy
   partToRotate: {fileID: 1151180044641106429}
   fireRate: 1
-  bulletPrefab: {fileID: 6095977460783770490, guid: b38104af8272aff468d8ef48ab330daa, type: 3}
+  bulletPrefab: {fileID: 3700094955926737261, guid: b38104af8272aff468d8ef48ab330daa, type: 3}
   firePoint: {fileID: 9000507435081507315}
   Damage: 50
   lineRenderer: {fileID: 0}
@@ -62,8 +62,8 @@ MonoBehaviour:
   TDE_sound: {fileID: 8300000, guid: f6a0513bb693ef6499592777e8870da1, type: 3}
   canon_sound: {fileID: 8300000, guid: 60f71de7c73e33b4e87dc7b1def0e9db, type: 3}
   balise_sound: {fileID: 8300000, guid: 18413a6805730194a90f179796860152, type: 3}
-  isCanon: 1
-  isBalise: 0
+  isCanon: 0
+  isBalise: 1
 --- !u!114 &-7306335650801964733
 MonoBehaviour:
   m_ObjectHideFlags: 0

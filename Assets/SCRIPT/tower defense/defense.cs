@@ -160,6 +160,13 @@ public class defense : MonoBehaviour {
             {
                 WazeAudioSource.Play();
             }
+            GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "fleche"), firePoint.position, firePoint.rotation, 0);
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+            if(bullet != null)
+        {
+            bullet.damage = Damage;
+            bullet.Seek(target);
+        }
         }
         else if (isCanon)
         {
@@ -172,14 +179,13 @@ public class defense : MonoBehaviour {
             {
                 WazeAudioSource.Play();
             }
-        }
-        GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "boulet_de_canon"), firePoint.position,firePoint.rotation, 0);;
-        Bullet bullet = bulletGO.GetComponent<Bullet>();
-
-        if(bullet != null)
-        {
-            bullet.damage = Damage;
-            bullet.Seek(target);
+            GameObject bulletGO = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "boulet_de_canon"), firePoint.position, firePoint.rotation, 0);
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                bullet.damage = Damage;
+                bullet.Seek(target);
+            }
         }
     }
 
