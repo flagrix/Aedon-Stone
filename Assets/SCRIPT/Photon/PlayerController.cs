@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public Camera playerCamera;
 
-    private bool isGameOverState = false;
+    //private bool isGameOverState = false;
 
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
@@ -109,8 +109,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Update()
     {
-        if (!photonView.IsMine || isGameOverState)
-            return;
+        //if (!photonView.IsMine || isGameOverState)
+            //return;
         if (photonView.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.C))
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private void HandleMovement()
     {
         Animator.SetBool("SAUTE", false);
-        photonView.RPC("RPC_Saute", RpcTarget.Others, false);
+        
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -230,9 +230,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         {
             isRunning = false; // Cannot run while crouching
             Animator.SetBool("EnMarche", true);
-            photonView.RPC("RPC_SetRunning", RpcTarget.Others, true);
+            
             Animator.SetBool("CoursForest", false);
-            photonView.RPC("RPC_Cours", RpcTarget.Others, false);
+            
         }
 
         if (isGrounded)
@@ -243,35 +243,35 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     Animator.SetBool("EnMarche", false);
-                    photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
+                    
                     Animator.SetBool("CoursForest", true);
-                    photonView.RPC("RPC_Cours", RpcTarget.Others, true);
+                    
 
                 }
                 else
                 {
                     Animator.SetBool("EnMarche", true);
-                    photonView.RPC("RPC_SetRunning", RpcTarget.Others, true);
+                    
                     Animator.SetBool("CoursForest", false);
-                    photonView.RPC("RPC_Cours", RpcTarget.Others, false);
+                    
                 }
             }
             else
             {
                 Animator.SetBool("EnMarche", false);
-                photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
+                
                 Animator.SetBool("CoursForest", false);
-                photonView.RPC("RPC_Cours", RpcTarget.Others, false);
+                
             }
 
             if (Input.GetButton("Jump") && canMove)
             {
                 Animator.SetBool("EnMarche", false);
-                photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
+                
                 Animator.SetBool("CoursForest", false);
-                photonView.RPC("RPC_Cours", RpcTarget.Others, false);
+                
                 Animator.SetBool("SAUTE", true);
-                photonView.RPC("RPC_Saute", RpcTarget.Others, true);
+                
                 moveDirection.y = jumpPower;
             }
         }
@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     private void HandleCamera()
     {
-        if (!canMove || isGameOverState) return;
+        //if (!canMove || isGameOverState) return;
 
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
@@ -362,23 +362,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         playerManager.StartRespawn();
     }
 
-    [PunRPC]
-    void RPC_SetRunning(bool isRunning)
-    {
-        Animator.SetBool("EnMarche", isRunning);
-    }
-    [PunRPC]
-    void RPC_Cours(bool isRunning) 
-    {
-        Animator.SetBool("CoursForest", isRunning);
-    }
-    [PunRPC]
-    void RPC_Saute(bool isRunning)
-    {
-        Animator.SetBool("SAUTE", isRunning);
-    }
+    
 
-    public void SetGameOverState(bool isOver)
+    /**public void SetGameOverState(bool isOver)
     {
         isGameOverState = isOver;
         canMove = !isOver;  // bloque la possibilité de bouger quand game over
@@ -393,6 +379,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-    }
+    }**/
 
 }

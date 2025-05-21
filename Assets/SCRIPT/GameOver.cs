@@ -14,7 +14,7 @@ public class GameOver : MonoBehaviour
     public CanvasGroup gameOverCanvas;
     [SerializeField] private GameObject Réticule;
 
-    private void Awake()
+   /** private void Awake()
     {
     }
 
@@ -113,5 +113,5 @@ public class GameOver : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GameOverUI.SetActive(false);
         isGameOver = false;
-    }
+    }**/
 }
