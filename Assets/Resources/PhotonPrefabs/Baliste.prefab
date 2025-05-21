@@ -26,9 +26,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671122222603546772}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.008047773, y: -0.80670244, z: 0.039087243, w: -0.58960885}
+  m_LocalRotation: {x: 0.008050045, y: -0.806703, z: 0.03908883, w: -0.5896079}
   m_LocalPosition: {x: -369.03543, y: 0.000032424927, z: 1119.33}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.3951273, y: 2.2494254, z: 1.4231}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1151180044641106429}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3048232b94aa74848baff19d346bf6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
+  range: 50
   enemyTag: Enemy
   partToRotate: {fileID: 1151180044641106429}
   fireRate: 1
