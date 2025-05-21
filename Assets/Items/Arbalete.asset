@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: Arbalete
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 588d0540885b7ff41a20dad83df6b28b, type: 3}
+  sprite: {fileID: 21300000, guid: d6eba660a87b4df49943c7633b5512cd, type: 3}
   cooldown: 3
   itemType: 4

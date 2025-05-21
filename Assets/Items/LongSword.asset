@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2233bb7624454614995e8093c9f44edc, type: 3}
   m_Name: LongSword
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 4d18b86f5ecbbab40bb8ac915c6e1400, type: 3}
+  sprite: {fileID: 21300000, guid: 8c0a9875d1324d144bc75c075ca2ab5b, type: 3}
   cooldown: 3
   itemType: 2
