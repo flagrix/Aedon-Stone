@@ -24,6 +24,10 @@ public class Inventory : MonoBehaviourPun
 
     public GameObject balliste;
 
+    public GameObject playerHUD;
+
+    public GameObject playerHUD2;
+
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
@@ -39,7 +43,14 @@ public class Inventory : MonoBehaviourPun
     }
     private void Start()
     {
-
+        if (!photonView.IsMine && playerHUD != null)
+        {
+            playerHUD.SetActive(false);
+        }
+        if (!photonView.IsMine && playerHUD2 != null)
+        {
+            playerHUD2.SetActive(false);
+        }
     }
     private void Update()
     {

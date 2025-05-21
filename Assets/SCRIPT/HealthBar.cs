@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviourPun
 {
     public Slider slider;
     public int actual_health = 100;
@@ -12,10 +13,16 @@ public class HealthBar : MonoBehaviour
     private float flashTimer;
 
     private PlayerMovement playerMovement;
+    public GameObject playerHUD; // Ton HUD Canvas
 
+    
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        if (!photonView.IsMine && playerHUD != null)
+        {
+            playerHUD.SetActive(false);
+        }
     }
 
     void Update()
