@@ -235,24 +235,33 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     Animator.SetBool("EnMarche", false);
+                    photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
                     Animator.SetBool("CoursForest", true);
+                    photonView.RPC("RPC_Cours", RpcTarget.Others, true);
+
                 }
                 else
                 {
                     Animator.SetBool("EnMarche", true);
+                    photonView.RPC("RPC_SetRunning", RpcTarget.Others, true);
                     Animator.SetBool("CoursForest", false);
+                    photonView.RPC("RPC_Cours", RpcTarget.Others, false);
                 }
             }
             else
             {
                 Animator.SetBool("EnMarche", false);
+                photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
                 Animator.SetBool("CoursForest", false);
+                photonView.RPC("RPC_Cours", RpcTarget.Others, false);
             }
 
             if (Input.GetButton("Jump") && canMove)
             {
                 Animator.SetBool("EnMarche", false);
+                photonView.RPC("RPC_SetRunning", RpcTarget.Others, false);
                 Animator.SetBool("CoursForest", false);
+                photonView.RPC("RPC_Cours", RpcTarget.Others, false);
                 Animator.SetBool("SAUTE", true);
                 moveDirection.y = jumpPower;
             }
@@ -343,4 +352,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         SetActive(false);
         playerManager.StartRespawn();
     }
+
+    [PunRPC]
+    void RPC_SetRunning(bool isRunning)
+    {
+        Animator.SetBool("EnMarche", isRunning);
+    }
+    void RPC_Cours(bool isRunning) 
+    {
+        Animator.SetBool("CoursForest", isRunning);
+    }
+
 }
