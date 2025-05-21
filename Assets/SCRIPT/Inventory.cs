@@ -20,6 +20,10 @@ public class Inventory : MonoBehaviourPun
 
     public GameObject turretPrefab;
 
+    public GameObject tde;
+
+    public GameObject balliste;
+
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
@@ -75,8 +79,44 @@ public class Inventory : MonoBehaviourPun
             WazeAudioSource.Play();
         }
     }
-    
-     public void BuildTurret()
+
+    public void BuildTurret()
+    {
+        if (selectedNode == null) return;
+
+        if (selectedNode.turret != null)
+        {
+            Debug.Log("Une tourelle existe déjà ici.");
+            return;
+        }
+        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+        selectedNode.turret = turret;
+        Debug.Log("Tourelle construite sur " + selectedNode.name);
+
+        panelToShow.SetActive(false); // Ferme le panel si tu veux
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void BuildTde()
+    {
+        if (selectedNode == null) return;
+
+        if (selectedNode.turret != null)
+        {
+            Debug.Log("Une tourelle existe déjà ici.");
+            return;
+        }
+        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "tour_de_l_enfer"), selectedNode.transform.position, transform.rotation, 0);
+        selectedNode.turret = turret;
+        Debug.Log("Tourelle construite sur " + selectedNode.name);
+
+        panelToShow.SetActive(false); // Ferme le panel si tu veux
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+   public void Buildballiste()
 {
     if (selectedNode == null) return;
 
@@ -85,10 +125,8 @@ public class Inventory : MonoBehaviourPun
         Debug.Log("Une tourelle existe déjà ici.");
         return;
     }
-    GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
-    
+    GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
     selectedNode.turret = turret;
-
     Debug.Log("Tourelle construite sur " + selectedNode.name);
     
     panelToShow.SetActive(false); // Ferme le panel si tu veux

@@ -24,7 +24,6 @@ public class GameOver : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log("Update appelé");
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("ok");

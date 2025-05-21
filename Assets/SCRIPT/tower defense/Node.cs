@@ -5,8 +5,6 @@ using Photon.Pun;
 using System.IO;
 public class Node : MonoBehaviour
 {
-    [HideInInspector]
-    public Node selectedNode;
     public Vector3 positionOffset;
 
     public Color hoverColor;

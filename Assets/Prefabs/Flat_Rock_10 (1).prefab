@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7334106997215113405}
   - component: {fileID: 174131953511680237}
   - component: {fileID: 818975504996691823}
-  - component: {fileID: 2310258165521598403}
+  - component: {fileID: -1243450999276053660}
   m_Layer: 0
   m_Name: Flat_Rock_10 (1)
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4321915044771530151, guid: 965cb11046352854c98c3ef568981780, type: 3}
---- !u!114 &2310258165521598403
+--- !u!114 &-1243450999276053660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,6 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: {x: 0, y: 0, z: 0}
   hoverColor: {r: 1, g: 0, b: 0, a: 0}
   turret: {fileID: 0}
-  panelToShow: {fileID: 700611391426988436, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}

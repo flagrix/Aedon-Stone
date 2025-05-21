@@ -53,6 +53,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6095977460783770490, guid: b38104af8272aff468d8ef48ab330daa, type: 3}
   firePoint: {fileID: 9000507435081507315}
   Damage: 50
+  lineRenderer: {fileID: 0}
+  useLaser: 0
+  damageOverTime: 20
+  slowAmount: 0.5
+  WazeAudioSource: {fileID: 0}
+  TDE_sound: {fileID: 0}
+  canon_sound: {fileID: 0}
 --- !u!114 &-7306335650801964733
 MonoBehaviour:
   m_ObjectHideFlags: 0
