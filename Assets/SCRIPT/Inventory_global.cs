@@ -5,9 +5,10 @@ using Photon.Pun;
 using System.IO;
 public class Inventory_global : MonoBehaviour
 {
+   
     public static int runes;
 
-    public int startrune = 400;
+    public int startrune = 1000;
     public Text runesText;
 
     public void Start()

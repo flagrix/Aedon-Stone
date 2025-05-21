@@ -14,8 +14,6 @@ public class Node : MonoBehaviour
     private Renderer rend;
 
     private BuildManager buildManager;
-
-
     private void Start()
     {
         rend = GetComponent<Renderer>();
@@ -27,7 +25,17 @@ public class Node : MonoBehaviour
     {
         if (turret != null)
         {
-            Debug.Log("Impossible de construire ici, il y a déjà une tourelle.");
+            if (turret.GetComponent<defense>() && turret.GetComponent<defense>().isCanon)
+            {
+                foreach (var player in FindObjectsOfType<Inventory>())
+            {
+                if (player.photonView.IsMine)
+                {
+                    player.ShowPanelAmeliorationcanon(); // Affiche son propre panel
+                    break;
+                }
+            }
+            }
             return;
         }
         else

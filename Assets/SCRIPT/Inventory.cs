@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
+using TMPro;
 public class Inventory : MonoBehaviourPun
 {
     [HideInInspector]
@@ -40,6 +41,16 @@ public class Inventory : MonoBehaviourPun
 
     public int damage_augmentation_canon=20;
 
+    public TMP_Text Level_canon;
+
+    public TMP_Text degat_actuelle_canon;
+
+    public TMP_Text degat_suivant_canon;
+
+    public TMP_Text range_actuelle_canon;
+
+    public TMP_Text range_suivante_canon;
+
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
@@ -73,22 +84,15 @@ public class Inventory : MonoBehaviourPun
         {
             playerHUD2.SetActive(false);
         }
+        Level_canon.text = level_canon.ToString();
+        degat_actuelle_canon.text = "50";
+        degat_suivant_canon.text = (50 + damage_augmentation_canon * level_canon).ToString();
+        range_actuelle_canon.text = "40";
+        range_suivante_canon.text = "40";
     }
     private void Update()
     {
         if (photonView == null || !photonView.IsMine) return;
-
-    }
-
-    public void addRune(int newRune)
-    {
-        if (runes + newRune < 0)
-            runes = 0;
-        else
-        {
-            runes += newRune;
-            runesText.text = runes.ToString();
-        }
 
     }
     public void addPotion(int newpotion)
@@ -186,12 +190,25 @@ public class Inventory : MonoBehaviourPun
         if (cout_amélioration_canon <= Inventory_global.runes)
         {
             selectedNode.turret.GetComponent<defense>().add_Damage(damage_augmentation_canon * level_canon);
+            degat_actuelle_canon.text = (selectedNode.turret.GetComponent<defense>().Damage).ToString();
+            degat_suivant_canon.text = (selectedNode.turret.GetComponent<defense>().Damage + damage_augmentation_canon * level_canon).ToString();
+            level_canon += 1;
             if (level_canon == 3 || level_canon == 5)
             {
                 selectedNode.turret.GetComponent<defense>().add_range(5);
+                range_actuelle_canon.text = (selectedNode.turret.GetComponent<defense>().range).ToString();
+                if (level_canon == 2 || level_canon == 4)
+                {
+                    range_suivante_canon.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
+                }
             }
-            level_canon += 1;
+            if (level_canon == 2 || level_canon == 4)
+            {
+                range_suivante_canon.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
+            }
             inv.addRune(-cout_amélioration_canon);
+            cout_amélioration_canon = cout_amélioration_canon + 100 * level_canon;
+            Level_canon.text = cout_amélioration_canon.ToString();
         }
         panel_amélioration_canon.SetActive(false); // Ferme le panel si tu veux
         Cursor.lockState = CursorLockMode.Locked;
