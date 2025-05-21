@@ -34,8 +34,8 @@ public class defense : MonoBehaviour {
     public AudioClip canon_sound;
     public AudioClip balise_sound;
 
-    public bool isCanon = true;
-    public bool isBalise = false;
+    public bool isCanon = false;
+    public bool isBalise = true;
 
 
     // Use this for initialization
@@ -83,10 +83,10 @@ public class defense : MonoBehaviour {
                 }
             }
 
-            if (WazeAudioSource.isPlaying)
+            if (WazeAudioSource.isPlaying && WazeAudioSource.clip == TDE_sound )
             {
                 Debug.Log("Stop laser sound (plus de cible)");
-                WazeAudioSource.Stop(); // 🔊 on arrête bien le son ici aussi
+                WazeAudioSource.Stop(); 
             }
             return;
         }
@@ -107,7 +107,7 @@ public class defense : MonoBehaviour {
         }
         else
         {
-            if (WazeAudioSource.isPlaying)
+            if (WazeAudioSource.isPlaying && WazeAudioSource.clip != canon_sound && WazeAudioSource.clip != balise_sound)
             {
                 Debug.Log("arrete son tde");
                 WazeAudioSource.Stop();
