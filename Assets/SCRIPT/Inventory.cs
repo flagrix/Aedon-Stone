@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviourPun
     public int potions;
     public Text runesText; //pour afficher les runes
     public Text potionsText;
+    public Inventory_global inv;
 
     public HealthBar healthBar;
     public AudioSource WazeAudioSource;
@@ -28,6 +29,12 @@ public class Inventory : MonoBehaviourPun
 
     public GameObject playerHUD2;
 
+    private int cout_canon=350;
+
+    private int cout_tde=700;
+
+    private int cout_baliste=500;
+
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
@@ -43,6 +50,7 @@ public class Inventory : MonoBehaviourPun
     }
     private void Start()
     {
+        inv = FindObjectOfType<Inventory_global>();
         if (!photonView.IsMine && playerHUD != null)
         {
             playerHUD.SetActive(false);
@@ -93,6 +101,7 @@ public class Inventory : MonoBehaviourPun
 
     public void BuildTurret()
     {
+
         if (selectedNode == null) return;
 
         if (selectedNode.turret != null)
@@ -100,13 +109,18 @@ public class Inventory : MonoBehaviourPun
             Debug.Log("Une tourelle existe déjà ici.");
             return;
         }
-        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
-        selectedNode.turret = turret;
-        Debug.Log("Tourelle construite sur " + selectedNode.name);
+        if (cout_canon <= Inventory_global.runes)
+        {
+            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+            selectedNode.turret = turret;
+            Debug.Log("Tourelle construite sur " + selectedNode.name);
+            inv.addRune(-cout_canon);
+        }
 
         panelToShow.SetActive(false); // Ferme le panel si tu veux
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
     }
 
     public void BuildTde()
@@ -118,9 +132,13 @@ public class Inventory : MonoBehaviourPun
             Debug.Log("Une tourelle existe déjà ici.");
             return;
         }
-        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "tour_de_l_enfer"), selectedNode.transform.position, transform.rotation, 0);
-        selectedNode.turret = turret;
-        Debug.Log("Tourelle construite sur " + selectedNode.name);
+        if (cout_tde <= Inventory_global.runes)
+        {
+            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "tour_de_l_enfer"), selectedNode.transform.position, transform.rotation, 0);
+            selectedNode.turret = turret;
+            Debug.Log("Tourelle construite sur " + selectedNode.name);
+            inv.addRune(-cout_tde);
+        }
 
         panelToShow.SetActive(false); // Ferme le panel si tu veux
         Cursor.lockState = CursorLockMode.Locked;
@@ -136,9 +154,13 @@ public class Inventory : MonoBehaviourPun
         Debug.Log("Une tourelle existe déjà ici.");
         return;
     }
-    GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
-    selectedNode.turret = turret;
-    Debug.Log("Tourelle construite sur " + selectedNode.name);
+    if (cout_baliste <= Inventory_global.runes)
+    {
+        GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+        selectedNode.turret = turret;
+        Debug.Log("Tourelle construite sur " + selectedNode.name);
+        inv.addRune(-cout_baliste);
+    }
     
     panelToShow.SetActive(false); // Ferme le panel si tu veux
     Cursor.lockState = CursorLockMode.Locked;
