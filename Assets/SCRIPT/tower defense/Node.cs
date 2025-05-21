@@ -6,15 +6,15 @@ using System.IO;
 public class Node : MonoBehaviour {
 
     public Color hoverColor;
-    public Vector3 positionOffset;
 
-    private GameObject turret;
+    public GameObject turret;
     private Color startColor;
     private Renderer rend;
 
     private BuildManager buildManager;
 
     public GameObject panelToShow;
+    public GameObject Reticule;
 
     private void Start()
     {
@@ -28,20 +28,15 @@ public class Node : MonoBehaviour {
         if (panelToShow != null)
         {
             panelToShow.SetActive(true);
-        }
-        if (buildManager.GetTurretToBuild() == null)
-        {
-            return;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Reticule.SetActive(false);
         }
         if (turret != null)
         {
             Debug.Log("Impossible de construire ici, il y a déjà une tourelle.");
             return;
         }
-
-        GameObject turretToBuild = buildManager.GetTurretToBuild();
-        turret = (GameObject)PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), transform.position + positionOffset, transform.rotation, 0);
-        
     }
 
     private void OnMouseEnter()

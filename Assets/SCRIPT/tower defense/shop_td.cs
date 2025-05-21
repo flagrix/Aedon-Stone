@@ -1,7 +1,12 @@
 using UnityEngine;
-
-public class shop_td
+using System.Collections;
+using UnityEngine.UI;
+using Photon.Pun;
+using System.IO;
+public class shop_td : MonoBehaviour
 {
+
+    public Vector3 positionOffset;
 
     private BuildManager buildManager;
 
@@ -11,7 +16,9 @@ public class shop_td
     }
     public void PurchaseStandardTurret()
     {
-        Debug.Log("canon posé");
-        buildManager.SetTurretToBuild(buildManager.standardTurretPrefab);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), transform.position + positionOffset, transform.rotation, 0);
     }
+    
+
+        
 }
