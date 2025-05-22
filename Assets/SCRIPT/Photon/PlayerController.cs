@@ -169,9 +169,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                     var fastEnemy = hit.collider.GetComponent<FastQwertien>();
                     var fatEnemy = hit.collider.GetComponent<FatQwertien>();
 
-                    if (enemy != null) enemy.SetHealth(-attackDamage);
-                    if (fastEnemy != null) fastEnemy.SetHealth(-attackDamage);
-                    if (fatEnemy != null) fatEnemy.SetHealth(-attackDamage);
+                    if (enemy != null) enemy.photonView.RPC("SetHealth", RpcTarget.AllBuffered, attackDamage);
+                    if (fastEnemy != null) fastEnemy.SetHealth(attackDamage);
+                    if (fatEnemy != null) fatEnemy.SetHealth(attackDamage);
                 }
 
                 lastAttackTime = Time.time;
