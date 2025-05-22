@@ -301,7 +301,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1163f79cc1964a2419afce54389ef3ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PV: {fileID: 0}
   worth: 50
   startSpeed: 10
   speed: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   healthBar: {fileID: 7164247423914958630}
   agent2: {fileID: 5361120206367074208}
   stopDistance: 8
+  photonView: {fileID: 0}
 --- !u!114 &8993598095364893802
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ennemy : MonoBehaviourPunCallbacks, IDamageable
 {
-    PhotonView PV;
+    [SerializeField]public PhotonView PV;
     public int worth = 50;
     public float startSpeed = 10;
     public float speed;
@@ -18,11 +18,16 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
 
     public void Awake()
     {
-        PV = GetComponentInChildren<PhotonView>();
+        PV = GetComponent<PhotonView>();
+        if (PV == null)
+            PV = GetComponentInParent<PhotonView>();
+        if (PV== null)
+            PV = GetComponentInChildren<PhotonView>();
     }
 
     public void Start()
     {
+        PV = GetComponentInParent<PhotonView>();
         speed = startSpeed;
         health = startHealth;
     }

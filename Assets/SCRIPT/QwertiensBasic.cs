@@ -6,22 +6,30 @@ public class QwertiensBasic : ennemy, IPunObservable
 {
     public NavMeshAgent agent2;
     public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
-
+    [SerializeField] PhotonView photonView;
     private Vector3 lastTargetPosition;
     private float lastAttackTime;
     private GameObject currentTarget;
     
     private void Awake()
     {
-        
+        photonView = GetComponent<PhotonView>();
+        if (photonView == null)
+            photonView = GetComponentInParent<PhotonView>();
+        if (photonView== null)
+            photonView = GetComponentInChildren<PhotonView>();
+        PV = photonView;
+        speed = startSpeed;
+        health = startHealth;
     }
     void Start()
     {
 
         agent2 = GetComponent<NavMeshAgent>();
-        agent2.speed = 3f;
+        agent2.speed = speed;
         Debug.Log("sndv");
         InvokeRepeating(nameof(FindClosestPlayer), 0f, 1f); // Cherche une cible toutes les secondes
+        Debug.Log(health);
     }
     void Update()
     {

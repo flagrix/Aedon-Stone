@@ -258,11 +258,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804eea5d4f7e1b644acc54397181c121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PV: {fileID: 0}
   worth: 50
   startSpeed: 10
   speed: 10
   startHealth: 100
   health: 100
+  attackDamage: 10
+  attackCooldown: 4
+  healthBar: {fileID: 0}
 --- !u!1 &1260575960564773755
 GameObject:
   m_ObjectHideFlags: 0
