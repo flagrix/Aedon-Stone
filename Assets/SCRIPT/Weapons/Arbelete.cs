@@ -3,9 +3,24 @@ using UnityEngine;
 public class Arbelete : Item
 {
   [SerializeField] Camera cam;
+  
+  private float tempecoule = 3;
+
+  private void Update()
+  {
+    tempecoule += Time.deltaTime;
+  }
   public override void Use()
   {
-    Shoot();
+    if (itemScriptableObject.cooldown < tempecoule)
+    {
+      Shoot();
+      tempecoule = 0;
+    }
+    else
+    {
+      Debug.Log("Arbelete reloading"+ tempecoule );
+    }
   }
 
   void Shoot()
@@ -14,7 +29,6 @@ public class Arbelete : Item
     ray.origin = cam.transform.position;
     if (Physics.Raycast(ray, out RaycastHit hit))
     {
-      Debug.Log("we hit " + hit.collider.gameObject.name);
       var temp = hit.collider.gameObject.GetComponent<IDamageable>();
       temp?.TakeDamage(itemScriptableObject.damage);
     }

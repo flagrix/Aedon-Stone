@@ -16,3 +16,4 @@ MonoBehaviour:
   cooldown: 1
   itemType: 1
   damage: 60
+  portee: 6

@@ -33,7 +33,6 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     }
     public void TakeDamage(float amount)
     {
-        Debug.Log(PV);
         if (PV != null)
             PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
             
@@ -41,12 +40,11 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
 
     public void FinalTakeDamage(float amount)
     {
-        Debug.Log("FinalTakeDamage");
         health -= amount;
         PV.RPC("SetHealth", RpcTarget.All);
         if(health <= 0 || isDead)
         {
-            Die();
+           Die();
         }
     }
 
@@ -61,20 +59,21 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
         {
             Debug.LogWarning("Inventory_global non trouvé !");
         }
-        isDead = true;
-        Destroy(gameObject);
-    }
-    
 
-      public void Slow(float amount)
+        isDead = true;
+        if (photonView.IsMine)
+        {
+            Debug.Log(gameObject.name + " is dead");
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+
+    public void Slow(float amount)
     {
         speed = startSpeed * (1f - amount);
     }
       
-    void RPC_TakeDamage(float amount)
-    {
-        
-    }
 
 
 
