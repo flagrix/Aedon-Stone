@@ -11,6 +11,13 @@ public class PharmacoBook : Item
     {
         tempecoule += Time.deltaTime;
     }
+    public AudioSource WazeAudioSource;
+    public AudioClip pharmabook_sound;
+
+    void Start()
+    {
+        WazeAudioSource.clip = pharmabook_sound;
+    }
     public override void Use()
     {
         if (itemScriptableObject.cooldown < tempecoule)
@@ -21,6 +28,11 @@ public class PharmacoBook : Item
         else
         {
             Debug.Log("Pharmaco Book is reloading"+ tempecoule );
+        }
+        Debug.Log("Pharmacobook"+ itemScriptableObject.itemType.ToString());
+        if (!WazeAudioSource.isPlaying)
+        {
+            WazeAudioSource.Play();
         }
     }
 }

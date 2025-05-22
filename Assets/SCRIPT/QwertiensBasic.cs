@@ -10,7 +10,10 @@ public class QwertiensBasic : ennemy, IPunObservable
     private Vector3 lastTargetPosition;
     private float lastAttackTime;
     private GameObject currentTarget;
-    
+
+    public AudioSource WazeAudioSource;
+    public AudioClip qwertien_sound;
+
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
@@ -30,6 +33,7 @@ public class QwertiensBasic : ennemy, IPunObservable
         Debug.Log("sndv");
         InvokeRepeating(nameof(FindClosestPlayer), 0f, 1f); // Cherche une cible toutes les secondes
         Debug.Log(health);
+        WazeAudioSource.clip = qwertien_sound;
     }
     void Update()
     {
@@ -83,6 +87,10 @@ public class QwertiensBasic : ennemy, IPunObservable
     }
     private void AttackPlayer()
     {
+        if (!WazeAudioSource.isPlaying)
+        {
+            WazeAudioSource.Play();
+        }
         if (currentTarget != null)
         {
             IDamageable damageable = currentTarget.GetComponent<IDamageable>();

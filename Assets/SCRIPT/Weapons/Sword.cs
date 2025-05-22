@@ -9,6 +9,13 @@ public class Sword : Item
     {
         tempecoule += Time.deltaTime;
     }
+    public AudioSource WazeAudioSource;
+    public AudioClip sword_sound;
+
+    void Start()
+    {
+        WazeAudioSource.clip = sword_sound;
+    }
     public override void Use()
     {
         if (itemScriptableObject.cooldown < tempecoule)
@@ -40,6 +47,11 @@ public class Sword : Item
             }
             
             
+        }
+        Debug.Log("Sword"+ itemScriptableObject.itemType.ToString());
+        if (!WazeAudioSource.isPlaying)
+        {
+            WazeAudioSource.Play();
         }
     }
 }
