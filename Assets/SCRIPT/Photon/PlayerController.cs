@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
                 if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
                 {
+                    Debug.Log("ca marhce");
                     // Ici tu touches un objet sur le bon layer
                     var enemy = hit.collider.GetComponent<QwertiensBasic>();
                     var fastEnemy = hit.collider.GetComponent<FastQwertien>();

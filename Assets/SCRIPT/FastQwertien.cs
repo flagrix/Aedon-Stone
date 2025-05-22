@@ -12,13 +12,11 @@ public class FastQwertien : MonoBehaviour
     public int attackDamage = 10;
     public float attackCooldown = 4f;
     private float lastAttackTime;
-    public static FastQwertien instance;
 
     private int Health = 80;
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+       
     }
 
     void Update()
@@ -26,7 +24,7 @@ public class FastQwertien : MonoBehaviour
         if (PlayerMovement.instance != null)
         {
 
-            Vector3 targetPos = new Vector3(414.6f, 2f, 626.3f);
+            Vector3 targetPos = new Vector3(81.15487f, 0.1f, -57.1f);
 
             float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
 

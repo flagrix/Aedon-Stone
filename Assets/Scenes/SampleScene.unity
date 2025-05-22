@@ -1850,6 +1850,8 @@ MonoBehaviour:
   waveCountTimer: {fileID: 0}
   waveAnnouncement: {fileID: 0}
   announcementDuration: 10
+  WazeAudioSource: {fileID: 0}
+  new_wave: {fileID: 0}
 --- !u!143 &227697162
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2292,8 +2294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &276452884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2665,8 +2668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &316046392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3010,8 +3014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &346279625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3346,11 +3351,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7d6ce7ceb710e409dd323a6c67b0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedNode: {fileID: 0}
   runes: 0
   potions: 0
   runesText: {fileID: 0}
   potionsText: {fileID: 0}
+  inv: {fileID: 0}
   healthBar: {fileID: 0}
+  WazeAudioSource: {fileID: 0}
+  potion: {fileID: 0}
+  panelToShow: {fileID: 0}
+  panel_amelioration_canon: {fileID: 0}
+  panel_amelioration_tde: {fileID: 0}
+  turretPrefab: {fileID: 0}
+  tde: {fileID: 0}
+  balliste: {fileID: 0}
+  playerHUD: {fileID: 0}
+  playerHUD2: {fileID: 0}
+  level_canon: 0
+  damage_augmentation_canon: 20
+  Level_canon: {fileID: 0}
+  degat_actuelle_canon: {fileID: 0}
+  degat_suivant_canon: {fileID: 0}
+  range_actuelle_canon: {fileID: 0}
+  range_suivante_canon: {fileID: 0}
+  cout_amelioration_canon_text: {fileID: 0}
+  level_tde: 0
+  damage_augmentation_tde: 7
+  Level_tde: {fileID: 0}
+  degat_actuelle_tde: {fileID: 0}
+  degat_suivant_tde: {fileID: 0}
+  range_actuelle_tde: {fileID: 0}
+  range_suivante_tde: {fileID: 0}
+  cout_amelioration_tde_text: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,6 +4814,7 @@ MonoBehaviour:
   actual_health: 100
   damageImage: {fileID: 1020466533}
   flashDuration: 0.7
+  playerHUD: {fileID: 0}
 --- !u!114 &645194496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5668,8 +5702,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!1001 &846619660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5901,8 +5936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &882139223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6905,8 +6941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &1045122230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8155,8 +8192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &1207998642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8195,8 +8233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &1211125970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8999,8 +9038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0.0047169924, b: 0.0047169924, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &1391451104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10012,6 +10052,8 @@ MonoBehaviour:
   waveCountTimer: {fileID: 0}
   waveAnnouncement: {fileID: 0}
   announcementDuration: 10
+  WazeAudioSource: {fileID: 0}
+  new_wave: {fileID: 0}
 --- !u!114 &1490948599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10677,8 +10719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e19a1c79a6fb314b96095e8636c0806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  hoverColor: {r: 1, g: 0, b: 0, a: 0}
+  turret: {fileID: 0}
 --- !u!65 &1583301290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10889,6 +10932,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8977675072813818149, guid: 47d8165626b41a243b1a0222655960b7, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6243772395542237736, guid: 47d8165626b41a243b1a0222655960b7, type: 3}
       propertyPath: m_Name
       value: Imp Blue
@@ -14981,6 +15028,12 @@ MonoBehaviour:
   useLaser: 0
   damageOverTime: 20
   slowAmount: 0.5
+  WazeAudioSource: {fileID: 0}
+  TDE_sound: {fileID: 0}
+  canon_sound: {fileID: 0}
+  balise_sound: {fileID: 0}
+  isCanon: 0
+  isBalise: 1
 --- !u!4 &4634015637785898198
 Transform:
   m_ObjectHideFlags: 0

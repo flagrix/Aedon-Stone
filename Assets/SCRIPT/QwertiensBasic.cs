@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class QwertiensBasic : MonoBehaviourPunCallbacks
+public class QwertiensBasic : MonoBehaviourPunCallbacks, IPunObservable
 {
     public NavMeshAgent agent2;
     public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
@@ -79,19 +79,6 @@ public class QwertiensBasic : MonoBehaviourPunCallbacks
 
         currentTarget = closest;
     }
-    public void SetHealth(int i)
-    {
-        Health += i;
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-        }
-        if (healthBar != null)
-        {
-            healthBar.value = Health;
-        }
-    }
-
     private void AttackPlayer()
     {
         if (currentTarget != null)
@@ -101,11 +88,44 @@ public class QwertiensBasic : MonoBehaviourPunCallbacks
 
             if (damageable != null && targetPhotonView != null && targetPhotonView.IsMine)
             {
-                damageable.TakeDamage(attackDamage);
+                if (damageable != null && targetPhotonView != null)
+                {
+                    targetPhotonView.RPC("TakeDamage", RpcTarget.AllBuffered, (float)attackDamage);
+                }
                 Debug.Log("💥 Qwertien attaque et inflige des degats !");
             }
 
             lastAttackTime = Time.time;
         }
     }
+
+    [PunRPC]
+    public void SetHealth(int i)
+    {
+        Health -= i;
+
+        if (healthBar != null)
+            healthBar.value = Health;
+
+        if (Health <= 0)
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(Health);
+        }
+        else
+        {
+            Health = (int)stream.ReceiveNext();
+            if (healthBar != null)
+                healthBar.value = Health;
+        }
+    }
+
 }
