@@ -94,10 +94,8 @@ public class QwertiensBasic : ennemy, IPunObservable
     }
 
     [PunRPC]
-    public void SetHealth(int i)
+    public void SetHealth()
     {
-        health -= i;
-
         if (healthBar != null)
             healthBar.value = health;
 
@@ -124,6 +122,7 @@ public class QwertiensBasic : ennemy, IPunObservable
     [PunRPC]
     public void RPC_TakeDamage(float dmg)
     {
+        Debug.Log("BasicQwertiens hit");
         base.FinalTakeDamage(dmg);
     }
 }

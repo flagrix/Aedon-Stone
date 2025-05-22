@@ -2,9 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 
 public class EnnemyGauche : ennemy {
-
-  
-
+    
     private Transform target;
     private int waypointIndex = 0;
 

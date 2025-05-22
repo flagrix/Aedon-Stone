@@ -18,7 +18,7 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
 
     public void Awake()
     {
-        PV = GetComponent<PhotonView>();
+        PV = GetComponentInChildren<PhotonView>();
     }
 
     public void Start()
@@ -28,15 +28,17 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     }
     public void TakeDamage(float amount)
     {
+        Debug.Log(PV);
         if (PV != null)
             PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
-            PV.RPC("SetHealth", RpcTarget.All);
+            
     }
 
     public void FinalTakeDamage(float amount)
     {
-        if (!PV.IsMine)return;
+        Debug.Log("FinalTakeDamage");
         health -= amount;
+        PV.RPC("SetHealth", RpcTarget.All);
         if(health <= 0 || isDead)
         {
             Die();

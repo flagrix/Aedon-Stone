@@ -15,7 +15,8 @@ public class Arbelete : Item
     if (Physics.Raycast(ray, out RaycastHit hit))
     {
       Debug.Log("we hit " + hit.collider.gameObject.name);
-      hit.collider.gameObject.GetComponent<IDamageable>()?.TakeDamage(itemScriptableObject.damage);
+      var temp = hit.collider.gameObject.GetComponent<IDamageable>();
+      temp?.TakeDamage(itemScriptableObject.damage);
     }
   }
 }
