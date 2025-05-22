@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
    
     [Header("Health Bar Settings")]
     [SerializeField]public Slider healthBar;
-    [SerializeField]public int actual_health = 100;
+    //[SerializeField]public int actual_health = 100;
     [Header("Damage Flash Settings")]
     public Image damageImage; // Image rouge qui recouvre l'�cran
     public float flashDuration = 0.7f; // Dur�e du flash en secondes
@@ -249,12 +249,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void SetActualHealth(int delta)
     {
-        if (delta < 0 && actual_health > 0)
+       
+        if (delta < 0 && currHealth > 0)
         {
             TriggerDamageFlash();
         }
 
-        actual_health = Mathf.Clamp(actual_health + delta, 0, 100);
+        currHealth = Mathf.Clamp(currHealth + delta, 0, 100);
+        Debug.Log("it's me "+delta + " health is " + currHealth);
         SetHealth();
     }
 

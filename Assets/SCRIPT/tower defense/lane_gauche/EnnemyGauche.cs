@@ -43,11 +43,5 @@ public class EnnemyGauche : ennemy {
     {
         if (healthBar != null)
             healthBar.value = health;
-
-        if (health <= 0)
-        {
-            if (photonView.IsMine)
-                PhotonNetwork.Destroy(gameObject);
-        }
     }
  }

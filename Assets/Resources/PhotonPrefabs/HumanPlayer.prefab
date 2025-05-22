@@ -2930,7 +2930,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6809417956900630428}
   healthBar: {fileID: 5515934558681496333}
-  actual_health: 100
   damageImage: {fileID: 1592462243675123325}
   flashDuration: 0.7
   walkSpeed: 10
@@ -4625,7 +4624,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.28
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4634,7 +4633,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -15876,8 +15875,6 @@ MonoBehaviour:
   itemScriptableObject: {fileID: 11400000, guid: 16dfc0238170a584381a7889e2a9a88a, type: 2}
   ItemGameobjects: {fileID: 4751313539582970175}
   cam: {fileID: 6809417956900630428}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  arbalete_sound: {fileID: 8300000, guid: 18413a6805730194a90f179796860152, type: 3}
 --- !u!4 &5385142768780219269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
@@ -15987,8 +15984,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 05946f4462f06f24cba33010ba2b2541, type: 2}
   ItemGameobjects: {fileID: 1935020167159203105}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  sword_sound: {fileID: 8300000, guid: 40f6f5ec35e732d438881a7f761cd13a, type: 3}
 --- !u!1001 &1998772332287944065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16098,8 +16093,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 56ab4bba542698b4b824e9d524bd7e7d, type: 2}
   ItemGameobjects: {fileID: 1692360640635328720}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  pharmabook_sound: {fileID: 8300000, guid: 2608dc4e6c12c8e4cae81726ddfcc0e0, type: 3}
 --- !u!4 &2033280286579196522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
@@ -16209,8 +16202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: e1704636769f0cc45a1c91369abc70f8, type: 2}
   ItemGameobjects: {fileID: 2889358440501036317}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  hammer_sound: {fileID: 8300000, guid: 860c271f13df84844b4a678da20cdd84, type: 3}
 --- !u!1001 &2662951336469979820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16318,8 +16309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 1f38be846b4f36547a00f3ae76244443, type: 2}
   ItemGameobjects: {fileID: 2662951336469881870}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  sword_sound: {fileID: 8300000, guid: 40f6f5ec35e732d438881a7f761cd13a, type: 3}
 --- !u!4 &2662951336470378542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 39262ef7e96679244a570217eb28a1fb, type: 3}
@@ -16439,8 +16428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 4bd9ee79b07e8ca4f86000a400e3647c, type: 2}
   ItemGameobjects: {fileID: 7899054715100513971}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  flamobook_sound: {fileID: 8300000, guid: 1948fbfcc619c314788d3eef882f4ae9, type: 3}
 --- !u!1001 &8083525272693264837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16858,8 +16845,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 3b52ba30db026a042aacce4905ef52da, type: 2}
   ItemGameobjects: {fileID: 8446668220439779145}
-  WazeAudioSource: {fileID: 9129919435976573457}
-  sword_sound: {fileID: 8300000, guid: e541a81df630b394ea34f6cbdf26566d, type: 3}
 --- !u!4 &9111704892444282355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}

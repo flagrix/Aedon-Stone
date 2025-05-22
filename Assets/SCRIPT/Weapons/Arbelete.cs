@@ -3,12 +3,27 @@ using UnityEngine;
 public class Arbelete : Item
 {
   [SerializeField] Camera cam;
+  
+  private float tempecoule = 3;
+
+  private void Update()
+  {
+    tempecoule += Time.deltaTime;
+  }
 
     public AudioSource WazeAudioSource;
     public AudioClip arbalete_sound;
     public override void Use()
   {
-    Shoot();
+    if (itemScriptableObject.cooldown < tempecoule)
+    {
+      Shoot();
+      tempecoule = 0;
+    }
+    else
+    {
+      Debug.Log("Arbelete reloading"+ tempecoule );
+    }
   }
 
   void Shoot()

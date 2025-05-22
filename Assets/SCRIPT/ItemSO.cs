@@ -8,6 +8,7 @@ public class ItemSO : ScriptableObject
     public float cooldown;
     public itemType itemType;
     public float damage;
+    public float portee;
 }
 
 public enum itemType {Hammer, Axe, LongSword, PharmacoBook, Arbalete, FlameBook, Hallebarde}

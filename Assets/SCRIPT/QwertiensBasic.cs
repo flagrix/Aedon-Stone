@@ -114,12 +114,7 @@ public class QwertiensBasic : ennemy, IPunObservable
     {
         if (healthBar != null)
             healthBar.value = health;
-
-        if (health <= 0)
-        {
-            if (photonView.IsMine)
-                PhotonNetwork.Destroy(gameObject);
-        }
+        
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -130,7 +125,7 @@ public class QwertiensBasic : ennemy, IPunObservable
         }
         else
         {
-            health = (int)stream.ReceiveNext();
+            health = (float)stream.ReceiveNext();
             if (healthBar != null)
                 healthBar.value = health;
         }
@@ -138,7 +133,6 @@ public class QwertiensBasic : ennemy, IPunObservable
     [PunRPC]
     public void RPC_TakeDamage(float dmg)
     {
-        Debug.Log("BasicQwertiens hit");
         base.FinalTakeDamage(dmg);
     }
 }
