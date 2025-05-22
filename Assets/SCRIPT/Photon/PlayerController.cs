@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     
     private Inventory inventory; //pour l'inventaire local
 
+    public GameObject playerHUD;
 
     void Awake()
     {
@@ -87,7 +88,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         Animator.SetBool("MortEnSah", false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        if (!photonView.IsMine && playerHUD != null)
+        {
+            playerHUD.SetActive(false);
+        }
         // Set initial height
         targetHeight = defaultHeight;
 

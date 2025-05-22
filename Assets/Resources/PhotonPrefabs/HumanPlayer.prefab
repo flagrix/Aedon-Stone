@@ -2954,6 +2954,7 @@ MonoBehaviour:
   crouchHeight: 1
   crouchSpeed: 3
   crouchTransitionSpeed: 15
+  playerHUD: {fileID: 7834127243217798025}
 --- !u!114 &7028846162118373132
 MonoBehaviour:
   m_ObjectHideFlags: 0
