@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Random = UnityEngine.Random;
+
 public class PlayerItemInventory : MonoBehaviourPunCallbacks
 {
     [Header("General")]
@@ -55,6 +58,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     
     private Dictionary<itemType, Item> itemSetActive = new Dictionary<itemType, Item>() { } ;
     private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
+    private Dictionary<itemType, string> stringprefab = new Dictionary<itemType, string>() { } ;
 
     void Awake()
     {
@@ -70,7 +74,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         itemSetActive.Add(itemType.Arbalete, Arbalete_item);
         itemSetActive.Add(itemType.FlameBook, FlameBook_item);
         itemSetActive.Add(itemType.Hallebarde, Hallebarde_item);
-        
+        //
         itemInstanciate.Add(itemType.Hammer, HammerItemPrefab);
         itemInstanciate.Add(itemType.Axe, AxeItemPrefab);
         itemInstanciate.Add(itemType.LongSword, LongSwordItemPrefab);
@@ -78,22 +82,32 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         itemInstanciate.Add(itemType.Arbalete, ArbaleteItemPrefab);
         itemInstanciate.Add(itemType.FlameBook, FlameBookItemPrefab);
         itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);
+        //
+        stringprefab.Add(itemType.Arbalete, "PhotonPrefabs/arbalete");
+        stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/PharmacoBook (1)");
+        stringprefab.Add(itemType.Hallebarde, "PhotonPrefabs/hallebarde (1)");
+        stringprefab.Add(itemType.Axe, "PhotonPrefabs/MetallAx2 (1)");
+        stringprefab.Add(itemType.PharmacoBook, "PhotonPrefabs/PharmacoBook (1)");
+        stringprefab.Add(itemType.LongSword, "PhotonPrefabs/LongSword (1)");
+        
         if (PV.IsMine)
         {
             selectedItem = 0;
             NewItemSelected();
         }
-        NewItemSelected();
+
+        selectedItem = 0;
     }
     
     void Update()
     {
-        if(!PV.IsMine)return;
+        if(!PV.IsMine) return;
+    
         //Item Pickup
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        
+    
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, playerReach)&& inventoryList.Count < 4)
+        if (Physics.Raycast(ray, out hitInfo, playerReach) && inventoryList.Count < 4)
         {
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
@@ -101,8 +115,34 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 pickUpItem_gameobject.SetActive(true);
                 if (Input.GetKey(pickItemKey))
                 {
-                    inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.itemType);
-                    item.PickItem();
+                    // Récupérer les informations de l'item avant de le détruire
+                    ItemPickable itemPickable = hitInfo.collider.GetComponent<ItemPickable>();
+                    if (itemPickable != null)
+                    {
+                        itemType pickedItemType = itemPickable.itemScriptableObject.itemType;
+                    
+                        // Ajouter à l'inventaire
+                        inventoryList.Add(pickedItemType);
+                    
+                        // Appeler la méthode PickItem
+                        item.PickItem();
+                    
+                        // Détruire l'objet via Photon (synchronisé sur tous les clients)
+                        PhotonView itemPhotonView = hitInfo.collider.GetComponent<PhotonView>();
+                        if (itemPhotonView != null)
+                        {
+                            PhotonNetwork.Destroy(itemPhotonView.gameObject);
+                        }
+                        else
+                        {
+                            // Si l'objet n'a pas de PhotonView, destruction locale uniquement
+                            Debug.LogWarning("L'item n'a pas de PhotonView, destruction locale seulement");
+                            Destroy(hitInfo.collider.gameObject);
+                        }
+                    
+                        // Mettre à jour l'interface
+                        NewItemSelected();
+                    }
                 }
             }
             else
@@ -118,7 +158,12 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1 && inventoryList[selectedItem] != itemType.Hammer)
         {
-            Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
+            //Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
+            PhotonNetwork.Instantiate(stringprefab[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position,Quaternion.Euler(
+                Random.Range(75f, 105f), 
+                Random.Range(0f, 360f), 
+                Random.Range(-15f, 15f)
+            ));
             inventoryList.RemoveAt(selectedItem);
             if (selectedItem != 0)
             {
@@ -144,11 +189,11 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         {
             if (a == selectedItem)
             {
-                VARIABLE.color = Color.green;
+                VARIABLE.color = Color.red;
             }
             else
             {
-                VARIABLE.color = Color.red;
+                VARIABLE.color = Color.clear;
             }
 
             a++;
@@ -187,6 +232,18 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     private void NewItemSelected()
     {
+        //debugage
+        if (inventoryList == null || inventoryList.Count == 0)
+        {
+            Debug.LogWarning("inventoryList est null ou vide");
+            return;
+        }
+        if (selectedItem < 0 || selectedItem >= inventoryList.Count)
+        {
+            Debug.LogWarning($"selectedItem ({selectedItem}) est hors des limites de inventoryList (count: {inventoryList.Count})");
+            selectedItem = 0;
+        }
+        //
         Hammer_item.ItemGameobjects.SetActive(false);
         Axe_item.ItemGameobjects.SetActive(false);
         LongSword_item.ItemGameobjects.SetActive(false);
@@ -194,9 +251,24 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         Arbalete_item.ItemGameobjects.SetActive(false);
         FlameBook_item.ItemGameobjects.SetActive(false);
         Hallebarde_item.ItemGameobjects.SetActive(false);
-        GameObject selctedObject = itemSetActive[inventoryList[selectedItem]].ItemGameobjects;
-        
-        selctedObject.SetActive(true);
+        //GameObject selectedObject = itemSetActive[inventoryList[selectedItem]].ItemGameobjects;
+        itemType currentItemType = inventoryList[selectedItem];
+        if (!itemSetActive.ContainsKey(currentItemType))
+        {
+            Debug.LogError($"itemType {currentItemType} n'existe pas dans itemSetActive");
+            return;
+        }
+        GameObject selectedObject = itemSetActive[currentItemType].ItemGameobjects;
+        if (selectedObject != null)
+        {
+            selectedObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError($"GameObject pour {currentItemType} est null");
+        }
+        //
+        selectedObject.SetActive(true);
 
         if (PV.IsMine)
         {
@@ -208,12 +280,62 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
+        /* if (changedProps.ContainsKey("selectedItem") && targetPlayer == PV.Owner)
+         {
+            selectedItem= (int)changedProps["selectedItem"];
+            if(!PV.IsMine)
+                NewItemSelected();
+         } */
+        if (changedProps == null || targetPlayer == null || PV == null)
+        {
+            Debug.LogWarning("Paramètres null dans OnPlayerPropertiesUpdate");
+            return;
+        }
+
         if (changedProps.ContainsKey("selectedItem") && targetPlayer == PV.Owner)
         {
-           selectedItem= (int)changedProps["selectedItem"];
-           if(!PV.IsMine) 
-               NewItemSelected();
-        } 
+            object selectedItemObj = changedProps["selectedItem"];
+            if (selectedItemObj != null)
+            {
+                int newSelectedItem = (int)selectedItemObj;
+
+                // Vérifier que la valeur est valide
+                if (inventoryList != null && newSelectedItem >= 0 && newSelectedItem < inventoryList.Count)
+                {
+                    selectedItem = newSelectedItem;
+                    if (!PV.IsMine)
+                    {
+                        NewItemSelected();
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"selectedItem invalide reçu: {newSelectedItem}");
+                }
+            }
+        }
+    }
+
+    [PunRPC]
+    void RPC_PickupItem(itemType pickedItemType, int itemViewID)
+    {
+        // Trouver l'objet par son ViewID
+        PhotonView itemView = PhotonNetwork.GetPhotonView(itemViewID);
+        if (itemView != null)
+        {
+            // Seulement le joueur qui a ramassé l'item l'ajoute à son inventaire
+            if (PV.IsMine)
+            {
+                inventoryList.Add(pickedItemType);
+                NewItemSelected();
+            }
+
+            // Détruire l'objet pour tous les joueurs
+            if (itemView.IsMine || PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(itemView.gameObject);
+            }
+        }
     }
 }
 

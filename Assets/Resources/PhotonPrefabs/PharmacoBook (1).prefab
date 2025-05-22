@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8189760650207836466}
   - component: {fileID: 4160813694522140167}
   - component: {fileID: 5874218634984688658}
+  - component: {fileID: -2544667034531247293}
   m_Layer: 0
   m_Name: PharmacoBook (1)
   m_TagString: Untagged
@@ -97,6 +98,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-2544667034531247293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880795220011919504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5322261452823817691
 GameObject:
   m_ObjectHideFlags: 0

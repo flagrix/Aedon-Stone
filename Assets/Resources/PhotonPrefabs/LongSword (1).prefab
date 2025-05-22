@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 2731634262849029373}
   - component: {fileID: 6680318651286105399}
   - component: {fileID: 318859405425736812}
+  - component: {fileID: 5328458272356170760}
   m_Layer: 0
   m_Name: LongSword (1)
   m_TagString: Untagged
@@ -116,7 +117,7 @@ Transform:
   m_LocalRotation: {x: 0.45451948, y: 0.5416752, z: 0.6644629, w: 0.2418448}
   m_LocalPosition: {x: 380.66, y: 4.67, z: 625.972}
   m_LocalScale: {x: 3, y: 2.3999999, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1488076189326074319}
   m_Father: {fileID: 0}
@@ -142,10 +143,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5825585985126533364}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.36
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 1.45, y: 0.91, z: 0.16}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -180,5 +181,28 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.04, y: 0.91, z: 0.06}
-  m_Center: {x: 0, y: 0.31, z: 0}
+  m_Size: {x: 0.04, y: 0.9643845, z: 0.021244073}
+  m_Center: {x: -0.00000045222615, y: 0.28280693, z: 0.0006865406}
+--- !u!114 &5328458272356170760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825585985126533364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

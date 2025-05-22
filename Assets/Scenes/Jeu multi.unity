@@ -8378,6 +8378,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5328458272356170760, guid: e340b5b38f0095e43a21c28c4352a2be, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5825585985126533364, guid: e340b5b38f0095e43a21c28c4352a2be, type: 3}
       propertyPath: m_Name
       value: LongSword (1)
@@ -29589,6 +29593,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5254192063441970323, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5992164415958169570, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
       propertyPath: m_Name
       value: arbalete
@@ -34337,6 +34345,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8657170685223928187, guid: 4ae38e46d87439c4e954ef8748d19eb1, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 659655910779529019, guid: 4ae38e46d87439c4e954ef8748d19eb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -215
@@ -40839,6 +40851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2544667034531247293, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3880795220011919504, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
       propertyPath: m_Name
       value: PharmacoBook (1)
@@ -64422,6 +64438,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3955490820980939426, guid: 68aa0f3c0afd67c479617802cfda2797, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5984025438512682847, guid: 68aa0f3c0afd67c479617802cfda2797, type: 3}
       propertyPath: m_LocalPosition.x
       value: -194.97
