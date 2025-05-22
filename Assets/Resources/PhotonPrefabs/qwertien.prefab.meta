@@ -1,14 +1,16 @@
 fileFormatVersion: 2
-guid: 47d8165626b41a243b1a0222655960b7
-PrefabImporter:
-  externalObjects: {}
+guid: c9bc790a133e19c40b64d6db4cfb7a22
+timeCreated: 1560341454
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 241394
-  packageName: Fantasy Imp Creature
-  packageVersion: 1.0
-  assetPath: Assets/Imp/Prefabs/Imp Blue.prefab
-  uploadId: 556736
+  productId: 94707
+  packageName: Mini Legion Rock Golem PBR HP Polyart
+  packageVersion: 1.2
+  assetPath: Assets/Mini Legion Rock Golem PBR HP Polyart/Prefabs/HP_Golem.prefab
+  uploadId: 347235
