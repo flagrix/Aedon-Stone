@@ -51,6 +51,8 @@ public class Inventory : MonoBehaviourPun
 
     public TMP_Text range_suivante_canon;
 
+    public TMP_Text cout_amelioration_canon_text;
+
     public void ShowPanel()
     {
         if (!photonView.IsMine) return;
@@ -86,9 +88,10 @@ public class Inventory : MonoBehaviourPun
         }
         Level_canon.text = level_canon.ToString();
         degat_actuelle_canon.text = "50";
-        degat_suivant_canon.text = (50 + damage_augmentation_canon * level_canon).ToString();
-        range_actuelle_canon.text = "40";
-        range_suivante_canon.text = "40";
+        degat_suivant_canon.text = (50 + (damage_augmentation_canon * (level_canon + 1))).ToString();
+        range_actuelle_canon.text = "30";
+        range_suivante_canon.text = "30";
+        cout_amelioration_canon_text.text = cout_amélioration_canon.ToString();
     }
     private void Update()
     {
@@ -189,10 +192,10 @@ public class Inventory : MonoBehaviourPun
     {
         if (cout_amélioration_canon <= Inventory_global.runes)
         {
+            level_canon += 1;
             selectedNode.turret.GetComponent<defense>().add_Damage(damage_augmentation_canon * level_canon);
             degat_actuelle_canon.text = (selectedNode.turret.GetComponent<defense>().Damage).ToString();
-            degat_suivant_canon.text = (selectedNode.turret.GetComponent<defense>().Damage + damage_augmentation_canon * level_canon).ToString();
-            level_canon += 1;
+            degat_suivant_canon.text = (selectedNode.turret.GetComponent<defense>().Damage + (damage_augmentation_canon * (level_canon+1))).ToString();
             if (level_canon == 3 || level_canon == 5)
             {
                 selectedNode.turret.GetComponent<defense>().add_range(5);
@@ -208,7 +211,8 @@ public class Inventory : MonoBehaviourPun
             }
             inv.addRune(-cout_amélioration_canon);
             cout_amélioration_canon = cout_amélioration_canon + 100 * level_canon;
-            Level_canon.text = cout_amélioration_canon.ToString();
+            Level_canon.text = level_canon.ToString();
+            cout_amelioration_canon_text.text = cout_amélioration_canon.ToString();
         }
         panel_amélioration_canon.SetActive(false); // Ferme le panel si tu veux
         Cursor.lockState = CursorLockMode.Locked;
