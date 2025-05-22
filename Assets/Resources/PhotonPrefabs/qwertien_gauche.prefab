@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 5013033130008585215}
   - component: {fileID: 6742006047869468100}
   - component: {fileID: 8064063472820026329}
+  - component: {fileID: -1977910603336942256}
   m_Layer: 0
   m_Name: qwertien_gauche
   m_TagString: Enemy
@@ -206,8 +207,8 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 2
-    Name: DecaleOuJeTeSuce
+    SynchronizeType: 0
+    Name: mv
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -267,6 +268,18 @@ MonoBehaviour:
   attackDamage: 10
   attackCooldown: 4
   healthBar: {fileID: 0}
+--- !u!114 &-1977910603336942256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114823452707282408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179f4a8245bcd4640ba58d21671670a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1260575960564773755
 GameObject:
   m_ObjectHideFlags: 0
