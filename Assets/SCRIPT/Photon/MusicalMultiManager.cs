@@ -21,10 +21,6 @@ public class MusicalMultiManager : MonoBehaviour
         }
         if (instance.IsMine)
         {
-            
-
-
-
             StartCoroutine(PlayMusicSequence());
         }
     }

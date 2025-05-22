@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private Quaternion networkedRotation;
 
     public Camera playerCamera;
-/**
+
     private bool isGameOverState = false;
-    **/
+   
     [Header("Health Bar Settings")]
     [SerializeField]public Slider healthBar;
     [SerializeField]public int actual_health = 100;
@@ -75,11 +75,32 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Awake()
     {
-        photonView = GetComponent<PhotonView>();
-        characterController = GetComponent<CharacterController>();
-        playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
-        inventory = GetComponentInChildren<Inventory>();
-      //  healthBar = GetComponentInChildren<HealthBar>();
+        {
+            photonView = GetComponent<PhotonView>();
+            characterController = GetComponent<CharacterController>();
+
+            // Sécuriser l'accès à InstantiationData et PlayerManager
+            if (photonView != null && photonView.InstantiationData != null && photonView.InstantiationData.Length > 0)
+            {
+                PhotonView managerView = PhotonView.Find((int)photonView.InstantiationData[0]);
+                if (managerView != null)
+                {
+                    playerManager = managerView.GetComponent<PlayerManager>();
+                }
+                else
+                {
+                    Debug.LogWarning("PlayerManager PhotonView has already been destroyed.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("InstantiationData is null or empty.");
+            }
+
+            inventory = GetComponentInChildren<Inventory>();
+        }
+
+        //  healthBar = GetComponentInChildren<HealthBar>();
     }
 
     void Start()
@@ -121,10 +142,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Update()
     {
-        /**
-            if (!photonView.IsMine || isGameOverState)
-            return;
-            **/
+       
+           
         if (photonView.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.C))
@@ -358,6 +377,27 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         photonView.RPC("RPC_TakeDamage", RpcTarget.All, damage);
     }
 
+    public void SetGameOverState(bool isOver)
+    {
+        if (photonView.IsMine)
+        {
+            isGameOverState = isOver;
+            canMove = !isOver;  // bloque la possibilité de bouger quand game over
+        }
+
+
+        if (isOver)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
     [PunRPC]
     void RPC_TakeDamage(float damage)
     {
@@ -399,22 +439,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
  
 /**
-    public void SetGameOverState(bool isOver)
-    {
-        isGameOverState = isOver;
-        canMove = !isOver;  // bloque la possibilité de bouger quand game over
 
-        if (isOver)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
     **/
 
 }

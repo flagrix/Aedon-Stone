@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     public bool isGameOver = false;
     public CanvasGroup gameOverCanvas;
     [SerializeField] private GameObject Réticule;
-/**
+
     private void Awake()
     {
     }
@@ -63,7 +63,6 @@ public class GameOver : MonoBehaviour
     {
 
         GameOverUI.SetActive(true);
-        Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -114,5 +113,5 @@ public class GameOver : MonoBehaviour
         GameOverUI.SetActive(false);
         isGameOver = false;
     }
-    **/
+    
 }
