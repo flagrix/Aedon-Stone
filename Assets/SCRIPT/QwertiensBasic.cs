@@ -90,7 +90,7 @@ public class QwertiensBasic : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (damageable != null && targetPhotonView != null)
                 {
-                    targetPhotonView.RPC("TakeDamage", RpcTarget.AllBuffered, (float)attackDamage);
+                    targetPhotonView.RPC("RPC_TakeDamage", RpcTarget.AllBuffered, (float)attackDamage);
                 }
                 Debug.Log("💥 Qwertien attaque et inflige des degats !");
             }
