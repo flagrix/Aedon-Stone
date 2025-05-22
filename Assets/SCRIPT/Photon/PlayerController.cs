@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 {
@@ -18,6 +19,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 /**
     private bool isGameOverState = false;
     **/
+    [Header("Health Bar Settings")]
+    [SerializeField]public Slider healthBar;
+    [SerializeField]public int actual_health = 100;
+    [Header("Damage Flash Settings")]
+    public Image damageImage; // Image rouge qui recouvre l'�cran
+    public float flashDuration = 0.7f; // Dur�e du flash en secondes
+    private float flashTimer;
 
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
@@ -60,8 +68,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     private float targetHeight; // Target height for crouching/standing
     PlayerManager playerManager;
-
-    private HealthBar healthBar; // pour la barre de vie locale
+    
     private Inventory inventory; //pour l'inventaire local
 
 
@@ -71,7 +78,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         characterController = GetComponent<CharacterController>();
         playerManager = PhotonView.Find((int)photonView.InstantiationData[0]).GetComponent<PlayerManager>();
         inventory = GetComponentInChildren<Inventory>();
-        healthBar = GetComponentInChildren<HealthBar>();
+      //  healthBar = GetComponentInChildren<HealthBar>();
     }
 
     void Start()
@@ -88,12 +95,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (photonView.IsMine)
         {
             ///EquipItem(0);
-            healthBar = FindObjectOfType<HealthBar>();
+           /* healthBar = FindObjectOfType<HealthBar>();
             if (healthBar != null)
             {
-                healthBar.SetMaxHealth((int)maxHealth);
-                healthBar.SetHealth((int)currHealth);
-            }
+                SetMaxHealth((int)maxHealth);
+                SetHealth((int)currHealth);
+            }*/
             
         }
         else
@@ -111,7 +118,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     void Update()
     {
         /**
-        if (!photonView.IsMine || isGameOverState)
+            if (!photonView.IsMine || isGameOverState)
             return;
             **/
         if (photonView.IsMine)
@@ -199,7 +206,41 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         }
     }
 
+    public void SetMaxHealth(int health)
+    {
+        healthBar.maxValue = health;
+        healthBar.value = health;
+    }
 
+    public void SetHealth()
+    {
+        if (healthBar != null)
+            healthBar.value = currHealth;
+
+        if (currHealth <= 0)
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    public void SetActualHealth(int delta)
+    {
+        if (delta < 0 && actual_health > 0)
+        {
+            TriggerDamageFlash();
+        }
+
+        actual_health = Mathf.Clamp(actual_health + delta, 0, 100);
+        SetHealth();
+    }
+
+  
+    private void TriggerDamageFlash()
+    {
+        flashTimer = flashDuration;
+        damageImage.color = new Color(1f, 0f, 0f, 1f);
+    }
 
     private void HandleMovement()
     {
@@ -319,10 +360,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (!photonView.IsMine) return;
         Animator.SetBool("JaiMal", true);
         currHealth -= damage;
-
-        if (healthBar != null)
-            healthBar.SetActualHealth(-(int)damage); // négatif = perte de vie
-
+        
+        SetActualHealth(-(int)damage); // négatif = perte de vie
         if (currHealth <= 0)
         {
             Animator.SetBool("MortEnSah", true);
@@ -333,7 +372,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     public void Heal(float amount)
     {
         currHealth = Mathf.Clamp(currHealth + amount, 0, maxHealth);
-        healthBar.SetActualHealth((int)amount);
+        SetActualHealth((int)amount);
     }
 
     public void SetActive(bool active)

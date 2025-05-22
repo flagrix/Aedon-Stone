@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+/*public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] private float timeBetweenRespawn = 10f;
@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour
         /**if (HealthBar.instance != null)
         {
             HealthBar.instance.SetActualHealth(100);
-        }**/
+        }
         if (timeBetweenRespawn < 30f)
             timeBetweenRespawn += 5f;
         countdown = 0f;
         player.isRespawning = false;
     }
-}
+}*/

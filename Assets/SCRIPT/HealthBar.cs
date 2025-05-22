@@ -2,30 +2,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class HealthBar : MonoBehaviourPun
+/*public class HealthBar : MonoBehaviourPun
 {
-    public Slider slider;
+   public Slider slider;
     public int actual_health = 100;
 
     [Header("Damage Flash Settings")]
-    public Image damageImage; // Image rouge qui recouvre l'écran
-    public float flashDuration = 0.7f; // Durée du flash en secondes
+    public Image damageImage; // Image rouge qui recouvre l'ï¿½cran
+    public float flashDuration = 0.7f; // Durï¿½e du flash en secondes
     private float flashTimer;
 
-    private PlayerMovement playerMovement;
+    //private PlayerMovement playerMovement;
     public GameObject playerHUD; // Ton HUD Canvas
 
     
-    private void Start()
+   /* private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         if (!photonView.IsMine && playerHUD != null)
         {
             playerHUD.SetActive(false);
         }
-    }
+    }*/
 
-    void Update()
+  /*  void Update()
     {
         // Mort si plus de vie
         if (actual_health <= 0 && playerMovement != null)
@@ -45,7 +45,7 @@ public class HealthBar : MonoBehaviourPun
         else
         {
             damageImage.gameObject.SetActive(false);
-            damageImage.color = new Color(1f, 0f, 0f, 0f); // Caché
+            damageImage.color = new Color(1f, 0f, 0f, 0f); // Cachï¿½
         }
     }
 
@@ -76,5 +76,4 @@ public class HealthBar : MonoBehaviourPun
     {
         flashTimer = flashDuration;
         damageImage.color = new Color(1f, 0f, 0f, 1f);
-    }
-}
+    }*/

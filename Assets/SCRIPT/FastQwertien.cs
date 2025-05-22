@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FastQwertien : MonoBehaviour
 {
     public NavMeshAgent agent2;
-    public float stopDistance = 5F; // Distance minimale avant d'arrêter la poursuite
+    public float stopDistance = 5F; // Distance minimale avant d'arrï¿½ter la poursuite
 
 
     public Slider healthBar;
@@ -19,7 +19,7 @@ public class FastQwertien : MonoBehaviour
        
     }
 
-    void Update()
+  /*  void Update()
     {
         if (PlayerMovement.instance != null)
         {
@@ -28,34 +28,20 @@ public class FastQwertien : MonoBehaviour
 
             float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
 
-            // Si la distance est supérieure à la distance minimale ou que la cible a changé, recalculer le chemin
+            // Si la distance est supï¿½rieure ï¿½ la distance minimale ou que la cible a changï¿½, recalculer le chemin
             if (distanceToPlayer > stopDistance)
             {
                agent2.SetDestination(targetPos); 
             }
             else
             {
-                // Arrêter le mouvement si l'agent est dans la portée minimale
+                // Arrï¿½ter le mouvement si l'agent est dans la portï¿½e minimale
                 agent2.ResetPath();
                 //if (!GameOver.instance.isGameOver)
                     AttackTower();
             }
         }
-    }
-
-    public void SetHealth(int i)
-    {
-        Health += i;
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-        }
-        if (healthBar != null)
-        {
-            healthBar.value = Health;
-        }
-    }
-
+    }*/
     private void AttackTower()
     {
         if (Time.time - lastAttackTime >= attackCooldown)
@@ -66,7 +52,7 @@ public class FastQwertien : MonoBehaviour
                 Debug.Log("Qwertien attaque la tour !");
             }
 
-            // Mettre à jour le temps de la dernière attaque
+            // Mettre ï¿½ jour le temps de la derniï¿½re attaque
             lastAttackTime = Time.time;
         }
     }

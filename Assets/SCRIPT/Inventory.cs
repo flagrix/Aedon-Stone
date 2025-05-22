@@ -13,8 +13,7 @@ public class Inventory : MonoBehaviourPun
     public Text runesText; //pour afficher les runes
     public Text potionsText;
     public Inventory_global inv;
-
-    public HealthBar healthBar;
+    
     public AudioSource WazeAudioSource;
     public AudioClip potion;
 

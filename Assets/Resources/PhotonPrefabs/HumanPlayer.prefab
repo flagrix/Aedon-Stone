@@ -1600,7 +1600,6 @@ MonoBehaviour:
   runesText: {fileID: 0}
   potionsText: {fileID: 8854100495494825107}
   inv: {fileID: 0}
-  healthBar: {fileID: 0}
   WazeAudioSource: {fileID: 8968197981631033105}
   potion: {fileID: 8300000, guid: 2608dc4e6c12c8e4cae81726ddfcc0e0, type: 3}
   panelToShow: {fileID: 8761578463361456209}
@@ -2690,7 +2689,6 @@ GameObject:
   - component: {fileID: 7028846162118373132}
   - component: {fileID: 4816503870339816729}
   - component: {fileID: 8392610345625016559}
-  - component: {fileID: 5868413780857935143}
   - component: {fileID: 605021383031476124}
   m_Layer: 0
   m_Name: HumanPlayer
@@ -2931,6 +2929,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 6809417956900630428}
+  healthBar: {fileID: 5515934558681496333}
+  actual_health: 100
+  damageImage: {fileID: 1592462243675123325}
+  flashDuration: 0.7
   walkSpeed: 10
   runSpeed: 20
   jumpPower: 7
@@ -3018,23 +3020,6 @@ MonoBehaviour:
   emptySlotSprite: {fileID: 21300000, guid: fe84748d53ced724ea8fc451879f689e, type: 3}
   cam: {fileID: 6809417956900630428}
   pickUpItem_gameobject: {fileID: 5504618128696358679}
---- !u!114 &5868413780857935143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782702501690864755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea3d2b8e68d0c1a468d93b340cd6a372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 5515934558681496333}
-  actual_health: 100
-  damageImage: {fileID: 1592462243675123325}
-  flashDuration: 0.7
-  playerHUD: {fileID: 2616900023049953234}
 --- !u!114 &605021383031476124
 MonoBehaviour:
   m_ObjectHideFlags: 0

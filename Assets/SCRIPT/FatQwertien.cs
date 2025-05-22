@@ -21,7 +21,7 @@ public class FatQwertien : MonoBehaviour
             instance = this;
     }
 
-    void Update()
+  /*  void Update()
     {
         float interetjoueur = -Vector3.Distance(agent2.transform.position, PlayerMovement.instance.GetPlayerPosition());// - HealthBar.instance.actual_health;
         float interettour = -Vector3.Distance(agent2.transform.position, new Vector3(414.6f, 2f, 626.3f)) -  TowerHealth.instance.health;
@@ -59,7 +59,7 @@ public class FatQwertien : MonoBehaviour
                     else AttackTower();
             }
         }
-    }
+    }*/
 
     public void SetHealth(int i)
     {

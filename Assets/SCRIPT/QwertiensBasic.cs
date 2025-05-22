@@ -94,8 +94,10 @@ public class QwertiensBasic : ennemy, IPunObservable
     }
 
     [PunRPC]
-    public void SetHealth()
+    public void SetHealth(int i)
     {
+        health -= i;
+
         if (healthBar != null)
             healthBar.value = health;
 

@@ -30,7 +30,7 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     {
         if (PV != null)
             PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
-            PV.RPC("SetHealth", RpcTarget.All, health);
+            PV.RPC("SetHealth", RpcTarget.All);
     }
 
     public void FinalTakeDamage(float amount)

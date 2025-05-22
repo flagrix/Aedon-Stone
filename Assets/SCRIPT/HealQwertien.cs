@@ -6,7 +6,7 @@ using System.Collections;
 public class HealQwertien : MonoBehaviour
 {
     public NavMeshAgent agent2;
-    public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
+    public float stopDistance = 8F; // Distance minimale avant d'arrï¿½ter la poursuite
 
     private Vector3 lastTargetPosition;
     public Slider healthBar;
@@ -39,22 +39,22 @@ public class HealQwertien : MonoBehaviour
         if (rend != null)
         {
             rend.material.color = Color.yellow;
-            yield return new WaitForSeconds(0.2f); // durée du flash
+            yield return new WaitForSeconds(0.2f); // durï¿½e du flash
             rend.material.color = originalColor;
         }
     }
 
-    void Update()
+ /*   void Update()
     {
         if (PlayerMovement.instance != null)
         {
-            // Récupérer la position actuelle du joueur
+            // Rï¿½cupï¿½rer la position actuelle du joueur
             Vector3 targetPos = PlayerMovement.instance.GetPlayerPosition();
 
-            // Vérifier la distance entre l'agent et le joueur
+            // Vï¿½rifier la distance entre l'agent et le joueur
             float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
 
-            // Si la distance est supérieure à la distance minimale ou que la cible a changé, recalculer le chemin
+            // Si la distance est supï¿½rieure ï¿½ la distance minimale ou que la cible a changï¿½, recalculer le chemin
             if (distanceToPlayer > stopDistance)
             {
                 if (targetPos != lastTargetPosition)
@@ -65,47 +65,17 @@ public class HealQwertien : MonoBehaviour
             }
             else
             {
-                // Arrêter le mouvement si l'agent est dans la portée minimale
+                // Arrï¿½ter le mouvement si l'agent est dans la portï¿½e minimale
                 agent2.ResetPath();
                 //if (!GameOver.instance.isGameOver)
-                    AttackPlayer();
             }
             if (Time.time - lastHealTime >= HealCooldown)
             {
-                SetHealth(15);
                 lastHealTime = Time.time;
                 StartCoroutine(FlashHealEffect());
             }
         }
-    }
-
-    public void SetHealth(int i)
-    {
-        Health += i;
-        if (Health <= 0)
-        {
-            Destroy(gameObject);
-        }
-        if (healthBar != null)
-        {
-            healthBar.value = Health;
-        }
-    }
-
-    private void AttackPlayer()
-    {
-        if (Time.time - lastAttackTime >= attackCooldown)
-        {
-            /**if (HealthBar.instance != null)
-            {
-                HealthBar.instance.SetActualHealth(-attackDamage);
-                Debug.Log("HealQwertien attaque le joueur !");
-            }**/
-
-            // Mettre à jour le temps de la dernière attaque
-            lastAttackTime = Time.time;
-        }
-    }
+    }*/
 
 }
 
