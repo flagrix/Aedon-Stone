@@ -18,11 +18,11 @@ public class AnimatorQwertien : MonoBehaviour
     {
         if (transform.position != lastPos)
         {
-            animator.SetBool("DecaleOuJeTeSuce", true);
+            animator.SetBool("mv", true);
         }
         else 
         {
-            animator.SetBool("DecaleOuJeTeSuce", false);
+            animator.SetBool("mv", false);
         }
         lastPos = transform.position;
     }
