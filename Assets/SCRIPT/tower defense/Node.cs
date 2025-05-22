@@ -28,28 +28,39 @@ public class Node : MonoBehaviour
             if (turret.GetComponent<defense>() && turret.GetComponent<defense>().isCanon)
             {
                 foreach (var player in FindObjectsOfType<Inventory>())
-            {
-                if (player.photonView.IsMine)
                 {
-                    player.ShowPanelAmeliorationcanon(); // Affiche son propre panel
-                    break;
+                    if (player.photonView.IsMine)
+                    {
+                        player.ShowPanelAmeliorationcanon(); // Affiche son propre panel
+                        break;
+                    }
                 }
             }
-            }
-            return;
-        }
-        else
-        {
-            foreach (var player in FindObjectsOfType<Inventory>())
+            if (turret.GetComponent<defense>() && turret.GetComponent<defense>().useLaser)
             {
-                if (player.photonView.IsMine)
+                foreach (var player in FindObjectsOfType<Inventory>())
                 {
-                    player.selectedNode = this;
-                    player.ShowPanel(); // Affiche son propre panel
-                    break;
+                    if (player.photonView.IsMine)
+                    {
+                        player.ShowPanelAmeliorationtde(); // Affiche son propre panel
+                        break;
+                    }
+                }
+                return;
+            }
+        }
+            else
+            {
+                foreach (var player in FindObjectsOfType<Inventory>())
+                {
+                    if (player.photonView.IsMine)
+                    {
+                        player.selectedNode = this;
+                        player.ShowPanel(); // Affiche son propre panel
+                        break;
+                    }
                 }
             }
-        }
         
     }
 

@@ -206,4 +206,9 @@ public class defense : MonoBehaviour
     {
         Damage = Damage + r;
     }
+
+    public void add_Damageovertime(int d)
+    {
+        damageOverTime = damageOverTime + d;
+    }
 }
