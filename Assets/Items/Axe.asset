@@ -15,3 +15,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 27047efcb14ca0f4b81449fa22347cca, type: 3}
   cooldown: 1
   itemType: 1
+  damage: 60

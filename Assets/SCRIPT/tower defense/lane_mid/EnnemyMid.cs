@@ -1,9 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class EnnemyMid : ennemy {
-
-   
-
+public class EnnemyMid : ennemy
+{
     private Transform target;
     private int waypointIndex = 0;
 
@@ -34,5 +33,24 @@ public class EnnemyMid : ennemy {
 
         waypointIndex++;
         target = Waypoints_lane_mid.points_mid[waypointIndex];
+    }
+    [PunRPC]
+    public void RPC_TakeDamage(float dmg)
+    {
+        base.FinalTakeDamage(dmg);
+        
+    }
+    
+    [PunRPC]
+    public void SetHealth()
+    {
+        if (healthBar != null)
+            healthBar.value = health;
+
+        if (health <= 0)
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.Destroy(gameObject);
+        }
     }
 }

@@ -2,21 +2,15 @@
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Photon.Pun;
-
-public class QwertiensBasic : MonoBehaviourPunCallbacks, IPunObservable
+public class QwertiensBasic : ennemy, IPunObservable
 {
     public NavMeshAgent agent2;
     public float stopDistance = 8F; // Distance minimale avant d'arrêter la poursuite
 
     private Vector3 lastTargetPosition;
-    public Slider healthBar;
-    public int attackDamage = 10;
-    public float attackCooldown = 4f; 
     private float lastAttackTime;
-
     private GameObject currentTarget;
-
-    private int Health = 100;
+    
     private void Awake()
     {
         
@@ -100,14 +94,12 @@ public class QwertiensBasic : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void SetHealth(int i)
+    public void SetHealth()
     {
-        Health -= i;
-
         if (healthBar != null)
-            healthBar.value = Health;
+            healthBar.value = health;
 
-        if (Health <= 0)
+        if (health <= 0)
         {
             if (photonView.IsMine)
                 PhotonNetwork.Destroy(gameObject);
@@ -118,14 +110,18 @@ public class QwertiensBasic : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(Health);
+            stream.SendNext(health);
         }
         else
         {
-            Health = (int)stream.ReceiveNext();
+            health = (int)stream.ReceiveNext();
             if (healthBar != null)
-                healthBar.value = Health;
+                healthBar.value = health;
         }
     }
-
+    [PunRPC]
+    public void RPC_TakeDamage(float dmg)
+    {
+        base.FinalTakeDamage(dmg);
+    }
 }

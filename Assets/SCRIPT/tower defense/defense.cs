@@ -127,7 +127,7 @@ public class defense : MonoBehaviour
 
     void Laser()
     {
-        targetEnemy.TakeDammage(damageOverTime * Time.deltaTime);
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
         targetEnemy.Slow(slowAmount);
 
         if (lineRenderer.enabled == false)

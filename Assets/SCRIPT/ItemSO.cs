@@ -7,6 +7,7 @@ public class ItemSO : ScriptableObject
     public Sprite sprite;
     public float cooldown;
     public itemType itemType;
+    public float damage;
 }
 
 public enum itemType {Hammer, Axe, LongSword, PharmacoBook, Arbalete, FlameBook, Hallebarde}

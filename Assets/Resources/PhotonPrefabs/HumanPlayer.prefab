@@ -15889,6 +15889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 16dfc0238170a584381a7889e2a9a88a, type: 2}
   ItemGameobjects: {fileID: 4751313539582970175}
+  cam: {fileID: 6809417956900630428}
 --- !u!4 &5385142768780219269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}

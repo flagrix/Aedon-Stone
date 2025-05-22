@@ -225,7 +225,6 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Down");
              itemSetActive[inventoryList[selectedItem]].Use();
         }
         

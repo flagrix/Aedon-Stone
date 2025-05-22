@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private void HandleAttack()
     {
         Animator.SetBool("MoiJeBagarre", false);
-        if (Input.GetMouseButtonDown(0)) // Clic gauche (marche pas)
+       /* if (Input.GetMouseButtonDown(0)) // Clic gauche (marche pas)
         {
             
             if (Time.time - lastAttackTime >= attackCooldown)
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
                 lastAttackTime = Time.time;
             }
-        }
+        }*/
     }
     private void PlayFootstepSound()
     {

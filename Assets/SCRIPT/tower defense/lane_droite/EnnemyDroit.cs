@@ -1,7 +1,9 @@
+using Photon.Pun;
 using UnityEngine;
 
-public class EnnemyDroit : ennemy {
-     private Transform target;
+public class EnnemyDroit : ennemy 
+{
+    private Transform target;
     private int waypointIndex = 0;
     void Start()
     {
@@ -29,5 +31,23 @@ public class EnnemyDroit : ennemy {
 
         waypointIndex++;
         target = Waypoints_lane_droite.points[waypointIndex];
+    }
+    [PunRPC]
+    public void RPC_TakeDamage(float dmg)
+    {
+        base.FinalTakeDamage(dmg);
+    }
+    
+    [PunRPC]
+    public void SetHealth()
+    {
+        if (healthBar != null)
+            healthBar.value = health;
+
+        if (health <= 0)
+        {
+            if (photonView.IsMine)
+                PhotonNetwork.Destroy(gameObject);
+        }
     }
 }
