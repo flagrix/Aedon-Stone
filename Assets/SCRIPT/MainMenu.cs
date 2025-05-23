@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
@@ -55,6 +56,7 @@ public class MainMenu : MonoBehaviour
     }
     public void BackStart()
     {
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("Main Menu");
     }
     public void retour()
