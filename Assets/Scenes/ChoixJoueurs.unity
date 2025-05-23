@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musique: []
   audiosource: {fileID: 0}
+  echapMenu: {fileID: 0}
 --- !u!1 &392260765
 GameObject:
   m_ObjectHideFlags: 0

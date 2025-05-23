@@ -152,6 +152,7 @@ MonoBehaviour:
   musique:
   - {fileID: 8300000, guid: 4d16a85e1ba9cfb4c9f8283b6e19ab23, type: 3}
   audiosource: {fileID: 34565251}
+  echapMenu: {fileID: 0}
 --- !u!82 &34565251
 AudioSource:
   m_ObjectHideFlags: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musique: []
   audiosource: {fileID: 0}
+  echapMenu: {fileID: 0}
 --- !u!1 &392260765
 GameObject:
   m_ObjectHideFlags: 0
