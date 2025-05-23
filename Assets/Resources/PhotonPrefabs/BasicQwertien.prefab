@@ -489,6 +489,7 @@ MonoBehaviour:
   photonView: {fileID: 0}
   WazeAudioSource: {fileID: 7599684172205848925}
   qwertien_sound: {fileID: 8300000, guid: 85c96ce4859b6a84080e837bb819b5c7, type: 3}
+  animator: {fileID: 212555897433171964}
 --- !u!114 &8993598095364893802
 MonoBehaviour:
   m_ObjectHideFlags: 0

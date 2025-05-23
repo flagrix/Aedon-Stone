@@ -13,6 +13,7 @@ public class QwertiensBasic : ennemy, IPunObservable
 
     public AudioSource WazeAudioSource;
     public AudioClip qwertien_sound;
+    public Animator? animator=null;
 
     private void Awake()
     {
@@ -37,6 +38,10 @@ public class QwertiensBasic : ennemy, IPunObservable
     }
     void Update()
     {
+        if (animator != null)
+        {
+            animator.SetBool("tape", false);
+        }
         if (currentTarget != null)
         {
             float distance = Vector3.Distance(transform.position, currentTarget.transform.position);
@@ -55,6 +60,10 @@ public class QwertiensBasic : ennemy, IPunObservable
                 // Attaque si le cooldown est terminé
                 if (Time.time - lastAttackTime >= attackCooldown)
                 {
+                    if (animator!=null)
+                    {
+                        animator.SetBool("tape",true);
+                    }
                     AttackPlayer();
                     lastAttackTime = Time.time;
                 }
