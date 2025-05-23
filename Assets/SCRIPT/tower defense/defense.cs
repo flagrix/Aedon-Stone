@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
 using TMPro;
+
 public class defense : MonoBehaviourPunCallbacks
 {
 
@@ -59,12 +60,17 @@ public class defense : MonoBehaviourPunCallbacks
 
     public Inventory_global inv;
 
+    public PhotonView PV;
+
+    public bool isupgratable;
+
 
     // Use this for initialization
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         inv = FindObjectOfType<Inventory_global>();
+        PV = GetComponent<PhotonView>();
     }
 
 
@@ -225,47 +231,45 @@ public class defense : MonoBehaviourPunCallbacks
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-
-    public bool Upgrade()
+    [PunRPC]
+    public void RPC_Upgrade()
     {
         if (isCanon || isBalise)
         {
 
-            if (Inventory_global.runes < upgradeCost)
+            if (Inventory_global.runes >= upgradeCost)
             {
-                return false;
+                inv.addRune(-upgradeCost_tde);
+                level++;
+
+                Damage = Damage + (damageUpgradeAmount * (level));
+                range = range + (rangeUpgradeAmount * (level));
+                Damagenext = Damage + (damageUpgradeAmount * (level + 1));
+                Rangenext = range + (damageUpgradeAmount * (level + 1));
+                upgradeCost += upgradeCostIncrement; ;
+                isupgratable = true;
+            }
+        }
+            else if (useLaser)
+            {
+                if (Inventory_global.runes >= upgradeCost_tde)
+                {
+                    inv.addRune(-upgradeCost_tde);
+                    level++;
+
+                    damageOverTime = (int)(damageOverTime + (damageUpgradeAmount_tde * (level)));
+                    range = range + (rangeUpgradeAmount * (level));
+                    damageOverTime_tde = (int)(damageOverTime + (damageUpgradeAmount_tde * (level + 1)));
+                    Rangenext = range + (damageUpgradeAmount * (level + 1));
+                    upgradeCost_tde += upgradeCostIncrement;
+                }
             }
 
-            inv.addRune(-upgradeCost_tde);
-            level++;
+    }
 
-            Damage = Damage + (damageUpgradeAmount * (level));
-            range = range + (rangeUpgradeAmount * (level));
-            Damagenext = Damage + (damageUpgradeAmount * (level + 1));
-            Rangenext = range + (damageUpgradeAmount * (level + 1));
-            upgradeCost += upgradeCostIncrement; ;
-            return true;
-        }
-        else if (useLaser)
-        {
-            if (Inventory_global.runes < upgradeCost_tde)
-            {
-                return false;
-            }
-
-            inv.addRune(-upgradeCost_tde);
-            level++;
-
-            damageOverTime = (int)(damageOverTime + (damageUpgradeAmount_tde * (level)));
-            range = range + (rangeUpgradeAmount * (level));
-            damageOverTime_tde = (int)(damageOverTime + (damageUpgradeAmount_tde * (level + 1)));
-            Rangenext = range + (damageUpgradeAmount * (level + 1));
-            upgradeCost_tde += upgradeCostIncrement;
-            return true;
-
-        }
-        return false;
-
+    public void Upgrade()
+    {
+        PV.RPC("RPC_Upgrade", RpcTarget.All);
     }
     
      private void OnMouseDown()
@@ -274,11 +278,11 @@ public class defense : MonoBehaviourPunCallbacks
         {
             if (inventory.photonView.IsMine)
             {
-                    inventory.ShowUpgradePanel(this);
-                    break;
+                inventory.ShowUpgradePanel(this);
+                break;
             }
         }
-        
+
     }
     
 }
