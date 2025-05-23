@@ -3172,7 +3172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df08d32ebb1bbfe4b9274b58408c3691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryList: 00000000020000000300000004000000
+  inventoryList: 00000000050000000300000004000000
   selectedItem: 0
   playerReach: 5
   throwItem_GameObject: {fileID: 1716475252784222956}
@@ -16680,15 +16680,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16764,6 +16764,8 @@ MonoBehaviour:
   cam: {fileID: 6809417956900630428}
   WazeAudioSource: {fileID: 9129919435976573457}
   arbalete_sound: {fileID: 8300000, guid: 18413a6805730194a90f179796860152, type: 3}
+  projectilePrefab: {fileID: 7119193146613221682, guid: 1ad6406c7146744459561e6eb28f86c7, type: 3}
+  firePoint: {fileID: 5385142768780219269}
 --- !u!4 &5385142768780219269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
@@ -16946,7 +16948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8126266101119350810, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
       propertyPath: m_Layer
@@ -17868,6 +17870,9 @@ MonoBehaviour:
   ItemGameobjects: {fileID: 7899054715100513971}
   WazeAudioSource: {fileID: 9129919435976573457}
   flamobook_sound: {fileID: 8300000, guid: 1948fbfcc619c314788d3eef882f4ae9, type: 3}
+  cam: {fileID: 6809417956900630428}
+  radiusExplosion: 10
+  explosionParticlesPrefab: {fileID: 5535193669030494607, guid: 89f1338d1ba89ca45950285b71ed364d, type: 3}
 --- !u!1001 &8083525272693264837
 PrefabInstance:
   m_ObjectHideFlags: 0

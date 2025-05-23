@@ -8,6 +8,8 @@ public class Arbelete : Item
 
     public AudioSource WazeAudioSource;
     public AudioClip arbalete_sound;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint; // Point de tir (muzzle ou main de l’arme)
     public override void Use()
   {
     if (itemScriptableObject.cooldown < itemScriptableObject.tempecoule)
@@ -44,6 +46,7 @@ public class Arbelete : Item
         var temp = hit.collider.gameObject.GetComponent<IDamageable>();
         temp?.TakeDamage(itemScriptableObject.damage);
       }
+      
     }
   }
 }
