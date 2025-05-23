@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 {
@@ -73,9 +74,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public GameObject playerHUD;
 
+    public bool EnPause = false;
+    public GameObject EscapeMenu;
+
     void Awake()
     {
         {
+            EscapeMenu.SetActive(false);
             photonView = GetComponent<PhotonView>();
             characterController = GetComponent<CharacterController>();
 
@@ -146,31 +151,52 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
            
         if (photonView.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (!EnPause) 
             {
-                Debug.Log("aa");
-                TakeDamage(20f);
-            }
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                inventory.addPotion(1);
-            }
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                inventory.UsePotion();
-            }
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    Debug.Log("aa");
+                    TakeDamage(20f);
+                }
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    inventory.addPotion(1);
+                }
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    inventory.UsePotion();
+                }
 
-            if (transform.position.y < -10f) //Die if you fall out
-            {
-                Animator.SetBool("MortEnSah", true);
-                Die();
-            }
+                if (transform.position.y < -10f) //Die if you fall out
+                {
+                    Animator.SetBool("MortEnSah", true);
+                    Die();
+                }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    EscapeMenu.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    EnPause = true;
+                }
 
-            HandleMovement();
-            HandleCamera();
-            HandleAttack();
-            PlayFootstepSound();
-            Animator.SetBool("JaiMal", false);
+                HandleMovement();
+                HandleCamera();
+                HandleAttack();
+                PlayFootstepSound();
+                Animator.SetBool("JaiMal", false);
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    EscapeMenu.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    EnPause = false;
+                }
+            }
+            
         }
 
         else

@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
     public AudioClip[] musique;
     public AudioSource audiosource;
     private static MainMenu instance;
+    public GameObject? echapMenu=null;
     private void Awake()
     {
         if (instance == null)
@@ -46,6 +47,23 @@ public class MainMenu : MonoBehaviour
     public void TwoPlayer()
     {
         SceneManager.LoadScene("Loadingscene");
+    }
+    public void LeaveGame()
+    {
+        Application.Quit();
+    }
+    public void BackStart()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+    public void retour()
+    {
+        if (echapMenu != null)
+        {
+            echapMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
