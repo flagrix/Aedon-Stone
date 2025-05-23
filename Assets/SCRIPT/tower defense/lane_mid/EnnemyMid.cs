@@ -47,6 +47,6 @@ public class EnnemyMid : ennemy
     public void SetHealth()
     {
         if (healthBar != null)
-            healthBar.value = health;
+            healthBar.value = health/startHealth*100;
     }
 }
