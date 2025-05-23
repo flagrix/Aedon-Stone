@@ -47,6 +47,8 @@ MonoBehaviour:
   - SetHealth
   - RPC_Drop
   - RPC_PickupItem
+  - SetActualHealth
+  - SetActualHealthRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

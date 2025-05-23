@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class TowerHealth : MonoBehaviour
+public class TowerHealth : MonoBehaviourPunCallbacks
 {
     public static TowerHealth instance;
     public int health = 1000;
@@ -13,26 +14,47 @@ public class TowerHealth : MonoBehaviour
             instance = this;
     }
 
-    public void SetHealth(int i)
+    void Start()
     {
-        health = i;
-        if (health <= 0)
+        slider.maxValue = 1000;
+        slider.value = health;
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            //GameOver.instance.EndGame();
+                photonView.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -200);
+
+
         }
-        
     }
 
-    public void SetActualHealth(int i)
+    [PunRPC]
+    public void SetActualHealthRPC(int i)
     {
         if (health + i <= 0)
             health = 0;
-        else if (health + i > 100)
-            health = 100;
+        else if (health + i > 1000)
+            health = 1000;
         else
             health += i;
+        Debug.Log(health);
         SetHealth(health);
     }
 
+    public void SetHealth(int i)
+    {
+        health = i;
+        slider.value = i;
+        if (health <= 0)
+        {
+            GameOver localGameOver = FindObjectOfType<GameOver>();
+            if (localGameOver != null && !localGameOver.isGameOver)
+            {
+                localGameOver.EndGame();
+            }
 
+        }
+
+    }
 }

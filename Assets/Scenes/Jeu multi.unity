@@ -32687,6 +32687,7 @@ GameObject:
   - component: {fileID: 613302289}
   - component: {fileID: 613302291}
   - component: {fileID: 613302292}
+  - component: {fileID: 613302293}
   m_Layer: 5
   m_Name: TowerBar
   m_TagString: Untagged
@@ -32781,6 +32782,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   slider: {fileID: 613302291}
+--- !u!114 &613302293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613302288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &615588068
 PrefabInstance:
   m_ObjectHideFlags: 0
