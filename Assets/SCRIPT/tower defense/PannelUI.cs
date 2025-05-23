@@ -57,8 +57,9 @@ public class TurretUI : MonoBehaviour
         {
             upgradeButton.onClick.AddListener(() =>
             {
-                if (turretDefense != null && turretDefense.Upgrade())
+                if (turretDefense != null)
                 {
+                    turretDefense.Upgrade();
                     UpdateUI();
                 }
             });
@@ -84,8 +85,9 @@ public class TurretUI : MonoBehaviour
         {
             upgradeButton_tde.onClick.AddListener(() =>
             {
-                if (turretDefense != null && turretDefense.Upgrade())
+                if (turretDefense != null)
                 {
+                   turretDefense.Upgrade();
                     UpdateUI();
                 }
             });
@@ -111,8 +113,9 @@ public class TurretUI : MonoBehaviour
         {
             upgradeButton_baliste.onClick.AddListener(() =>
             {
-                if (turretDefense != null && turretDefense.Upgrade())
+                if (turretDefense != null)
                 {
+                    turretDefense.Upgrade();
                     UpdateUI();
                 }
             });
