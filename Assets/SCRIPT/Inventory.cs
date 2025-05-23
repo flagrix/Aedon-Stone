@@ -114,7 +114,15 @@ public class Inventory : MonoBehaviourPun
         }
         if (cout_canon <= Inventory_global.runes)
         {
-            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "canon_vrai 1"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+            object[] instantiationData = new object[] { selectedNode.name };
+
+            GameObject turret = PhotonNetwork.Instantiate(
+                Path.Combine("PhotonPrefabs", "canon_vrai 1"),
+                selectedNode.transform.position + selectedNode.positionOffset,
+                Quaternion.identity,
+                0,
+                instantiationData
+            );
             selectedNode.turret = turret;
             Debug.Log("Tourelle construite sur " + selectedNode.name);
             inv.addRune(-cout_canon);
@@ -138,7 +146,8 @@ public class Inventory : MonoBehaviourPun
         }
         if (cout_tde <= Inventory_global.runes)
         {
-            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "tour_de_l_enfer"), selectedNode.transform.position, transform.rotation, 0);
+            object[] instantiationData = new object[] { selectedNode.name };
+            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "tour_de_l_enfer"), selectedNode.transform.position, transform.rotation, 0, instantiationData);
             selectedNode.turret = turret;
             Debug.Log("Tourelle construite sur " + selectedNode.name);
             inv.addRune(-cout_tde);
@@ -160,7 +169,8 @@ public class Inventory : MonoBehaviourPun
         }
         if (cout_baliste <= Inventory_global.runes)
         {
-            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0);
+            object[] instantiationData = new object[] { selectedNode.name };
+            GameObject turret = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Baliste"), selectedNode.transform.position + selectedNode.positionOffset, transform.rotation, 0, instantiationData);
             selectedNode.turret = turret;
             Debug.Log("Tourelle construite sur " + selectedNode.name);
             inv.addRune(-cout_baliste);
