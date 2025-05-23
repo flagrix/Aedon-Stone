@@ -27,6 +27,9 @@ public class TableauRcords : MonoBehaviour
     [SerializeField] private GameObject Fond;
     [SerializeField] private Button Croix;
 
+    public bool isInfini = false;
+    public bool isSolo = false;
+
     public static TableauRcords instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,18 +38,33 @@ public class TableauRcords : MonoBehaviour
         {
             RecordSolo[i] = PlayerPrefs.GetInt("RecordSolo_" + i, -1); // -1 si aucune valeur enregistrée
         }
+        for (int i = 0; i < 7; i++)
+        {
+            RecordDuo[i] = PlayerPrefs.GetInt("RecordDuo_" + i, -1); // -1 si aucune valeur enregistrée
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void Awake()
     {
-            instance = this;
+        instance = this;
 
+    }
+
+    public void BoutonInfini()
+    {
+        isInfini = true;
+        Debug.Log("a " + isInfini);
+    }
+
+    private void BoutonSolo()
+    {
+        isSolo = true;
     }
 
     public void NewScoreSolo(int score)
@@ -82,7 +100,13 @@ public class TableauRcords : MonoBehaviour
             if (score > RecordDuo[i])
             {
                 RecordDuo.RemoveAt(6);
-                RecordDuo.Insert(i, score);
+                RecordDuo.Add(score);
+                for (int y = 5; y >= i; y--)
+                {
+                    (RecordDuo[y], RecordDuo[y + 1]) = (RecordDuo[y + 1], RecordDuo[y]);
+                }
+                PlayerPrefs.SetInt("RecordDuo_" + i, RecordDuo[i]);
+                PlayerPrefs.Save();
                 break;
             }
     }
@@ -94,11 +118,11 @@ public class TableauRcords : MonoBehaviour
         Histoire.colors = colors;
         Histoire.interactable = false; // Empêcher les clics
         ColorBlock colors_inf = Infini.colors;
-        colors_inf.normalColor = new Color(0.3f, 0.3f, 0.3f); 
+        colors_inf.normalColor = new Color(0.3f, 0.3f, 0.3f);
         Infini.colors = colors_inf;
         Infini.interactable = false;
         ColorBlock colors_rec = Record.colors;
-        colors_rec.normalColor = new Color(0.3f, 0.3f, 0.3f); 
+        colors_rec.normalColor = new Color(0.3f, 0.3f, 0.3f);
         Record.colors = colors_rec;
         Record.interactable = false;
         Image fondImage = Fond.GetComponent<Image>();
@@ -132,7 +156,7 @@ public class TableauRcords : MonoBehaviour
         }
         if (RecordSolo[1] == -1)
             SecondSolo.text = ".........";
-        else SecondSolo.text = RecordSolo[1].ToString() +  " pts";
+        else SecondSolo.text = RecordSolo[1].ToString() + " pts";
         if (RecordSolo[2] == -1)
             ThirdSolo.text = ".........";
         else ThirdSolo.text = RecordSolo[2].ToString() + " pts";
@@ -196,7 +220,7 @@ public class TableauRcords : MonoBehaviour
         colors.normalColor = Color.white; // Rétablir la couleur d'origine
         Histoire.colors = colors;
         ColorBlock colors_rec = Record.colors;
-        colors_rec.normalColor = Color.white; 
+        colors_rec.normalColor = Color.white;
         Record.colors = colors_rec;
         Record.interactable = true;
         ColorBlock colors_inf = Infini.colors;

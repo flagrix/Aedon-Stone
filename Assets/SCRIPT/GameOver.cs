@@ -6,7 +6,7 @@ using Photon.Pun;
 public class GameOver : MonoBehaviour
 {
 
-    public AudioSource GameOverSoundSource;  
+    public AudioSource GameOverSoundSource;
     public AudioClip GameOverSound;
 
     public GameObject GameOverUI;
@@ -14,16 +14,26 @@ public class GameOver : MonoBehaviour
     public CanvasGroup gameOverCanvas;
     [SerializeField] private GameObject Réticule;
 
+    private bool isSolo = false;
+    private bool isInfini = false;
+
+    private float survivalTime = 0f;
+
+
     private void Awake()
     {
     }
 
     void Start()
     {
-        
+
     }
     void Update()
     {
+        if (!isGameOver)
+        {
+            survivalTime += Time.deltaTime; // Compte les secondes
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("ok");
@@ -36,7 +46,19 @@ public class GameOver : MonoBehaviour
     {
         Réticule.gameObject.SetActive(false);
         Debug.Log("jhsbdfojqhsdbf");
-        //TableauRcords.instance.NewScoreSolo(100);
+        Debug.Log("go" + TableauRcords.instance.isInfini);
+        Debug.Log("go" + TableauRcords.instance.isSolo);
+        if (TableauRcords.instance.isInfini)
+        {
+            if (TableauRcords.instance.isSolo) {
+                Debug.Log("solo"); 
+                TableauRcords.instance.NewScoreSolo((int)survivalTime * 10); }
+            else
+            {
+                Debug.Log("ghvsqgvo" + TableauRcords.instance.isSolo);
+                TableauRcords.instance.NewScoreDuo((int)survivalTime * 10);
+            }
+        }
         isGameOver = true;
         //MusicManager.instance.StopMusic();
         //PlayerMovement.instance.enabled = false;
@@ -87,7 +109,7 @@ public class GameOver : MonoBehaviour
         float alpha = 0f;
         while (alpha < 1f)
         {
-            alpha += Time.unscaledDeltaTime;  
+            alpha += Time.unscaledDeltaTime;
             gameOverCanvas.alpha = alpha;
             yield return null;
         }
@@ -113,5 +135,5 @@ public class GameOver : MonoBehaviour
         GameOverUI.SetActive(false);
         isGameOver = false;
     }
-    
+
 }

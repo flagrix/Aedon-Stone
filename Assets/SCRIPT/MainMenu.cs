@@ -41,7 +41,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnePlayer()
     {
-        SceneManager.LoadScene("SampleScene");
+        TableauRcords.instance.isSolo = true;
+        SceneManager.LoadScene("Loadingscene");
     }
 
     public void TwoPlayer()
