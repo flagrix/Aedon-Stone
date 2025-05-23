@@ -23,7 +23,7 @@ public class TowerHealth : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-                photonView.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -200);
+                //photonView.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -200);
 
 
         }

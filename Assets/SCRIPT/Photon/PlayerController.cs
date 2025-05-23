@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         {
             if (!EnPause) 
             {
-                if (Input.GetKeyDown(KeyCode.C))
+                /**if (Input.GetKeyDown(KeyCode.C))
                 {
                     Debug.Log("aa");
                     TakeDamage(20f);
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     inventory.UsePotion();
-                }
+                }**/
 
                 if (transform.position.y < -10f) //Die if you fall out
                 {

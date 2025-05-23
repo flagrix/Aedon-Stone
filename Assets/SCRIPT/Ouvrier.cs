@@ -7,6 +7,7 @@ public class Ouvrier : MonoBehaviour
 {
     void Start()
     {
-        
+        if (TableauRcords.instance.isInfini)
+            Destroy(gameObject);
     }
 }
