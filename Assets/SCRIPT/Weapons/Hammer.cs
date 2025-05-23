@@ -8,7 +8,7 @@ public class Hammer : Item
 
     void Start()
     {
-        WazeAudioSource.clip = hammer_sound;
+        //WazeAudioSource.clip = hammer_sound;
     }
     public override void Use()
     {

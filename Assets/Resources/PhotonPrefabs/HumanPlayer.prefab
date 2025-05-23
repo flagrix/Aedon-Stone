@@ -15875,6 +15875,8 @@ MonoBehaviour:
   itemScriptableObject: {fileID: 11400000, guid: 16dfc0238170a584381a7889e2a9a88a, type: 2}
   ItemGameobjects: {fileID: 4751313539582970175}
   cam: {fileID: 6809417956900630428}
+  WazeAudioSource: {fileID: 0}
+  arbalete_sound: {fileID: 0}
 --- !u!4 &5385142768780219269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6369111754309135704, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
@@ -15984,6 +15986,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 05946f4462f06f24cba33010ba2b2541, type: 2}
   ItemGameobjects: {fileID: 1935020167159203105}
+  cam: {fileID: 0}
+  WazeAudioSource: {fileID: 0}
+  sword_sound: {fileID: 0}
 --- !u!1001 &1998772332287944065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16093,6 +16098,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 56ab4bba542698b4b824e9d524bd7e7d, type: 2}
   ItemGameobjects: {fileID: 1692360640635328720}
+  player: {fileID: 0}
+  WazeAudioSource: {fileID: 0}
+  pharmabook_sound: {fileID: 0}
 --- !u!4 &2033280286579196522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
@@ -16202,6 +16210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: e1704636769f0cc45a1c91369abc70f8, type: 2}
   ItemGameobjects: {fileID: 2889358440501036317}
+  WazeAudioSource: {fileID: 0}
+  hammer_sound: {fileID: 0}
 --- !u!1001 &2662951336469979820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16309,6 +16319,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 1f38be846b4f36547a00f3ae76244443, type: 2}
   ItemGameobjects: {fileID: 2662951336469881870}
+  cam: {fileID: 0}
+  WazeAudioSource: {fileID: 0}
+  sword_sound: {fileID: 0}
 --- !u!4 &2662951336470378542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 39262ef7e96679244a570217eb28a1fb, type: 3}
@@ -16428,6 +16441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 4bd9ee79b07e8ca4f86000a400e3647c, type: 2}
   ItemGameobjects: {fileID: 7899054715100513971}
+  WazeAudioSource: {fileID: 0}
+  flamobook_sound: {fileID: 0}
 --- !u!1001 &8083525272693264837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16845,6 +16860,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 3b52ba30db026a042aacce4905ef52da, type: 2}
   ItemGameobjects: {fileID: 8446668220439779145}
+  cam: {fileID: 0}
+  WazeAudioSource: {fileID: 0}
+  sword_sound: {fileID: 0}
 --- !u!4 &9111704892444282355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca5a61b97e5fb2142a5577d016fa039f, type: 3}
