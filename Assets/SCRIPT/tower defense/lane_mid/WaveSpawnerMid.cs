@@ -45,25 +45,37 @@ public class WaveSpawnerMid : MonoBehaviour
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
+            yield return new WaitForSeconds(1f);
             SpawnEnemy();
-            if (i % 2 == 0)
+            yield return new WaitForSeconds(1f);
+            if (i > 0)
             {
-                SpawnEnemyfat();
-                SpawnEnemy();
+                if (i % 2 == 0)
+                {
+                    SpawnEnemyfat();
+                    yield return new WaitForSeconds(1f);
+                    SpawnEnemyfat();
+                    yield return new WaitForSeconds(1f);
+                }
+                if (i % 4 == 0)
+                {
+                    SpawnEnemyfast();
+                    yield return new WaitForSeconds(1f);
+                    SpawnEnemyfast();
+                    yield return new WaitForSeconds(1f);
+                }
+                if (i % 5 == 0)
+                {
+                    SpawnEnemyfat();
+                    yield return new WaitForSeconds(1f);
+                    SpawnEnemy();
+                    yield return new WaitForSeconds(1f);
+                    SpawnEnemyfast();
+                    yield return new WaitForSeconds(1f);
+
+                }
+                yield return new WaitForSeconds(1.5f);
             }
-            if (i % 4 == 0)
-            {
-                SpawnEnemyfast();
-                SpawnEnemy();
-            }
-            if (i % 5 == 0)
-            {
-                SpawnEnemyfat();
-                SpawnEnemy();
-                SpawnEnemy();
-                SpawnEnemy();
-            }
-            yield return new WaitForSeconds(1.5f);
         }
 
     }
