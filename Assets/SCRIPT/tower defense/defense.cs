@@ -228,7 +228,7 @@ public class defense : MonoBehaviourPunCallbacks
 
     public bool Upgrade()
     {
-        if (isCanon)
+        if (isCanon || isBalise)
         {
 
             if (Inventory_global.runes < upgradeCost)
