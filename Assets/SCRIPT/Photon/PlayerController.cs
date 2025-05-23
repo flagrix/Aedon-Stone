@@ -264,6 +264,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void SetHealth()
     {
+        if (TowerHealth.instance.health <= 0) return;
         if (healthBar != null)
             healthBar.value = currHealth;
 
@@ -276,7 +277,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void SetActualHealth(int delta)
     {
-       
+        if (TowerHealth.instance.health <= 0) return;
         if (delta < 0 && currHealth > 0)
         {
             TriggerDamageFlash();
@@ -448,6 +449,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void SetActive(bool active)
     {
+        if (playerCamera != null)
+        {
+            playerCamera.enabled = active;
+
+            AudioListener listener = playerCamera.GetComponent<AudioListener>();
+            if (listener != null) listener.enabled = active;
+        }
+
+        foreach (AudioSource source in GetComponentsInChildren<AudioSource>())
+        {
+            source.enabled = active;
+        }
         enabled = active;
         characterController.enabled = active;
 
@@ -459,6 +472,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     }
     void Die()
     {
+        if (photonView.IsMine)
+        {
+            // Désactive les AudioSource du joueur
+            foreach (AudioSource source in GetComponentsInChildren<AudioSource>())
+            {
+                source.Stop();
+                source.enabled = false;
+            }
+
+            // Désactive l'AudioListener (l'ouïe du joueur)
+            AudioListener listener = GetComponentInChildren<AudioListener>();
+            if (listener != null)
+            {
+                listener.enabled = false;
+            }
+        }
         Debug.Log("dead");
         SetActive(false);
         playerManager.StartRespawn();
