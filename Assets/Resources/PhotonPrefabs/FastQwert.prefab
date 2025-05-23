@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 9022529005369359379}
   m_Layer: 0
   m_Name: FastQwert
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -932,7 +932,7 @@ MonoBehaviour:
   PV: {fileID: 0}
   worth: 50
   startSpeed: 10
-  speed: 20
+  speed: 10
   startHealth: 100
   health: 100
   attackDamage: 10

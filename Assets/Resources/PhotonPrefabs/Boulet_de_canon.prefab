@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   explosionRadius: 0
-  speed: 70
+  speed: 100
 --- !u!114 &-9116964704812365797
 MonoBehaviour:
   m_ObjectHideFlags: 0

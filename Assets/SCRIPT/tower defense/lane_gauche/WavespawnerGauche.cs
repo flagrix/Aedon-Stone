@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
-public class WavespawnerGauche : MonoBehaviour {
+public class WavespawnerGauche : MonoBehaviour
+{
 
     [SerializeField]
     private Transform enemyPrefab;
@@ -19,27 +20,44 @@ public class WavespawnerGauche : MonoBehaviour {
 
     private int waveIndex = 0;
 
-    
 
-    void Update () {
-        if(countdown <= 0f)
+
+    void Update()
+    {
+        if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
 
         countdown -= Time.deltaTime;
-        
+
     }
 
     IEnumerator SpawnWave()
     {
-        if (waveIndex < 3)
-            waveIndex++;
-
+        waveIndex++;
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
+            SpawnEnemy();
+            if (i % 2 == 0)
+            {
+                SpawnEnemyfat();
+                SpawnEnemy();
+            }
+            if (i % 4 == 0)
+            {
+                SpawnEnemyfast();
+                SpawnEnemy();
+            }
+            if (i % 5 == 0)
+            {
+                SpawnEnemyfat();
+                SpawnEnemy();
+                SpawnEnemy();
+                SpawnEnemy();
+            }
             yield return new WaitForSeconds(1.5f);
         }
 
@@ -47,6 +65,14 @@ public class WavespawnerGauche : MonoBehaviour {
 
     void SpawnEnemy()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien_gauche"), spawnPoint.position,spawnPoint.rotation, 0);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien_gauche"), spawnPoint.position, spawnPoint.rotation, 0);
+    }
+    void SpawnEnemyfast()
+    {
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FastQwert_g"), spawnPoint.position, spawnPoint.rotation, 0);
+    }
+    void SpawnEnemyfat()
+    {
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FatQwert_g"), spawnPoint.position,spawnPoint.rotation, 0);
     }
 }
