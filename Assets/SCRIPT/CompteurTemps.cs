@@ -5,7 +5,7 @@ public class CompteurTemps : MonoBehaviour
 {
 
     public static CompteurTemps instance;
-    [SerializeField] private float timeBetweenWave = 50f;
+    [SerializeField] private float timeBetweenWave = 120f;
     private float countdown = 0f;
     public int waveNumber = 0; // Compteur de vagues
 
@@ -53,7 +53,7 @@ public class CompteurTemps : MonoBehaviour
             WazeAudioSource.Play();
         
         waveNumber++;
-        timeBetweenWave += 10f; // Augmente le temps entre les vagues
+        //timeBetweenWave += 10f; // Augmente le temps entre les vagues
         countdown = timeBetweenWave;
 
         waveAnnouncement.text = "Début Vague " + waveNumber + " !!!";
