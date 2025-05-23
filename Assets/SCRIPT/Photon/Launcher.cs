@@ -49,6 +49,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     public void StartGame()
     {
+        PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel("Jeu multi");
     }
 
