@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         {
             if (Input.GetKeyDown(KeyCode.C))
             {
+                Debug.Log("aa");
                 TakeDamage(20f);
             }
             if (Input.GetKeyDown(KeyCode.C))
@@ -405,7 +406,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     {
         if (!photonView.IsMine) return;
         Animator.SetBool("JaiMal", true);
-        currHealth -= damage;
         
         SetActualHealth(-(int)damage); // négatif = perte de vie
         if (currHealth <= 0)
@@ -417,7 +417,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void Heal(float amount)
     {
-        currHealth = Mathf.Clamp(currHealth + amount, 0, maxHealth);
         SetActualHealth((int)amount);
     }
 
