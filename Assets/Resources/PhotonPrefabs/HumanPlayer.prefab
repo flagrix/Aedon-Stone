@@ -1430,81 +1430,6 @@ Transform:
   - {fileID: 6812150161636325689}
   m_Father: {fileID: 1665574650117245499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &775453523886542786
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 551843064194948784}
-  - component: {fileID: 5220585398004568849}
-  - component: {fileID: 3791632316291789437}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &551843064194948784
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775453523886542786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.5, y: 6.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8785778477316802063}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -577, y: 150}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5220585398004568849
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775453523886542786}
-  m_CullTransparentMesh: 1
---- !u!114 &3791632316291789437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775453523886542786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 59488eaa733534d4a8f3474b09b5c33b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &802227190933087712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,29 +1743,12 @@ MonoBehaviour:
   WazeAudioSource: {fileID: 8968197981631033105}
   potion: {fileID: 8300000, guid: 2608dc4e6c12c8e4cae81726ddfcc0e0, type: 3}
   panelToShow: {fileID: 8761578463361456209}
-  panel_amelioration_canon: {fileID: 7214654649109180996}
-  panel_amelioration_tde: {fileID: 4247552153313110440}
   turretPrefab: {fileID: 3225055507136774675, guid: 46e064d2acf3a984199fc9809e3aa44a, type: 3}
   tde: {fileID: 789108424468720901, guid: f5a7c663dc0d21b43bb66fc8831a929f, type: 3}
   balliste: {fileID: 671122222603546772, guid: 75eab17873b5bd348adb4b0b893e5b28, type: 3}
   playerHUD: {fileID: 6273376082723608202}
   playerHUD2: {fileID: 618053530110900628}
-  level_canon: 0
-  damage_augmentation_canon: 20
-  Level_canon: {fileID: 6310165948360960352}
-  degat_actuelle_canon: {fileID: 5198573970471598741}
-  degat_suivant_canon: {fileID: 4964739148783351653}
-  range_actuelle_canon: {fileID: 7204346703082457487}
-  range_suivante_canon: {fileID: 4843464238600854971}
-  cout_amelioration_canon_text: {fileID: 6805169468566842323}
-  level_tde: 0
-  damage_augmentation_tde: 7
-  Level_tde: {fileID: 6366151590613772258}
-  degat_actuelle_tde: {fileID: 2246921893866604022}
-  degat_suivant_tde: {fileID: 8053971048471285724}
-  range_actuelle_tde: {fileID: 7624052253983283616}
-  range_suivante_tde: {fileID: 3154418139055579122}
-  cout_amelioration_tde_text: {fileID: 2541238709914317573}
+  defenseUI: {fileID: 2215053024004126943}
 --- !u!82 &8968197981631033105
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8654,6 +8562,7 @@ GameObject:
   - component: {fileID: 8785778477316802063}
   - component: {fileID: 8599307842116888192}
   - component: {fileID: 5238273063376420735}
+  - component: {fileID: 2548387312285563113}
   m_Layer: 5
   m_Name: "panel_am\xE9lioration_tde"
   m_TagString: Untagged
@@ -8676,7 +8585,6 @@ RectTransform:
   - {fileID: 7309988656471422885}
   - {fileID: 8303996737773074946}
   - {fileID: 8521345053668294875}
-  - {fileID: 551843064194948784}
   - {fileID: 8044068364538210141}
   - {fileID: 2719782946662201999}
   - {fileID: 2832048949479861247}
@@ -8734,6 +8642,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2548387312285563113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247552153313110440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268fe8327589f304883586330acef7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 7214654649109180996}
+  levelText: {fileID: 6366151590613772258}
+  damageText: {fileID: 5198573970471598741}
+  rangeText: {fileID: 7624052253983283616}
+  upgradeCostText: {fileID: 2541238709914317573}
+  damagesuivantText: {fileID: 4964739148783351653}
+  rangesuivantText: {fileID: 4843464238600854971}
+  upgradeButton: {fileID: 143487743615785522}
+  Quitter: {fileID: 467418424251695430}
+  panel_tde: {fileID: 4247552153313110440}
+  levelText_tde: {fileID: 6366151590613772258}
+  damageText_tde: {fileID: 2246921893866604022}
+  rangeText_tde: {fileID: 7624052253983283616}
+  upgradeCostText_tde: {fileID: 2541238709914317573}
+  damagesuivantText_tde: {fileID: 8053971048471285724}
+  rangesuivantText_tde: {fileID: 3154418139055579122}
+  upgradeButton_tde: {fileID: 1354637011854580768}
+  Quitter_tde: {fileID: 467418424251695430}
 --- !u!1 &4289797249930140589
 GameObject:
   m_ObjectHideFlags: 0
@@ -8899,81 +8837,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &4484439770391260669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1277077224870418858}
-  - component: {fileID: 2490356071155496399}
-  - component: {fileID: 2351497821274511032}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1277077224870418858
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484439770391260669}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.5, y: 6.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4496386979584718111}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -577, y: 150}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2490356071155496399
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484439770391260669}
-  m_CullTransparentMesh: 1
---- !u!114 &2351497821274511032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484439770391260669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0a08073d262bc54499b4b322cc8fc90d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4648985856289049187
 GameObject:
   m_ObjectHideFlags: 0
@@ -13982,6 +13845,7 @@ GameObject:
   - component: {fileID: 4496386979584718111}
   - component: {fileID: 756775825621753692}
   - component: {fileID: 1847490248686877425}
+  - component: {fileID: 2215053024004126943}
   m_Layer: 5
   m_Name: "panel_am\xE9lioration_canon"
   m_TagString: Untagged
@@ -14004,7 +13868,6 @@ RectTransform:
   - {fileID: 131926577300785152}
   - {fileID: 894685441421982542}
   - {fileID: 5823586998283008721}
-  - {fileID: 1277077224870418858}
   - {fileID: 3057325755281712363}
   - {fileID: 6323530053332218670}
   - {fileID: 8869964652640281731}
@@ -14062,6 +13925,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2215053024004126943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7214654649109180996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268fe8327589f304883586330acef7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 7214654649109180996}
+  levelText: {fileID: 6310165948360960352}
+  damageText: {fileID: 5198573970471598741}
+  rangeText: {fileID: 7204346703082457487}
+  upgradeCostText: {fileID: 6805169468566842323}
+  damagesuivantText: {fileID: 4964739148783351653}
+  rangesuivantText: {fileID: 4843464238600854971}
+  upgradeButton: {fileID: 143487743615785522}
+  Quitter: {fileID: 2250015879351989330}
+  panel_tde: {fileID: 7214654649109180996}
+  levelText_tde: {fileID: 6310165948360960352}
+  damageText_tde: {fileID: 5198573970471598741}
+  rangeText_tde: {fileID: 7204346703082457487}
+  upgradeCostText_tde: {fileID: 6805169468566842323}
+  damagesuivantText_tde: {fileID: 4964739148783351653}
+  rangesuivantText_tde: {fileID: 4843464238600854971}
+  upgradeButton_tde: {fileID: 143487743615785522}
+  Quitter_tde: {fileID: 2250015879351989330}
 --- !u!1 &7261931204531971714
 GameObject:
   m_ObjectHideFlags: 0

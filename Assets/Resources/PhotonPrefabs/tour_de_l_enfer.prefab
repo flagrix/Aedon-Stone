@@ -288,6 +288,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 5853736606324706400}
   useLaser: 1
   damageOverTime: 20
+  damageOverTime_tde: 27
   slowAmount: 0.5
   WazeAudioSource: {fileID: 3416867294176822990}
   TDE_sound: {fileID: 8300000, guid: f6a0513bb693ef6499592777e8870da1, type: 3}
@@ -295,6 +296,18 @@ MonoBehaviour:
   balise_sound: {fileID: 8300000, guid: 18413a6805730194a90f179796860152, type: 3}
   isCanon: 0
   isBalise: 0
+  level: 0
+  damageUpgradeAmount: 15
+  damageUpgradeAmount_tde: 7
+  rangeUpgradeAmount: 3
+  upgradeCost: 200
+  upgradeCost_tde: 300
+  upgradeCostIncrement: 100
+  baseDamage: 50
+  baseRange: 15
+  Damagenext: 90
+  Rangenext: 20
+  inv: {fileID: 0}
 --- !u!114 &7009908564025603842
 MonoBehaviour:
   m_ObjectHideFlags: 0
