@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                 {
                     inventory.addPotion(1);
                 }
-                if (Input.GetKeyDown(KeyCode.G))
+                if (Input.GetKeyDown(KeyCode.A))
                 {
                     inventory.UsePotion();
                 }

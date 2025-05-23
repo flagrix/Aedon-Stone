@@ -9,9 +9,10 @@ public class Hammer : Item
     void Start()
     {
         //WazeAudioSource.clip = hammer_sound;
+        itemScriptableObject.tempecoule = itemScriptableObject.cooldown+1;
     }
     public override void Use()
-    {
+    { 
         Debug.Log("Hammer"+ itemScriptableObject.itemType.ToString());
         if (!WazeAudioSource.isPlaying)
         {

@@ -51,6 +51,11 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField] Image[] inventorySlotImage = new Image[4];
     [SerializeField] Image[] inventoryBackgroundImage = new Image[4];
     [SerializeField] Sprite emptySlotSprite;
+    [SerializeField]public Slider slot1;
+    [SerializeField]public Slider slot2;
+    [SerializeField]public Slider slot3;
+    [SerializeField]public Slider slot4;
+    public List<Slider> SliderList;
     
     [SerializeField] Camera cam;
     [SerializeField] GameObject pickUpItem_gameobject;
@@ -89,6 +94,8 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         stringprefab.Add(itemType.Axe, "PhotonPrefabs/MetallAx2 (1)");
         stringprefab.Add(itemType.PharmacoBook, "PhotonPrefabs/PharmacoBook (1)");
         stringprefab.Add(itemType.LongSword, "PhotonPrefabs/LongSword (1)");
+        //
+        SliderList = new List<Slider>(){ slot1, slot2, slot3, slot4 };
         
         if (PV.IsMine)
         {
@@ -115,19 +122,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 pickUpItem_gameobject.SetActive(true);
                 if (Input.GetKey(pickItemKey))
                 {
-                    // Récupérer les informations de l'item avant de le détruire
                     ItemPickable itemPickable = hitInfo.collider.GetComponent<ItemPickable>();
                     if (itemPickable != null)
                     {
                         itemType pickedItemType = itemPickable.itemScriptableObject.itemType;
-                    
-                        // Ajouter à l'inventaire
+                        
                         inventoryList.Add(pickedItemType);
-                    
-                        // Appeler la méthode PickItem
+                        
                         item.PickItem();
-                    
-                        // Détruire l'objet via Photon (synchronisé sur tous les clients)
                         PhotonView itemPhotonView = hitInfo.collider.GetComponent<PhotonView>();
                         if (itemPhotonView != null)
                         {
@@ -135,12 +137,10 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                         }
                         else
                         {
-                            // Si l'objet n'a pas de PhotonView, destruction locale uniquement
                             Debug.LogWarning("L'item n'a pas de PhotonView, destruction locale seulement");
                             Destroy(hitInfo.collider.gameObject);
                         }
-                    
-                        // Mettre à jour l'interface
+                        
                         NewItemSelected();
                     }
                 }
@@ -189,16 +189,35 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         {
             if (a == selectedItem)
             {
-                VARIABLE.color = Color.red;
+                VARIABLE.enabled = true;
             }
             else
             {
-                VARIABLE.color = Color.clear;
+                //VARIABLE.color = Color.clear;
+                VARIABLE.enabled = false;
             }
 
             a++;
         }
         
+        for (int i = 0; i < inventoryList.Count; i++)
+        {
+            itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule += Time.deltaTime;
+            if (SliderList[i] != null)
+            {
+                var actualcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule;
+                var totalcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.cooldown;
+                if (actualcooldown / totalcooldown * 100 > 100)
+                {
+                    SliderList[i].value = 0;
+                }
+                else
+                {
+                    SliderList[i].value = actualcooldown / totalcooldown * 100;
+                }
+            }
+        }
+
         //Item selection
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
         {

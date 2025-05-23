@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: PharmacoBok
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0bb174f69c9851a48b09bf7d8180c39e, type: 3}
-  cooldown: 40
+  cooldown: 1
   itemType: 3
   damage: 70
   portee: 0
+  tempecoule: 20.565546

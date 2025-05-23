@@ -3,12 +3,7 @@ using UnityEngine;
 public class Sword : Item
 {
     [SerializeField] Camera cam;
-    private float tempecoule = 3000;
     
-    private void Update()
-    {
-        tempecoule += Time.deltaTime;
-    }
     public AudioSource WazeAudioSource;
     public AudioClip sword_sound;
 
@@ -18,14 +13,14 @@ public class Sword : Item
     }
     public override void Use()
     {
-        if (itemScriptableObject.cooldown < tempecoule)
+        if (itemScriptableObject.cooldown < itemScriptableObject.tempecoule)
         {
             Shoot(itemScriptableObject.damage);
-            tempecoule = 0;
+            itemScriptableObject.tempecoule = 0;
         }
         else
         {
-            Debug.Log("Sword is reloading"+ tempecoule );
+            Debug.Log("Sword is reloading"+ itemScriptableObject.tempecoule );
         }
     }
 
