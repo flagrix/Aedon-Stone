@@ -5,8 +5,8 @@ public class CompteurTemps : MonoBehaviour
 {
 
     public static CompteurTemps instance;
-    [SerializeField] private float timeBetweenWave = 120f;
-    private float countdown = 0f;
+    [SerializeField] public float timeBetweenWave = 120f;
+    public float countdown = 0f;
     public int waveNumber = 0; // Compteur de vagues
 
     [SerializeField] private Text waveCountTimer;
@@ -26,7 +26,7 @@ public class CompteurTemps : MonoBehaviour
     void Start()
     {
         countdown = timeBetweenWave;
-        waveAnnouncement.gameObject.SetActive(false); // Masquer l'annonce au départ
+        waveAnnouncement.gameObject.SetActive(false); // Masquer l'annonce au dï¿½part
     }
 
     void Update()
@@ -39,7 +39,7 @@ public class CompteurTemps : MonoBehaviour
         countdown -= Time.deltaTime;
         waveCountTimer.text = Mathf.Floor(countdown).ToString();
 
-        // Masquer l'annonce après un certain temps
+        // Masquer l'annonce aprï¿½s un certain temps
         if (waveAnnouncement.gameObject.activeSelf && Time.time >= announcementTimer)
         {
             waveAnnouncement.gameObject.SetActive(false);
@@ -56,8 +56,8 @@ public class CompteurTemps : MonoBehaviour
         //timeBetweenWave += 10f; // Augmente le temps entre les vagues
         countdown = timeBetweenWave;
 
-        waveAnnouncement.text = "Début Vague " + waveNumber + " !!!";
+        waveAnnouncement.text = "Dï¿½but Vague " + waveNumber + " !!!";
         waveAnnouncement.gameObject.SetActive(true);
-        announcementTimer = Time.time + announcementDuration; // Planifier la désactivation
+        announcementTimer = Time.time + announcementDuration; // Planifier la dï¿½sactivation
     }
 }

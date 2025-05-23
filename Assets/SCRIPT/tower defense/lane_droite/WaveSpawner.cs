@@ -15,13 +15,11 @@ public class WaveSpawner : MonoBehaviour
     private Transform spawnPoint;
 
     [SerializeField]
-    private float timeBetweenWaves = 30f;
+    private float timeBetweenWaves = 60f;
 
-    private float countdown = 2f;
+    private float countdown = 60f;
 
     private int waveIndex = 0;
-
-
 
     void Update()
     {
@@ -34,6 +32,7 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
     }
+
 
     IEnumerator SpawnWave()
     {
