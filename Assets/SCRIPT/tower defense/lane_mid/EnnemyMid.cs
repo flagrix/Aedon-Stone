@@ -29,7 +29,7 @@ public class EnnemyMid : ennemy
         {
             PhotonView towerPV = TowerHealth.instance.photonView;
             towerPV.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -10);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
             return;
         }
 

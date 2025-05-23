@@ -27,7 +27,7 @@ public class EnnemyDroit : ennemy
         {
             PhotonView towerPV = TowerHealth.instance.photonView;
             towerPV.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -10);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
             return;
         }
 
