@@ -25,6 +25,8 @@ public class EnnemyDroit : ennemy
     {
         if(waypointIndex >= Waypoints_lane_droite.points.Length - 1)
         {
+            PhotonView towerPV = TowerHealth.instance.photonView;
+            towerPV.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -10);
             Destroy(gameObject);
             return;
         }

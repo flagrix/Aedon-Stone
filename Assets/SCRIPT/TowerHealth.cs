@@ -5,7 +5,7 @@ using Photon.Pun;
 public class TowerHealth : MonoBehaviourPunCallbacks
 {
     public static TowerHealth instance;
-    public int health = 1000;
+    public int health = 2500;
     public Slider slider;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class TowerHealth : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        slider.maxValue = 1000;
+        slider.maxValue = 2500;
         slider.value = health;
     }
     void Update()
@@ -34,8 +34,8 @@ public class TowerHealth : MonoBehaviourPunCallbacks
     {
         if (health + i <= 0)
             health = 0;
-        else if (health + i > 1000)
-            health = 1000;
+        else if (health + i > 2500)
+            health = 2500;
         else
             health += i;
         Debug.Log(health);

@@ -27,6 +27,8 @@ public class EnnemyMid : ennemy
     {
         if(waypointIndex >= Waypoints_lane_mid.points_mid.Length - 1)
         {
+            PhotonView towerPV = TowerHealth.instance.photonView;
+            towerPV.RPC("SetActualHealthRPC", RpcTarget.AllBuffered, -10);
             Destroy(gameObject);
             return;
         }
