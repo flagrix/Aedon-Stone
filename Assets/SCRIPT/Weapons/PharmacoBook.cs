@@ -33,4 +33,8 @@ public class PharmacoBook : Item
             WazeAudioSource.Play();
         }
     }
+    public override void NodeOverview()
+    {
+        return;
+    }
 }

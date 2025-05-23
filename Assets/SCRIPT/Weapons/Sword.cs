@@ -23,6 +23,10 @@ public class Sword : Item
             Debug.Log("Sword is reloading"+ itemScriptableObject.tempecoule );
         }
     }
+    public override void NodeOverview()
+    {
+        return;
+    }
 
     public void Shoot(float damage)
     {

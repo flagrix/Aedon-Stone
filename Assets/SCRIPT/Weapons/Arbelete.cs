@@ -21,6 +21,11 @@ public class Arbelete : Item
     }
   }
 
+  public override void NodeOverview()
+  {
+    return;
+  }
+
   void Shoot()
   {
         WazeAudioSource.clip = arbalete_sound;
@@ -32,9 +37,13 @@ public class Arbelete : Item
     ray.origin = cam.transform.position;
     if (Physics.Raycast(ray, out RaycastHit hit))
     {
-      Debug.Log("we hit " + hit.collider.gameObject.name);
-      var temp = hit.collider.gameObject.GetComponent<IDamageable>();
-      temp?.TakeDamage(itemScriptableObject.damage);
+      float distance = Vector3.Distance(transform.position, hit.transform.position);
+      if (distance <= itemScriptableObject.portee)
+      {
+        Debug.Log("we hit " + hit.collider.gameObject.name);
+        var temp = hit.collider.gameObject.GetComponent<IDamageable>();
+        temp?.TakeDamage(itemScriptableObject.damage);
+      }
     }
   }
 }

@@ -217,6 +217,12 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 }
             }
         }
+        // overwiew du hammer
+        if (inventoryList[selectedItem] == itemType.Hammer)
+        {
+            itemSetActive[inventoryList[selectedItem]].NodeOverview();
+        }
+        
 
         //Item selection
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)

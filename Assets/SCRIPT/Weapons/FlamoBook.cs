@@ -17,4 +17,8 @@ public class FlamoBook : Item
             WazeAudioSource.Play();
         }
     }
+    public override void NodeOverview()
+    {
+        return;
+    }
 }

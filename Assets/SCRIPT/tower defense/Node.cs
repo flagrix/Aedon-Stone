@@ -21,7 +21,7 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    private void OnMouseDown()
+   /* private void OnMouseDown()
     {
         if (turret != null)
         {
@@ -48,17 +48,52 @@ public class Node : MonoBehaviour
             }
         }
         
-    }
+    }*/
 
-    private void OnMouseEnter()
+    public void OverviewOnMouseDown()
     {
-        
-        rend.material.color = hoverColor;
-        
-        
+        if (turret != null)
+        {
+            defense def = turret.GetComponent<defense>();
+            foreach (var inventory in FindObjectsOfType<Inventory>())
+            {
+                if (inventory.photonView.IsMine)
+                {
+                    inventory.ShowUpgradePanel(def);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            foreach (var player in FindObjectsOfType<Inventory>())
+            {
+                if (player.photonView.IsMine)
+                {
+                    player.selectedNode = this;
+                    player.ShowPanel(); // Affiche son propre panel
+                    break;
+                }
+            }
+        }
     }
 
-    private void OnMouseExit()
+  /*  public void OnMouseEnter()
+    {
+        rend.material.color = hoverColor;
+    }*/
+
+    public void overwiewOnMousseEnter()
+    {
+        rend.material.color = hoverColor;
+    }
+
+  /* public void OnMouseExit()
+    {
+        rend.material.color = startColor;
+    }*/
+
+    public void OverviewMousseExit()
     {
         rend.material.color = startColor;
     }

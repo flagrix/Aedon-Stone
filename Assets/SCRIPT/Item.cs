@@ -8,5 +8,6 @@ public abstract class Item : MonoBehaviour
     
 
     public abstract void Use();
+    public abstract void NodeOverview();
 
 }

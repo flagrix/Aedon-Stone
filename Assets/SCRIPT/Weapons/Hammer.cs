@@ -5,7 +5,8 @@ public class Hammer : Item
 
     public AudioSource WazeAudioSource;
     public AudioClip hammer_sound;
-    private Camera cam;
+    public Camera cam;
+    public Node temptarget;
 
     void Start()
     {
@@ -26,13 +27,25 @@ public class Hammer : Item
         
     }
 
-    public void NodeOverview()
+    public override void NodeOverview()
     {
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         ray.origin = cam.transform.position;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             var temp = hit.collider.gameObject.GetComponent<Node>();
+            if (temp != temptarget)
+            {
+                temptarget?.OverviewMousseExit();
+            }
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+            if (distance <= itemScriptableObject.portee)
+            {
+                temp?.overwiewOnMousseEnter();
+                temptarget = temp;
+            }
+
+            Debug.Log("Hammer"+ temptarget);
         }
     }
 
@@ -46,9 +59,13 @@ public class Hammer : Item
         ray.origin = cam.transform.position;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Debug.Log("we hit " + hit.collider.gameObject.name);
-            var temp = hit.collider.gameObject.GetComponent<Node>();
-            
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+            if (distance <= itemScriptableObject.portee)
+            {
+                Debug.Log("we hit " + hit.collider.gameObject.name);
+                var temp = hit.collider.gameObject.GetComponent<Node>();
+                temp?.OverviewOnMouseDown();
+            }
         }
         
     }

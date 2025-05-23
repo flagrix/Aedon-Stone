@@ -17103,6 +17103,8 @@ MonoBehaviour:
   ItemGameobjects: {fileID: 2889358440501036317}
   WazeAudioSource: {fileID: 9129919435976573457}
   hammer_sound: {fileID: 8300000, guid: 860c271f13df84844b4a678da20cdd84, type: 3}
+  cam: {fileID: 6809417956900630428}
+  temptarget: {fileID: 0}
 --- !u!1001 &2662951336469979820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17399,6 +17401,10 @@ PrefabInstance:
     - target: {fileID: 3491828214675589356, guid: 74fd0cc1f7019574aa1c80a75ba68db4, type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450396543581459575, guid: 74fd0cc1f7019574aa1c80a75ba68db4, type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7896763288172366098, guid: 74fd0cc1f7019574aa1c80a75ba68db4, type: 3}
       propertyPath: m_LocalPosition.x
