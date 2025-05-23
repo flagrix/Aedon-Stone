@@ -46,9 +46,7 @@ public class WaveSpawnerMid : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(1f);
-            SpawnEnemy();
-            yield return new WaitForSeconds(1f);
-            if (i > 0)
+            if (i > 1)
             {
                 if (i % 2 == 0)
                 {

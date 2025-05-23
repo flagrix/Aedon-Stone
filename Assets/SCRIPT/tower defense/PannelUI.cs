@@ -48,9 +48,11 @@ public class TurretUI : MonoBehaviour
     public Button vendre_tde;
 
     public Button vendre;
+    public Inventory_global inv;
 
     void Start()
     {
+        inv = FindObjectOfType<Inventory_global>();
         if (turretDefense.isCanon)
         {
             upgradeButton.onClick.AddListener(() =>
@@ -72,6 +74,7 @@ public class TurretUI : MonoBehaviour
             {
                 if (turretDefense != null)
                 {
+                    inv.addRune(350);
                     PhotonNetwork.Destroy(turretDefense.gameObject);
                     Hide();
                 }
@@ -98,6 +101,7 @@ public class TurretUI : MonoBehaviour
             {
                 if (turretDefense != null)
                 {
+                    inv.addRune(700);
                     PhotonNetwork.Destroy(turretDefense.gameObject);
                     Hide();
                 }
@@ -123,6 +127,7 @@ public class TurretUI : MonoBehaviour
             {
                 if (turretDefense != null)
                 {
+                    inv.addRune(500);
                     PhotonNetwork.Destroy(turretDefense.gameObject);
                     Hide();
                 }

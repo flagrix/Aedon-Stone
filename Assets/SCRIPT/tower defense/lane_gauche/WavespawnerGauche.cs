@@ -49,8 +49,7 @@ public class WavespawnerGauche : MonoBehaviour
                 {
                     SpawnEnemyfat();
                     yield return new WaitForSeconds(1f);
-                    SpawnEnemyfat();
-                    yield return new WaitForSeconds(1f);
+    
                 }
                 if (i % 4 == 0)
                 {
