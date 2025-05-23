@@ -434,11 +434,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PV: {fileID: 0}
-  worth: 50
-  startSpeed: 10
-  speed: 0
-  startHealth: 100
-  health: 0
+  worth: 150
+  startSpeed: 5
+  speed: 5
+  startHealth: 200
+  health: 200
   attackDamage: 10
   attackCooldown: 4
   healthBar: {fileID: 3708953668212737127}

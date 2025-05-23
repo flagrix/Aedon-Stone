@@ -358,8 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PV: {fileID: 0}
   worth: 50
-  startSpeed: 10
-  speed: 20
+  startSpeed: 7
+  speed: 7
   startHealth: 100
   health: 100
   attackDamage: 10
