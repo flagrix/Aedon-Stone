@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
-public class defense : MonoBehaviour
+using TMPro;
+public class defense : MonoBehaviourPunCallbacks
 {
 
     private Transform target;
@@ -28,6 +29,8 @@ public class defense : MonoBehaviour
     public bool useLaser;
 
     public int damageOverTime = 20;
+
+    public int damageOverTime_tde = 27;
     public float slowAmount = 0.5f;
 
     public AudioSource WazeAudioSource;
@@ -38,12 +41,38 @@ public class defense : MonoBehaviour
     public bool isCanon = false;
     public bool isBalise = true;
 
+    public int level = 0;
+
+    public float damageUpgradeAmount = 15f;
+    public float damageUpgradeAmount_tde = 7f;
+    public float rangeUpgradeAmount = 3f;
+
+    public int upgradeCost = 200;
+
+    public int upgradeCost_tde = 300;
+    public int upgradeCostIncrement = 100;
+
+    public float baseDamage = 50f;
+    public float baseRange = 15f;
+    public float Damagenext = 90f;
+    public float Rangenext = 20f;
+
+    public Inventory_global inv;
+
 
     // Use this for initialization
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        inv = FindObjectOfType<Inventory_global>();
     }
+
+
+    public void Initialize()
+    {
+
+    }
+
 
     void UpdateTarget()
     {
@@ -124,7 +153,6 @@ public class defense : MonoBehaviour
         }
     }
 
-
     void Laser()
     {
         targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
@@ -197,18 +225,60 @@ public class defense : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public void add_Damage(int d)
-    {
-        Damage = Damage + d;
-    }
 
-    public void add_range(int r)
+    public bool Upgrade()
     {
-        Damage = Damage + r;
-    }
+        if (isCanon)
+        {
 
-    public void add_Damageovertime(int d)
-    {
-        damageOverTime = damageOverTime + d;
+            if (Inventory_global.runes < upgradeCost)
+            {
+                return false;
+            }
+
+            inv.addRune(-upgradeCost_tde);
+            level++;
+
+            Damage = Damage + (damageUpgradeAmount * (level));
+            range = range + (rangeUpgradeAmount * (level));
+            Damagenext = Damage + (damageUpgradeAmount * (level + 1));
+            Rangenext = range + (damageUpgradeAmount * (level + 1));
+            upgradeCost += upgradeCostIncrement; ;
+            return true;
+        }
+        else if (useLaser)
+        {
+            if (Inventory_global.runes < upgradeCost_tde)
+            {
+                return false;
+            }
+
+            inv.addRune(-upgradeCost_tde);
+            level++;
+
+            damageOverTime = (int)(damageOverTime + (damageUpgradeAmount_tde * (level)));
+            range = range + (rangeUpgradeAmount * (level));
+            damageOverTime_tde = (int)(damageOverTime + (damageUpgradeAmount_tde * (level + 1)));
+            Rangenext = range + (damageUpgradeAmount * (level + 1));
+            upgradeCost_tde += upgradeCostIncrement;
+            return true;
+
+        }
+        return false;
+
     }
+    
+     private void OnMouseDown()
+    {
+        foreach (var inventory in FindObjectsOfType<Inventory>())
+        {
+            if (inventory.photonView.IsMine)
+            {
+                    inventory.ShowUpgradePanel(this);
+                    break;
+            }
+        }
+        
+    }
+    
 }

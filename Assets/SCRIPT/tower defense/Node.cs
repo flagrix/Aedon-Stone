@@ -25,55 +25,36 @@ public class Node : MonoBehaviour
     {
         if (turret != null)
         {
-            if (turret.GetComponent<defense>() && turret.GetComponent<defense>().isCanon)
+            defense def = turret.GetComponent<defense>();
+            foreach (var inventory in FindObjectsOfType<Inventory>())
             {
-                foreach (var player in FindObjectsOfType<Inventory>())
+                if (inventory.photonView.IsMine)
                 {
-                    if (player.photonView.IsMine)
-                    {
-                        player.ShowPanelAmeliorationcanon(); // Affiche son propre panel
-                        break;
-                    }
+                    inventory.ShowUpgradePanel(def);
+                    break;
                 }
-            }
-            if (turret.GetComponent<defense>() && turret.GetComponent<defense>().useLaser)
-            {
-                foreach (var player in FindObjectsOfType<Inventory>())
-                {
-                    if (player.photonView.IsMine)
-                    {
-                        player.ShowPanelAmeliorationtde(); // Affiche son propre panel
-                        break;
-                    }
-                }
-                return;
             }
         }
-            else
+        else
+        {
+            foreach (var player in FindObjectsOfType<Inventory>())
             {
-                foreach (var player in FindObjectsOfType<Inventory>())
+                if (player.photonView.IsMine)
                 {
-                    if (player.photonView.IsMine)
-                    {
-                        player.selectedNode = this;
-                        player.ShowPanel(); // Affiche son propre panel
-                        break;
-                    }
+                    player.selectedNode = this;
+                    player.ShowPanel(); // Affiche son propre panel
+                    break;
                 }
             }
+        }
         
     }
 
     private void OnMouseEnter()
     {
-        if (turret != null)
-        {
-            return;
-        }
-        else
-        {
-            rend.material.color = hoverColor;
-        }
+        
+        rend.material.color = hoverColor;
+        
         
     }
 

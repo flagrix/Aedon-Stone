@@ -13,14 +13,10 @@ public class Inventory : MonoBehaviourPun
     public Text runesText; //pour afficher les runes
     public Text potionsText;
     public Inventory_global inv;
-    
     public AudioSource WazeAudioSource;
     public AudioClip potion;
 
     public GameObject panelToShow;
-
-    public GameObject panel_amelioration_canon;
-    public GameObject panel_amelioration_tde;
 
     public GameObject turretPrefab;
 
@@ -36,40 +32,9 @@ public class Inventory : MonoBehaviourPun
     private int cout_tde = 700;
 
     private int cout_baliste = 500;
-    private int cout_amelioration_canon = 200;
 
-    private int cout_amelioration_tde = 200;
-    public int level_canon = 0;
+    public TurretUI defenseUI;
 
-    public int damage_augmentation_canon = 20;
-
-    public TMP_Text Level_canon;
-
-    public TMP_Text degat_actuelle_canon;
-
-    public TMP_Text degat_suivant_canon;
-
-    public TMP_Text range_actuelle_canon;
-
-    public TMP_Text range_suivante_canon;
-
-    public TMP_Text cout_amelioration_canon_text;
-
-    public int level_tde = 0;
-
-    public int damage_augmentation_tde = 7;
-
-    public TMP_Text Level_tde;
-
-    public TMP_Text degat_actuelle_tde;
-
-    public TMP_Text degat_suivant_tde;
-
-    public TMP_Text range_actuelle_tde;
-
-    public TMP_Text range_suivante_tde;
-
-    public TMP_Text cout_amelioration_tde_text;
 
     public void ShowPanel()
     {
@@ -80,24 +45,20 @@ public class Inventory : MonoBehaviourPun
         Cursor.visible = true;
     }
 
-    public void ShowPanelAmeliorationcanon()
+      public void ShowUpgradePanel(defense defense)
+    {
+        defenseUI.Show(defense);
+    }
+
+
+    public void ShowPanelAmelioration()
     {
         if (!photonView.IsMine) return;
 
-        panel_amelioration_canon.SetActive(true);
+        panelToShow.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
-
-    public void ShowPanelAmeliorationtde()
-    {
-        if (!photonView.IsMine) return;
-
-        panel_amelioration_tde.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
     private void Awake()
     {
 
@@ -113,18 +74,6 @@ public class Inventory : MonoBehaviourPun
         {
             playerHUD2.SetActive(false);
         }
-        Level_canon.text = level_canon.ToString();
-        degat_actuelle_canon.text = "50";
-        degat_suivant_canon.text = (50 + (damage_augmentation_canon * (level_canon + 1))).ToString();
-        range_actuelle_canon.text = "30";
-        range_suivante_canon.text = "30";
-        cout_amelioration_canon_text.text = cout_amelioration_canon.ToString();
-        Level_tde.text = level_tde.ToString();
-        degat_actuelle_tde.text = "20";
-        degat_suivant_tde.text = (20 + (damage_augmentation_tde * (level_tde + 1))).ToString();
-        range_actuelle_tde.text = "20";
-        range_suivante_tde.text = "20";
-        cout_amelioration_tde_text.text = cout_amelioration_tde.ToString();
     }
     private void Update()
     {
@@ -169,6 +118,7 @@ public class Inventory : MonoBehaviourPun
             selectedNode.turret = turret;
             Debug.Log("Tourelle construite sur " + selectedNode.name);
             inv.addRune(-cout_canon);
+            defense def = turret.GetComponent<defense>();
         }
 
         panelToShow.SetActive(false); // Ferme le panel si tu veux
@@ -220,68 +170,4 @@ public class Inventory : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-    public void Ameliorer_canon()
-    {
-        if (cout_amelioration_canon <= Inventory_global.runes)
-        {
-            level_canon += 1;
-            selectedNode.turret.GetComponent<defense>().add_Damage(damage_augmentation_canon * level_canon);
-            degat_actuelle_canon.text = (selectedNode.turret.GetComponent<defense>().Damage).ToString();
-            degat_suivant_canon.text = (selectedNode.turret.GetComponent<defense>().Damage + (damage_augmentation_canon * (level_canon + 1))).ToString();
-            if (level_canon == 3 || level_canon == 5)
-            {
-                selectedNode.turret.GetComponent<defense>().add_range(5);
-                range_actuelle_canon.text = (selectedNode.turret.GetComponent<defense>().range).ToString();
-                if (level_canon == 2 || level_canon == 4)
-                {
-                    range_suivante_canon.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
-                }
-            }
-            if (level_canon == 2 || level_canon == 4)
-            {
-                range_suivante_canon.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
-            }
-            inv.addRune(-cout_amelioration_canon);
-            cout_amelioration_canon = cout_amelioration_canon + 100 * level_canon;
-            Level_canon.text = level_canon.ToString();
-            cout_amelioration_canon_text.text = cout_amelioration_canon.ToString();
-        }
-        panel_amelioration_canon.SetActive(false); // Ferme le panel si tu veux
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-    
-    public void Ameliorer_tde()
-    {
-        if (cout_amelioration_tde <= Inventory_global.runes)
-        {
-            level_tde += 1;
-            selectedNode.turret.GetComponent<defense>().add_Damageovertime(damage_augmentation_tde * level_tde);
-            degat_actuelle_tde.text = (selectedNode.turret.GetComponent<defense>().damageOverTime).ToString();
-            degat_suivant_tde.text = (selectedNode.turret.GetComponent<defense>().damageOverTime + (damage_augmentation_tde * (level_tde+1))).ToString();
-            if (level_tde == 3 || level_tde == 5)
-            {
-                selectedNode.turret.GetComponent<defense>().add_range(5);
-                range_actuelle_tde.text = (selectedNode.turret.GetComponent<defense>().range).ToString();
-                if (level_tde == 2 || level_tde == 4)
-                {
-                    range_suivante_tde.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
-                }
-            }
-            if (level_tde == 2 || level_tde == 4)
-            {
-                range_suivante_tde.text = (selectedNode.turret.GetComponent<defense>().range + 5).ToString();
-            }
-            inv.addRune(-cout_amelioration_tde);
-            cout_amelioration_tde = cout_amelioration_tde + 100 * level_tde;
-            Level_tde.text = level_tde.ToString();
-            cout_amelioration_tde_text.text = cout_amelioration_tde.ToString();
-        }
-        panel_amelioration_tde.SetActive(false); // Ferme le panel si tu veux
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
 }
-
