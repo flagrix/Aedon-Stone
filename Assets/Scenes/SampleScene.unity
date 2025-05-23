@@ -3357,33 +3357,15 @@ MonoBehaviour:
   runesText: {fileID: 0}
   potionsText: {fileID: 0}
   inv: {fileID: 0}
-  healthBar: {fileID: 0}
   WazeAudioSource: {fileID: 0}
   potion: {fileID: 0}
   panelToShow: {fileID: 0}
-  panel_amelioration_canon: {fileID: 0}
-  panel_amelioration_tde: {fileID: 0}
   turretPrefab: {fileID: 0}
   tde: {fileID: 0}
   balliste: {fileID: 0}
   playerHUD: {fileID: 0}
   playerHUD2: {fileID: 0}
-  level_canon: 0
-  damage_augmentation_canon: 20
-  Level_canon: {fileID: 0}
-  degat_actuelle_canon: {fileID: 0}
-  degat_suivant_canon: {fileID: 0}
-  range_actuelle_canon: {fileID: 0}
-  range_suivante_canon: {fileID: 0}
-  cout_amelioration_canon_text: {fileID: 0}
-  level_tde: 0
-  damage_augmentation_tde: 7
-  Level_tde: {fileID: 0}
-  degat_actuelle_tde: {fileID: 0}
-  degat_suivant_tde: {fileID: 0}
-  range_actuelle_tde: {fileID: 0}
-  range_suivante_tde: {fileID: 0}
-  cout_amelioration_tde_text: {fileID: 0}
+  defenseUI: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -15028,6 +15010,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   useLaser: 0
   damageOverTime: 20
+  damageOverTime_tde: 27
   slowAmount: 0.5
   WazeAudioSource: {fileID: 0}
   TDE_sound: {fileID: 0}
@@ -15035,6 +15018,18 @@ MonoBehaviour:
   balise_sound: {fileID: 0}
   isCanon: 0
   isBalise: 1
+  level: 0
+  damageUpgradeAmount: 15
+  damageUpgradeAmount_tde: 7
+  rangeUpgradeAmount: 3
+  upgradeCost: 200
+  upgradeCost_tde: 300
+  upgradeCostIncrement: 100
+  baseDamage: 50
+  baseRange: 15
+  Damagenext: 90
+  Rangenext: 20
+  inv: {fileID: 0}
 --- !u!4 &4634015637785898198
 Transform:
   m_ObjectHideFlags: 0
@@ -15236,10 +15231,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Qwertien
       objectReference: {fileID: 0}
+    - target: {fileID: 5951127128987499029, guid: 256d367056945cf4e89b3469143633d1, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5959527613625068678, guid: 256d367056945cf4e89b3469143633d1, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 8993598095364893802, guid: 256d367056945cf4e89b3469143633d1, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9084578615335916693, guid: 256d367056945cf4e89b3469143633d1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -34,12 +34,6 @@ public class GameOver : MonoBehaviour
         {
             survivalTime += Time.deltaTime; // Compte les secondes
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("ok");
-            TriggerGameOver();
-            EndGame();
-        }
     }
 
     public void EndGame()

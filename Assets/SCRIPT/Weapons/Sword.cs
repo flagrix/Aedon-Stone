@@ -9,10 +9,11 @@ public class Sword : Item
 
     void Start()
     {
-        WazeAudioSource.clip = sword_sound;
+        
     }
     public override void Use()
     {
+        WazeAudioSource.clip = sword_sound;
         if (itemScriptableObject.cooldown < itemScriptableObject.tempecoule)
         {
             Shoot(itemScriptableObject.damage);

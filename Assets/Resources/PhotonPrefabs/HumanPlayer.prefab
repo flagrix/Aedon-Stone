@@ -2872,6 +2872,7 @@ GameObject:
   - component: {fileID: 4816503870339816729}
   - component: {fileID: 8392610345625016559}
   - component: {fileID: 605021383031476124}
+  - component: {fileID: 1041837688724319551}
   m_Layer: 0
   m_Name: HumanPlayer
   m_TagString: Player
@@ -3253,6 +3254,39 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
+--- !u!114 &1041837688724319551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57603ad09949414389fe48468face02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  dialoguePhrases:
+  - AAAAAAAAHHHHHH
+  - UN QWERTIEN A L'AIDE
+  - HEIN ?
+  - "Oh excusez moi je vous avait pris pour une de ces salet\xE9s de qwertiens."
+  - "Excusez moi je suis assez sur les nerfs depuis que la barri\xE8re a \xE9t\xE9
+    bris\xE9e et que les qwertiens attaquent."
+  - Vous voyer cette tour ?
+  - "C'est l\xE0 o\xF9 est cach\xE9 le saphir de vie."
+  - "Vous m'avez l'air d\xEAtre quelqu'un de fort. Pourriez vous \xE9liminez les
+    qwertiens qui tentent de s'en prendre \xE0 cette tour."
+  - "Si il la d\xE9truise l'humanit\xE9 est perdue."
+  - "Essayez de poser des b\xE2timents pour vous aider \xE0 d\xE9fendre la tour."
+  dialogueUI: {fileID: 8479839740919300920}
+  OuvrierLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  playerCamera: {fileID: 6809417956900630428}
+  textSpeed: 0.05
+  DialoguePanel: {fileID: 5842465938352614719}
 --- !u!1 &1784702869088564999
 GameObject:
   m_ObjectHideFlags: 0
@@ -14932,17 +14966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a71c6af4c2881549b308309eef85d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 10
-  dialoguePhrases:
-  - Bonjour, aventurier !
-  - Comment puis-je vous aider ?
-  dialogueUI: {fileID: 8479839740919300920}
-  OuvrierLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  playerCamera: {fileID: 6809417956900630428}
-  textSpeed: 0.05
-  DialoguePanel: {fileID: 5842465938352614719}
 --- !u!1 &7882480027140924350
 GameObject:
   m_ObjectHideFlags: 0

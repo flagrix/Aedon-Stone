@@ -11,10 +11,11 @@ public class FlamoBook : Item
 
     void Start()
     {
-        WazeAudioSource.clip = flamobook_sound;
+        
     }
     public override void Use()
     {
+        WazeAudioSource.clip = flamobook_sound;
         if (itemScriptableObject.cooldown < itemScriptableObject.tempecoule)
         {
             Debug.Log("FlamoBook" + itemScriptableObject.itemType.ToString());

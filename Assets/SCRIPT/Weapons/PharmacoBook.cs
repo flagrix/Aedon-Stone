@@ -12,11 +12,12 @@ public class PharmacoBook : Item
 
     void Start()
     {
-        WazeAudioSource.clip = pharmabook_sound;
+        
         particleSystem.Stop();
     }
     public override void Use()
     {
+        WazeAudioSource.clip = pharmabook_sound;
         if (itemScriptableObject.cooldown < itemScriptableObject.tempecoule)
         {
             player.SetActualHealth(Convert.ToInt32(itemScriptableObject.damage)); //heal le player

@@ -51,6 +51,7 @@ public class Hammer : Item
 
     void Build()
     {
+        WazeAudioSource.clip = hammer_sound;
         if (!WazeAudioSource.isPlaying)
         {
             WazeAudioSource.Play();
