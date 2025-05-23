@@ -44,6 +44,6 @@ public class EnnemyDroit : ennemy
     public void SetHealth()
     {
         if (healthBar != null)
-            healthBar.value = health;
+            healthBar.value = health/startHealth*100;
     }
 }

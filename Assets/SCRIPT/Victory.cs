@@ -12,7 +12,7 @@ public class Victory : MonoBehaviour
     public GameObject GameOverUI;
     public bool isGameOver = false;
     public CanvasGroup gameOverCanvas;
-    [SerializeField] private GameObject Réticule;
+    [SerializeField] private GameObject Reticule;
 
     private bool isSolo = false;
     private bool isInfini = false;
@@ -39,7 +39,7 @@ public class Victory : MonoBehaviour
 
     public void EndGame()
     {
-        Réticule.gameObject.SetActive(false);
+        Reticule.gameObject.SetActive(false);
         Debug.Log("jhsbdfojqhsdbf");
         Debug.Log("go" + TableauRcords.instance.isInfini);
         Debug.Log("go" + TableauRcords.instance.isSolo);
@@ -85,7 +85,7 @@ public class Victory : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Désactiver les contrôles pour le joueur local
+        // Dï¿½sactiver les contrï¿½les pour le joueur local
         foreach (var player in FindObjectsOfType<PlayerController>())
         {
             if (player.photonView.IsMine)
@@ -101,7 +101,7 @@ public class Victory : MonoBehaviour
         GameOverUI.SetActive(true);
         gameOverCanvas.interactable = true;
         gameOverCanvas.blocksRaycasts = true;
-        Réticule.SetActive(false);
+        Reticule.SetActive(false);
 
         float alpha = 0f;
         while (alpha < 1f)

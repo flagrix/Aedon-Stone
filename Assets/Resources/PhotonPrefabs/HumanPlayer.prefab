@@ -3195,14 +3195,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Armature'\n\tTransform 'Armature'\n\tFrom animation
-    clip 'BasicAttack'\n\tFrom animation clip 'CombatIdle'\n\tFrom animation clip
-    'Death'\n\tFrom animation clip 'GetHit'\n\tFrom animation clip 'Jump_Air'\n\tFrom
-    animation clip 'Jump_Landing'\n\tFrom animation clip 'Jump_Start'\n\tFrom animation
-    clip 'Run'\n\tFrom animation clip 'StaticIdle'\n\tFrom animation clip 'Walk'\n\tand
-    more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -3392,7 +3385,7 @@ MonoBehaviour:
   healthBar: {fileID: 5515934558681496333}
   damageImage: {fileID: 1592462243675123325}
   flashDuration: 0.7
-  walkSpeed: 10
+  walkSpeed: 100
   runSpeed: 20
   jumpPower: 7
   gravity: 20
@@ -13340,7 +13333,7 @@ MonoBehaviour:
   GameOverUI: {fileID: 3249937413127480998}
   isGameOver: 0
   gameOverCanvas: {fileID: 7200190834299154343}
-  "R\xE9ticule": {fileID: 3909033769725237908}
+  Reticule: {fileID: 0}
 --- !u!1 &5814845182013857403
 GameObject:
   m_ObjectHideFlags: 0
@@ -21122,7 +21115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8126266101119350810, guid: 0544dfc416a3e43499f2fbc3c63a4967, type: 3}
       propertyPath: m_Layer

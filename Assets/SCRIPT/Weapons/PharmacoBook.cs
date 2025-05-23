@@ -12,7 +12,6 @@ public class PharmacoBook : Item
 
     void Start()
     {
-        
         particleSystem.Stop();
     }
     public override void Use()
@@ -22,6 +21,7 @@ public class PharmacoBook : Item
         {
             player.SetActualHealth(Convert.ToInt32(itemScriptableObject.damage)); //heal le player
             particleSystem.Play();
+            Debug.Log("particuleeeeee");
             itemScriptableObject.tempecoule = 0;
         }
         else
