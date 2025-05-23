@@ -10012,6 +10012,7 @@ MonoBehaviour:
   vendre_baliste: {fileID: 3418946574559447466}
   vendre_tde: {fileID: 3418946574559447466}
   vendre: {fileID: 3418946574559447466}
+  inv: {fileID: 0}
 --- !u!1 &4252676277431452665
 GameObject:
   m_ObjectHideFlags: 0
@@ -16508,6 +16509,7 @@ MonoBehaviour:
   vendre_baliste: {fileID: 1243517379145775987}
   vendre_tde: {fileID: 1243517379145775987}
   vendre: {fileID: 1243517379145775987}
+  inv: {fileID: 0}
 --- !u!1 &7261931204531971714
 GameObject:
   m_ObjectHideFlags: 0
@@ -17917,6 +17919,7 @@ MonoBehaviour:
   vendre_baliste: {fileID: 2060855048846352378}
   vendre_tde: {fileID: 2060855048846352378}
   vendre: {fileID: 2060855048846352378}
+  inv: {fileID: 0}
 --- !u!1 &8047095701261929936
 GameObject:
   m_ObjectHideFlags: 0
