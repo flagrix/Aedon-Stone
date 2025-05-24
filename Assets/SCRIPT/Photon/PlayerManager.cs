@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Text respawnannoncement;
     [SerializeField] private Text TimeRespawnCount;
     [SerializeField] public GameObject Reticule;
+    public PlayerController playerController;
     private bool isRespawning = false;
     private float countdown = 0f;
     private float respawnStartTime;
@@ -23,7 +24,6 @@ public class PlayerManager : MonoBehaviour
     {
         Hp = GetComponent<PhotonView>();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (Hp.IsMine)
@@ -51,6 +51,8 @@ public class PlayerManager : MonoBehaviour
     {
         Transform spawnpoint = SpawnManager.instance.GetSpawnPoint();
         controller = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "HumanPlayer"), spawnpoint.position,spawnpoint.rotation, 0, new object[]{Hp.ViewID});
+        PlayerController playerController = controller.GetComponent<PlayerController>();
+        playerController.Heal(PlayerController.maxHealth);
     }
 
     public void StartRespawn()

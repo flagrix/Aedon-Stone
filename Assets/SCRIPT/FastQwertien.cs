@@ -18,30 +18,7 @@ public class FastQwertien : MonoBehaviour
     {
        
     }
-
-  /*  void Update()
-    {
-        if (PlayerMovement.instance != null)
-        {
-
-            Vector3 targetPos = new Vector3(81.15487f, 0.1f, -57.1f);
-
-            float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
-
-            // Si la distance est sup�rieure � la distance minimale ou que la cible a chang�, recalculer le chemin
-            if (distanceToPlayer > stopDistance)
-            {
-               agent2.SetDestination(targetPos); 
-            }
-            else
-            {
-                // Arr�ter le mouvement si l'agent est dans la port�e minimale
-                agent2.ResetPath();
-                //if (!GameOver.instance.isGameOver)
-                    AttackTower();
-            }
-        }
-    }*/
+    
     private void AttackTower()
     {
         if (Time.time - lastAttackTime >= attackCooldown)

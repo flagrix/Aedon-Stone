@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     PlayerManager playerManager;
     
     private Inventory inventory; //pour l'inventaire local
-
+    private Dictionary<itemType, string> stringprefab = new Dictionary<itemType, string>() { } ;
     public GameObject playerHUD;
 
     public bool EnPause = false;
@@ -103,6 +104,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         }
 
         //  healthBar = GetComponentInChildren<HealthBar>();
+        
+        stringprefab.Add(itemType.Arbalete, "PhotonPrefabs/arbalete");
+        stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/flamobook");
+        stringprefab.Add(itemType.Hallebarde, "PhotonPrefabs/hallebarde (1)");
+        stringprefab.Add(itemType.Axe, "PhotonPrefabs/MetallAx2 (1)");
+        stringprefab.Add(itemType.PharmacoBook, "PhotonPrefabs/PharmacoBook (1)");
+        stringprefab.Add(itemType.LongSword, "PhotonPrefabs/LongSword (1)");
+        stringprefab.Add(itemType.Hammer, "PhotonPrefabs/uploads_files_3650488_Blacksmith's+Rounding+Hammerno+sharps");
     }
 
     void Start()
@@ -241,7 +250,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             TriggerDamageFlash();
         }
 
-        currHealth = Mathf.Clamp(currHealth + delta, 0, 100);
+        currHealth = Mathf.Clamp(currHealth + delta, 0, maxHealth);
         Debug.Log("it's me "+delta + " health is " + currHealth);
         SetHealth();
     }
@@ -276,14 +285,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             targetHeight = defaultHeight;
         }
 
-        // Smoothly adjust height
+        
         characterController.height = Mathf.Lerp(characterController.height, targetHeight, crouchTransitionSpeed * Time.deltaTime);
 
-        // Adjust speed while crouching
+        
 
         if (isCrouching)
         {
-            isRunning = false; // Cannot run while crouching
+            isRunning = false; 
             Animator.SetBool("EnMarche", true);
             Animator.SetBool("CoursForest", false);
         }
@@ -333,13 +342,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     
 
     private void HandleCamera()
-    {/**
-        if (!canMove || isGameOverState) return;**/
-
+    {
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
     }
 
@@ -373,7 +379,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             canMove = !isOver;  // bloque la possibilité de bouger quand game over
         }
 
-
         if (isOver)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -399,12 +404,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             Die();
         }
     }
-   /* [PunRPC]
-    public void RPC_BuyItem(int price)
-    {
-        inventory.inv.addRune(-price);
-    }*/
-
     public void Heal(float amount)
     {
         SetActualHealth((int)amount);
@@ -450,15 +449,25 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             {
                 listener.enabled = false;
             }
+            PlayerItemInventory playerInventory = GetComponent<PlayerItemInventory>();
+            foreach (var VARIABLE in playerInventory.inventoryList)
+            {
+                if (VARIABLE != itemType.Hammer)
+                {
+                    PhotonNetwork.Instantiate(stringprefab[VARIABLE], position: playerInventory.throwItem_GameObject.transform.position,
+                        Quaternion.Euler(
+                            Random.Range(75f, 105f),
+                            Random.Range(0f, 360f),
+                            Random.Range(-15f, 15f)
+                        ));
+                    Debug.Log(VARIABLE);
+                }
+            }
         }
         Debug.Log("dead");
-        SetActive(false);
+        //SetActive(false);
+        PhotonNetwork.Destroy(gameObject);
         playerManager.StartRespawn();
     }
-
- 
-/**
-
-    **/
 
 }

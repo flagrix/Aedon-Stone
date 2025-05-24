@@ -19,7 +19,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     public List<itemType> inventoryList;
     public int selectedItem = 0;
     public float playerReach;
-    [SerializeField] GameObject throwItem_GameObject;
+    [SerializeField]public GameObject throwItem_GameObject;
     [SerializeField] PhotonView PV;
     private string precompile;
     [SerializeField] public float xbuy;
@@ -103,7 +103,6 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     
     
     private Dictionary<itemType, Item> itemSetActive = new Dictionary<itemType, Item>() { } ;
-    //private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
     private Dictionary<itemType, string> stringprefab = new Dictionary<itemType, string>() { } ;
 
     void Awake()
@@ -120,14 +119,6 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         itemSetActive.Add(itemType.Arbalete, Arbalete_item);
         itemSetActive.Add(itemType.FlameBook, FlameBook_item);
         itemSetActive.Add(itemType.Hallebarde, Hallebarde_item);
-        //
-       /* itemInstanciate.Add(itemType.Hammer, HammerItemPrefab);
-        itemInstanciate.Add(itemType.Axe, AxeItemPrefab);
-        itemInstanciate.Add(itemType.LongSword, LongSwordItemPrefab);
-        itemInstanciate.Add(itemType.PharmacoBook, PharmacoBookItemPrefab);
-        itemInstanciate.Add(itemType.Arbalete, ArbaleteItemPrefab);
-        itemInstanciate.Add(itemType.FlameBook, FlameBookItemPrefab);
-        itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);*/
         //
         stringprefab.Add(itemType.Arbalete, "PhotonPrefabs/arbalete");
         stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/flamobook");
@@ -232,7 +223,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     {
         if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1 && inventoryList[selectedItem] != itemType.Hammer)
         {
-            //Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
+           Debug.Log("objet instancié");
             PhotonNetwork.Instantiate(instanceObject, position: throwItem_GameObject.transform.position,Quaternion.Euler(
                 Random.Range(75f, 105f), 
                 Random.Range(0f, 360f), 

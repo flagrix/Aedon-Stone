@@ -21,45 +21,7 @@ public class FatQwertien : MonoBehaviour
             instance = this;
     }
 
-  /*  void Update()
-    {
-        float interetjoueur = -Vector3.Distance(agent2.transform.position, PlayerMovement.instance.GetPlayerPosition());// - HealthBar.instance.actual_health;
-        float interettour = -Vector3.Distance(agent2.transform.position, new Vector3(414.6f, 2f, 626.3f)) -  TowerHealth.instance.health;
-        if (PlayerMovement.instance != null)
-        {
-            Vector3 targetPos = new Vector3(0f,0f,0f);
-            if (interetjoueur > interettour)
-            {
-                targetPos = PlayerMovement.instance.GetPlayerPosition();
-            }
-            else
-            {
-                targetPos = new Vector3(414.6f, 2f, 626.3f);
-            }
-
-            // Vérifier la distance entre l'agent et le joueur
-            float distanceToPlayer = Vector3.Distance(agent2.transform.position, targetPos);
-
-            // Si la distance est supérieure à la distance minimale ou que la cible a changé, recalculer le chemin
-            if (distanceToPlayer > stopDistance)
-            {
-                if (targetPos != lastTargetPosition)
-                {
-                    agent2.SetDestination(targetPos);
-                    lastTargetPosition = targetPos;
-                }
-            }
-            else
-            {
-
-                agent2.ResetPath();
-                //if (!GameOver.instance.isGameOver)
-                    if (interetjoueur > interettour)
-                        AttackPlayer();
-                    else AttackTower();
-            }
-        }
-    }*/
+ 
 
     public void SetHealth(int i)
     {
@@ -80,12 +42,6 @@ public class FatQwertien : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            /**if (HealthBar.instance != null)
-            {
-                HealthBar.instance.SetActualHealth(-attackDamage);
-                Debug.Log("Qwertien attaque le joueur !");
-            }**/
-
             // Mettre à jour le temps de la dernière attaque
             lastAttackTime = Time.time;
         }
