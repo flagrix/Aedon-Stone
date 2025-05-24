@@ -50,11 +50,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private float footstepTimer = 0f;
 
     [Header("Attack Settings")]
-    public float attackRange = 10f;
-    public int attackDamage = 40;
     public LayerMask enemyLayer;
-    public float attackCooldown = 0.75f;
-    private float lastAttackTime = 0f;
     const float maxHealth = 100f;
     float currHealth = maxHealth;
 
@@ -182,7 +178,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
                 HandleMovement();
                 HandleCamera();
-                HandleAttack();
                 PlayFootstepSound();
                 Animator.SetBool("JaiMal", false);
             }
@@ -205,35 +200,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             transform.position = Vector3.Lerp(transform.position, networkedPosition, Time.deltaTime * 10f);
             transform.rotation = Quaternion.Lerp(transform.rotation, networkedRotation, Time.deltaTime * 10f);
         }
-    }
-    private void HandleAttack()
-    {
-        Animator.SetBool("MoiJeBagarre", false);
-       /* if (Input.GetMouseButtonDown(0)) // Clic gauche (marche pas)
-        {
-            
-            if (Time.time - lastAttackTime >= attackCooldown)
-            {
-                Animator.SetBool("MoiJeBagarre", true);
-                Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
-                {
-                    Debug.Log("ca marhce");
-                    // Ici tu touches un objet sur le bon layer
-                    var enemy = hit.collider.GetComponent<QwertiensBasic>();
-                    var fastEnemy = hit.collider.GetComponent<FastQwertien>();
-                    var fatEnemy = hit.collider.GetComponent<FatQwertien>();
-
-                    if (enemy != null) enemy.photonView.RPC("SetHealth", RpcTarget.AllBuffered, attackDamage);
-                    if (fastEnemy != null) fastEnemy.SetHealth(attackDamage);
-                    if (fatEnemy != null) fatEnemy.SetHealth(attackDamage);
-                }
-
-                lastAttackTime = Time.time;
-            }
-        }*/
     }
     private void PlayFootstepSound()
     {
@@ -261,6 +227,44 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         healthBar.maxValue = health;
         healthBar.value = health;
     }
+
+    public void AddMaxHealth(int health)
+    {
+        if (CanAfford(300))
+        {
+            healthBar.maxValue += health;
+            healthBar.value = health;
+            inventory.inv.addRune(-300);
+            Debug.Log("Add health of " + health);
+        }
+    }
+
+    public void AddSpeed(float speed)
+    {
+        if (CanAfford(250))
+        {
+            walkSpeed += speed / 2;
+            runSpeed += speed;
+            inventory.inv.addRune(-250);
+            Debug.Log("Add Speed of " + speed);
+        }
+}
+
+    public void AddJump(float jumpower)
+    {
+        if (CanAfford(150))
+        {
+            jumpPower += jumpower;
+            inventory.inv.addRune(-150);
+            Debug.Log("Add jumpower of " + jumpower);
+        }
+    }
+
+    public bool CanAfford(float amount)
+    {
+        return Inventory_global.runes >= amount;
+    }
+   
 
     public void SetHealth()
     {

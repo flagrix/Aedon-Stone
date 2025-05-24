@@ -16,4 +16,6 @@ MonoBehaviour:
   cooldown: 3
   itemType: 4
   damage: 40
-  portee: 100
+  portee: 105
+  tempecoule: 10216.547
+  price: 300

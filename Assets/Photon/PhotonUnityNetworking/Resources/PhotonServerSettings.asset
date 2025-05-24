@@ -52,6 +52,7 @@ MonoBehaviour:
   - RPC_BuildTurret
   - RPC_Upgrade
   - RPC_Spawn
+  - RPC_BuyItem
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

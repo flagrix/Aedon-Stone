@@ -373,6 +373,45 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         HidePanel();
     }
 
+    public bool CanAfford(float amount)
+    {
+        return Inventory_global.runes >= amount;
+    }
+
+    public void AddRange(float range)
+    {
+        if (CanAfford(200))
+        {
+            foreach (var Weapon in itemSetActive)
+            {
+                float portee = Weapon.Value.itemScriptableObject.portee;
+
+                Weapon.Value.itemScriptableObject.portee += range / portee * 100;
+            }
+
+            inv.addRune(-200);
+            Debug.Log("Add Range of " + range + "%");
+
+            HidePanel();
+        }
+    }
+
+    public void AddDamage(float damage)
+    {
+        if (CanAfford(300))
+        {
+            inv.addRune(-300);
+            foreach (var Weapon in itemSetActive)
+            {
+                float degats = Weapon.Value.itemScriptableObject.damage;
+
+                Weapon.Value.itemScriptableObject.damage += damage / degats * 100;
+            }
+            Debug.Log("Add damage of " + damage + "%");
+        }
+        HidePanel();
+    }
+
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         if (changedProps == null || targetPlayer == null || PV == null)

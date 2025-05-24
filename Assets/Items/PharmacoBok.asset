@@ -16,5 +16,6 @@ MonoBehaviour:
   cooldown: 40
   itemType: 3
   damage: 70
-  portee: 0
-  tempecoule: 30.444172
+  portee: Infinity
+  tempecoule: 248.01553
+  price: 350
