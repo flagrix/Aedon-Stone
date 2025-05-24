@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Garde la musique entre les scènes
+            DontDestroyOnLoad(gameObject); // Garde la musique entre les scï¿½nes
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.LogWarning("Le tableau 'musique' est vide ou non assigné dans l'inspecteur.");
+            Debug.LogWarning("Le tableau 'musique' est vide ou non assignï¿½ dans l'inspecteur.");
         }
     }
     public void StartGame()
@@ -79,7 +79,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
                 audiosource.Stop(); 
             }
         }
-        else if (!audiosource.isPlaying) // Reprend la musique si elle a été arrêtée
+        else if (!audiosource.isPlaying) // Reprend la musique si elle a ï¿½tï¿½ arrï¿½tï¿½e
         {
             audiosource.Play();
         }

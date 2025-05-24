@@ -111,6 +111,11 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     void Start()
     {
+        priceTextRange.text = $"Damage\n{Convert.ToInt32(actualRangePrice)} runes";
+        priceTextSpeed.text = $"Speed\n{Convert.ToInt32(actualSpeedPrice)} runes";
+        priceTextJump.text = $"Jump\n{Convert.ToInt32(actualJumpPrice)} runes";
+        priceTextHealth.text = $"Health\n{Convert.ToInt32(actualHealthPrice)} runes";
+        priceTextDamage.text = $"Damage\n{Convert.ToInt32(actualDamagePrice)} runes";
         PV = GetComponent<PhotonView>();
         itemSetActive.Add(itemType.Hammer, Hammer_item);
         itemSetActive.Add(itemType.Axe, Axe_item);
@@ -410,12 +415,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public void AddRange()
     {
-        actualRangePrice *= (Mathf.Pow((float)1.15, Rangelvl));
-        if (CanAfford(actualHealthPrice))
+        priceTextRange.text = $"Damage\n{Convert.ToInt32(actualRangePrice*(Mathf.Pow((float)1.15, Rangelvl)))} runes";
+        
+        if (CanAfford(actualRangePrice*(Mathf.Pow((float)1.15, Rangelvl))))
         {
+            actualRangePrice *= (Mathf.Pow((float)1.15, Rangelvl));
             Rangelvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualRangePrice));
-            priceTextRange.text = $"Damage\n{actualRangePrice} runes";
+            priceTextRange.text = $"Damage\n{Convert.ToInt32(actualRangePrice)} runes";
             float bonusRange = progressRange * maxBonusRange;
             foreach (var Weapon in itemSetActive)
             {
@@ -426,12 +433,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void AddSpeed()
     {
+        priceTextSpeed.text = $"Speed\n{Convert.ToInt32(actualSpeedPrice*(Mathf.Pow((float)1.15, Rangelvl)))} runes";
          actualSpeedPrice *= (Mathf.Pow((float)1.15, Speedlvl));
-        if (CanAfford(actualSpeedPrice))
+        if (CanAfford(actualSpeedPrice*(Mathf.Pow((float)1.15, Speedlvl))))
         {
+            actualSpeedPrice *= (Mathf.Pow((float)1.15, Speedlvl));
             Speedlvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualSpeedPrice));
-            priceTextSpeed.text = $"Speed\n{actualSpeedPrice} runes";
+            priceTextSpeed.text = $"Speed\n{Convert.ToInt32(actualSpeedPrice)} runes";
             Debug.Log("you have a Speed of "+ PlayerController.runSpeed);
             float bonusSpeed = progressSpeed * maxBonusSpeed;
             PlayerController.runSpeed += bonusSpeed;
@@ -440,12 +449,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void AddJump()
     {
-        actualJumpPrice *= (Mathf.Pow((float)1.15, Jumplvl));
-        if (CanAfford(actualJumpPrice))
+        priceTextJump.text = $"Jump\n{Convert.ToInt32(actualJumpPrice*(Mathf.Pow((float)1.15, Rangelvl)))} runes";
+        
+        if (CanAfford(actualJumpPrice*(Mathf.Pow((float)1.15, Jumplvl))))
         {
+            actualJumpPrice *= (Mathf.Pow((float)1.15, Jumplvl));
             Jumplvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualJumpPrice));
-            priceTextJump.text = $"Jump\n{actualJumpPrice} runes";
+            priceTextJump.text = $"Jump\n{Convert.ToInt32(actualJumpPrice)} runes";
             Debug.Log("you have a jumpower of " + PlayerController.jumpPower);
             float bonusJump = progressJump * maxBonusSpeed;
             PlayerController.jumpPower += bonusJump;
@@ -453,12 +464,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void AddMaxHealth()
     {
-        actualHealthPrice *= (Mathf.Pow((float)1.15, Healthlvl));
-        if (CanAfford(actualHealthPrice))
+        priceTextHealth.text = $"Health\n{Convert.ToInt32(actualHealthPrice*(Mathf.Pow((float)1.15, Rangelvl)))} runes";
+        
+        if (CanAfford(actualHealthPrice*(Mathf.Pow((float)1.15, Healthlvl))))
         {
+            actualHealthPrice *= (Mathf.Pow((float)1.15, Healthlvl));
             Healthlvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualHealthPrice));
-            priceTextHealth.text = $"Health\n{actualHealthPrice} runes";
+            priceTextHealth.text = $"Health\n{Convert.ToInt32(actualHealthPrice)} runes";
             Debug.Log("you have a Health of " + PlayerController.maxHealth);
             float bonusHealth = progressHealth * maxBonusSpeed;
             PlayerController.maxHealth += bonusHealth;
@@ -468,11 +481,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public void AddDamage()
     {
-        if (CanAfford(actualHealthPrice))
+        
+        priceTextDamage.text = $"Damage\n{Convert.ToInt32(actualDamagePrice*(Mathf.Pow((float)1.15, Rangelvl)))} runes";
+        if (CanAfford(actualDamagePrice*(Mathf.Pow((float)1.15, Healthlvl))))
         {
+            actualDamagePrice *= (Mathf.Pow((float)1.15, Healthlvl));
             Damagelvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualDamagePrice));
-            priceTextDamage.text = $"Damage\n{actualDamagePrice} runes";
+            priceTextDamage.text = $"Damage\n{Convert.ToInt32(actualDamagePrice)} runes";
             float bonusDamage = progressSpeed * maxBonusDamage;
             foreach (var Weapon in itemSetActive)
             { 
