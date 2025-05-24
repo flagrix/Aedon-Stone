@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     [Header("Attack Settings")]
     public LayerMask enemyLayer;
-    const float maxHealth = 100f;
-    float currHealth = maxHealth;
+    private float maxHealth = 100f;
+    float currHealth = 100f;
 
     [Header("Animation Settings")]
     Animator Animator;
@@ -234,7 +234,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (CanAfford(300))
         {
             healthBar.maxValue += health;
-            healthBar.value = health;
+            healthBar.value += health;
+            maxHealth += health;
+            currHealth = maxHealth;
             photonView.RPC("RPC_BuyItem", RpcTarget.All, -300);
             Debug.Log("Add health of " + health);
         }

@@ -69,7 +69,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     
     
     private Dictionary<itemType, Item> itemSetActive = new Dictionary<itemType, Item>() { } ;
-    private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
+    //private Dictionary<itemType, GameObject> itemInstanciate = new Dictionary<itemType, GameObject>() { } ;
     private Dictionary<itemType, string> stringprefab = new Dictionary<itemType, string>() { } ;
 
     void Awake()
@@ -87,13 +87,13 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         itemSetActive.Add(itemType.FlameBook, FlameBook_item);
         itemSetActive.Add(itemType.Hallebarde, Hallebarde_item);
         //
-        itemInstanciate.Add(itemType.Hammer, HammerItemPrefab);
+       /* itemInstanciate.Add(itemType.Hammer, HammerItemPrefab);
         itemInstanciate.Add(itemType.Axe, AxeItemPrefab);
         itemInstanciate.Add(itemType.LongSword, LongSwordItemPrefab);
         itemInstanciate.Add(itemType.PharmacoBook, PharmacoBookItemPrefab);
         itemInstanciate.Add(itemType.Arbalete, ArbaleteItemPrefab);
         itemInstanciate.Add(itemType.FlameBook, FlameBookItemPrefab);
-        itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);
+        itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);*/
         //
         stringprefab.Add(itemType.Arbalete, "PhotonPrefabs/arbalete");
         stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/flamobook");
