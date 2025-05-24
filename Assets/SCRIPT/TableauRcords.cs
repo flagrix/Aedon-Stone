@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,14 +28,12 @@ public class TableauRcords : MonoBehaviour
     [SerializeField] private Button Croix;
 
     public bool isInfini = false;
-    public static bool histoire = false;
     public bool isSolo = false;
 
     public static TableauRcords instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        DontDestroyOnLoad(this);
         for (int i = 0; i < 7; i++)
         {
             RecordSolo[i] = PlayerPrefs.GetInt("RecordSolo_" + i, -1); // -1 si aucune valeur enregistr�e
@@ -48,28 +45,17 @@ public class TableauRcords : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        instance = this;
+        DontDestroyOnLoad(this);
     }
 
     public void BoutonInfini()
     {
-        isInfini = true;
-        Debug.Log("a " + isInfini);
+       Destroy(gameObject);
     }
 
     public void BoutonFini()

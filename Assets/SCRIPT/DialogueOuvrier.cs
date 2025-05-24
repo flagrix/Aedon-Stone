@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Object = UnityEngine.Object;
 
 public class OuvrierDialogue : MonoBehaviour
 {
@@ -25,27 +27,34 @@ public class OuvrierDialogue : MonoBehaviour
     public float duree = 1f;
     public Image missionPanel;
     public TextMeshProUGUI missionText;
-    bool deployement = true;
-    bool retrait = false;
     bool isDone = false;
+    bool abandon = false;
     
     void Start()
     {
-        tableaurecords = FindObjectOfType<TableauRcords>();
-        if (!enabled)
-            Debug.LogWarning("SCRIPT OuvrierDialogue est desactive !");
-        player = GameObject.FindGameObjectWithTag("Player"); // Trouve le joueur par son tag
-        dialogueUI.gameObject.SetActive(false); // Cache le texte au d�but
-        DialoguePanel.SetActive(false); // Cache le panel au d�but
-        missionText.text = "Mission :\nA Villager Want to talk to you !\nPress T to interact with him !";
-        if(!tableaurecords.isInfini)StartCoroutine(FadeIn());
+        try
+        {
+            tableaurecords = Object.FindFirstObjectByType<TableauRcords>();
+            if (!enabled)
+                Debug.LogWarning("SCRIPT OuvrierDialogue est desactive !");
+            player = GameObject.FindGameObjectWithTag("Player"); // Trouve le joueur par son tag
+            dialogueUI.gameObject.SetActive(false); // Cache le texte au d�but
+            DialoguePanel.SetActive(false); // Cache le panel au d�but
+            missionText.text = "Mission :\nA Villager Want to talk to you !\nPress T to interact with him !";
+            if(!tableaurecords.isInfini)StartCoroutine(FadeIn());
+        }
+        catch (Exception e)
+        {
+            abandon = true;
+        }
         
+       
     }
 
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.T)) // Verifie si le clic gauche est press�
+        if (Input.GetKeyDown(KeyCode.T) && !abandon) // Verifie si le clic gauche est press�
         {
             Debug.Log("ouvrier");
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Rayon au centre de l'�cran
@@ -58,7 +67,6 @@ public class OuvrierDialogue : MonoBehaviour
                 if (ouvrier != null && !tableaurecords.isInfini)
                 {
                     missionText.text = "Well Done ! ";
-                    retrait = true;
                     StartCoroutine(FadeOut());
                     Debug.Log("ouvrier qui parle");
                     if (!isTyping && currentPhraseIndex < dialoguePhrases.Count) // Si le texte n'est pas en train de s'afficher et qu'il reste des phrases
@@ -70,9 +78,12 @@ public class OuvrierDialogue : MonoBehaviour
                         CloseDialogue(); // Ferme le dialogue
                     }
 
-                    missionText.text = "Mission :\nWin 10 Waves At least and come back to talk.";
-                    StartCoroutine(FadeIn());
-                    StartCoroutine(FadeOut());
+                    if (isDone)
+                    {
+                        missionText.text = "Mission :\nWin 10 Waves At least and come back to talk.";
+                        StartCoroutine(FadeIn());
+                        isDone = true;
+                    }
                 }
             }
         }
