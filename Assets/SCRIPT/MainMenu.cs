@@ -1,7 +1,8 @@
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class MainMenu : MonoBehaviour
+using Photon.Realtime;
+public class MainMenu : MonoBehaviourPunCallbacks
 {
     public AudioClip[] musique;
     public AudioSource audiosource;
@@ -58,6 +59,7 @@ public class MainMenu : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("Main Menu");
+        PhotonNetwork.Disconnect();
     }
     public void retour()
     {
