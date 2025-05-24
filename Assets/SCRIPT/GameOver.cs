@@ -39,6 +39,7 @@ public class GameOver : MonoBehaviour
     public void EndGame()
     {
         Réticule.gameObject.SetActive(false);
+        /**
         Debug.Log("jhsbdfojqhsdbf");
         Debug.Log("go" + TableauRcords.instance.isInfini);
         Debug.Log("go" + TableauRcords.instance.isSolo);
@@ -52,7 +53,7 @@ public class GameOver : MonoBehaviour
                 Debug.Log("ghvsqgvo" + TableauRcords.instance.isSolo);
                 TableauRcords.instance.NewScoreDuo((int)survivalTime * 10);
             }
-        }
+        }**/
         isGameOver = true;
         //MusicManager.instance.StopMusic();
         //PlayerMovement.instance.enabled = false;
