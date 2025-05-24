@@ -19,9 +19,9 @@ public class WaveSpawnerMid : MonoBehaviour
     private Transform spawnPoint;
 
     [SerializeField]
-    private float timeBetweenWaves = 120f;
+    private float timeBetweenWaves = 45f;
 
-    private float countdown = 40f;
+    private float countdown = 60f;
 
     private int waveIndex = 0;
 
@@ -45,7 +45,7 @@ public class WaveSpawnerMid : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(1f);
-            if (i > 1)
+            if (i > 0)
             {
                 if (i % 2 == 0)
                 {
@@ -53,7 +53,6 @@ public class WaveSpawnerMid : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     SpawnEnemyfat();
                     yield return new WaitForSeconds(1f);
-
                 }
                 if (i % 4 == 0)
                 {
@@ -61,6 +60,14 @@ public class WaveSpawnerMid : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                     SpawnEnemyfast();
                     yield return new WaitForSeconds(1f);
+                }
+                if (i % 5 == 0)
+                {
+                    SpawnEnemyfat();
+                    yield return new WaitForSeconds(1f);
+                    SpawnEnemy();
+                    yield return new WaitForSeconds(1f);
+
                 }
                 yield return new WaitForSeconds(1.5f);
             }
