@@ -3822,6 +3822,7 @@ MonoBehaviour:
   playerHUD: {fileID: 7834127243217798025}
   EnPause: 0
   EscapeMenu: {fileID: 6967659057317447829}
+  GameOver: {fileID: 2930683261233327967}
 --- !u!114 &7028846162118373132
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public bool EnPause = false;
     public GameObject EscapeMenu;
+    public GameObject GameOver;
 
     void Awake()
     {
@@ -155,7 +156,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     {
         if (photonView.IsMine)
         {
-            if (!EnPause) 
+            if (!EnPause && !GameOver) 
             {
                 if (transform.position.y < -10f)
                 {
@@ -178,7 +179,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown(KeyCode.Escape)&&!GameOver)
                 {
                     EscapeMenu.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
