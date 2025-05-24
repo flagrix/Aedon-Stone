@@ -1,6 +1,0 @@
-arbalete.fbx filter=lfs diff=lfs merge=lfs -text
-.fbx filter=lfs diff=lfs merge=lfs -text
-.png filter=lfs diff=lfs merge=lfs -text
-LightingData.asset filter=lfs diff=lfs merge=lfs -text
-ArenaFloorT_4096.tga filter=lfs diff=lfs merge=lfs -text
-ArenaFloorNorm_4096.tga filter=lfs diff=lfs merge=lfs -text
