@@ -3585,6 +3585,7 @@ MonoBehaviour:
   xbuy: 203
   ybuy: 10
   zbuy: -237
+  inv: {fileID: 0}
   throwItemKey: 103
   pickItemKey: 101
   Hammer_item: {fileID: 474790057041903013}
@@ -13055,7 +13056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5743171292188114883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15401,7 +15402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &44080802476943472
 RectTransform:
   m_ObjectHideFlags: 0

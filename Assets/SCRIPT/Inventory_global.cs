@@ -16,7 +16,7 @@ public class Inventory_global : MonoBehaviour
         runes = startrune;
         runesText.text = runes.ToString();
     }
-
+    
     public void addRune(int newRune)
     {
         if (runes + newRune < 0)

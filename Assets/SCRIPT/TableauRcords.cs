@@ -36,11 +36,11 @@ public class TableauRcords : MonoBehaviour
     {
         for (int i = 0; i < 7; i++)
         {
-            RecordSolo[i] = PlayerPrefs.GetInt("RecordSolo_" + i, -1); // -1 si aucune valeur enregistrée
+            RecordSolo[i] = PlayerPrefs.GetInt("RecordSolo_" + i, -1); // -1 si aucune valeur enregistrï¿½e
         }
         for (int i = 0; i < 7; i++)
         {
-            RecordDuo[i] = PlayerPrefs.GetInt("RecordDuo_" + i, -1); // -1 si aucune valeur enregistrée
+            RecordDuo[i] = PlayerPrefs.GetInt("RecordDuo_" + i, -1); // -1 si aucune valeur enregistrï¿½e
         }
     }
 
@@ -91,7 +91,7 @@ public class TableauRcords : MonoBehaviour
             PlayerPrefs.SetInt("RecordDuo_" + i, -1);
         }
         PlayerPrefs.Save(); // N'oublie pas pour enregistrer les changements
-        Debug.Log("Scores réinitialisés dans PlayerPrefs !");
+        Debug.Log("Scores reinitialises dans PlayerPrefs !");
     }
 
     public void NewScoreDuo(int score)
@@ -116,7 +116,7 @@ public class TableauRcords : MonoBehaviour
         ColorBlock colors = Histoire.colors;
         colors.normalColor = new Color(0.3f, 0.3f, 0.3f); // Assombrir les boutons
         Histoire.colors = colors;
-        Histoire.interactable = false; // Empêcher les clics
+        Histoire.interactable = false; // Empï¿½cher les clics
         ColorBlock colors_inf = Infini.colors;
         colors_inf.normalColor = new Color(0.3f, 0.3f, 0.3f);
         Infini.colors = colors_inf;
@@ -217,7 +217,7 @@ public class TableauRcords : MonoBehaviour
         SeventhDuo.gameObject.SetActive(false);
         Histoire.interactable = true;
         ColorBlock colors = Histoire.colors;
-        colors.normalColor = Color.white; // Rétablir la couleur d'origine
+        colors.normalColor = Color.white; // Rï¿½tablir la couleur d'origine
         Histoire.colors = colors;
         ColorBlock colors_rec = Record.colors;
         colors_rec.normalColor = Color.white;

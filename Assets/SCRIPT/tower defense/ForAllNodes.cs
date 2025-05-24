@@ -24,7 +24,7 @@ public class ForAllNodes : MonoBehaviour, IPunInstantiateMagicCallback
                 }
             }
 
-            Debug.Log("Canon assigné à " + nodeName);
+            Debug.Log("Canon assigne a " + nodeName);
         }
     }
 }

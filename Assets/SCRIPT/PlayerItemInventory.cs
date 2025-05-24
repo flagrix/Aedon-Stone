@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -22,6 +23,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField] public float xbuy;
     [SerializeField] public float ybuy;
     [SerializeField] public float zbuy;
+     public Inventory_global inv;
     
     
     [Space(20)]
@@ -108,8 +110,9 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             selectedItem = 0;
             NewItemSelected();
         }
-
         selectedItem = 0;
+        //
+        inv = FindObjectOfType<Inventory_global>();
     }
     
     void Update()
@@ -352,9 +355,21 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             NewItemSelected();
         }
     }
+
     public void BuyWeapon(string Weapon)
-    { 
-        PhotonNetwork.Instantiate(Weapon,new Vector3(xbuy,ybuy, zbuy),Quaternion.Euler(0f, 0f, 0f));
+    {
+        itemType objselect = (stringprefab.FirstOrDefault(x => x.Value == Weapon).Key);
+        int price = itemSetActive[objselect].itemScriptableObject.price;
+        if (Inventory_global.runes >= price)
+        {
+            PV.RPC("RPC_BuyItem", RpcTarget.All, price);
+            Debug.Log(Inventory_global.runes);
+            PhotonNetwork.Instantiate(Weapon, new Vector3(xbuy, ybuy, zbuy), Quaternion.Euler(0f, 0f, 0f));
+        }
+        else
+        {
+            Debug.Log(Inventory_global.runes);
+        }
         HidePanel();
     }
 
@@ -410,6 +425,12 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 PhotonNetwork.Destroy(itemView.gameObject);
             }
         }
+    }
+
+    [PunRPC]
+    public void RPC_BuyItem(int price)
+    {
+        inv.addRune(-price);
     }
 }
 
