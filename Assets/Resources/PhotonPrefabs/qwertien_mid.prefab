@@ -365,6 +365,7 @@ MonoBehaviour:
   attackDamage: 10
   attackCooldown: 4
   healthBar: {fileID: 7128489078810681621}
+  prefab: {fileID: 0}
 --- !u!114 &-4915682225047606730
 MonoBehaviour:
   m_ObjectHideFlags: 0

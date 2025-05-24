@@ -419,6 +419,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public void AddRange()
     {
+        actualRangePrice *= (Mathf.Pow((float)1.15, Rangelvl));
         if (CanAfford(actualHealthPrice))
         {
             Rangelvl++;
@@ -427,15 +428,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             float bonusRange = progressRange * maxBonusRange;
             foreach (var Weapon in itemSetActive)
             {
-                float Range = Weapon.Value.itemScriptableObject.portee;
-                Range += bonusRange;
+                 Weapon.Value.itemScriptableObject.portee += bonusRange;
             }
             Debug.Log("you have a Damage boost of " + bonusRange);
         }
     }
     public void AddSpeed()
     {
-         actualSpeedPrice = actualSpeedPrice* (Mathf.Pow((float)1.15, Speedlvl));
+         actualSpeedPrice *= (Mathf.Pow((float)1.15, Speedlvl));
         if (CanAfford(actualSpeedPrice))
         {
             Speedlvl++;
@@ -449,6 +449,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void AddJump()
     {
+        actualJumpPrice *= (Mathf.Pow((float)1.15, Jumplvl));
         if (CanAfford(actualJumpPrice))
         {
             Jumplvl++;
@@ -461,6 +462,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void AddMaxHealth()
     {
+        actualHealthPrice *= (Mathf.Pow((float)1.15, Healthlvl));
         if (CanAfford(actualHealthPrice))
         {
             Healthlvl++;
@@ -482,9 +484,8 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             priceTextDamage.text = $"Damage\n{actualDamagePrice} runes";
             float bonusDamage = progressSpeed * maxBonusDamage;
             foreach (var Weapon in itemSetActive)
-            {
-                float damage = Weapon.Value.itemScriptableObject.damage;
-                damage += bonusDamage;
+            { 
+                Weapon.Value.itemScriptableObject.damage+= bonusDamage;
             }
             Debug.Log("you have a Damage boost of " + bonusDamage);
         }

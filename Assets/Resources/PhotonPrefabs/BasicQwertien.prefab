@@ -438,6 +438,7 @@ MonoBehaviour:
   attackDamage: 10
   attackCooldown: 4
   healthBar: {fileID: 7164247423914958630}
+  prefab: {fileID: 0}
   agent2: {fileID: 5361120206367074208}
   stopDistance: 8
   photonView: {fileID: 0}
