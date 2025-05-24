@@ -313,8 +313,13 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             a++;
         }
         
-        for (int i = 0; i < inventoryList.Count; i++)
+        for (int i = 0; i < 4; i++)
         {
+            if (i >= inventoryList.Count)
+            {
+                SliderList[i].value = 0;
+                continue;
+            }
             itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule += Time.deltaTime;
             if (SliderList[i] != null)
             {
@@ -389,7 +394,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 Weapon.Value.itemScriptableObject.portee += range / portee * 100;
             }
 
-            inv.addRune(-200);
+            PV.RPC("RPC_BuyItem", RpcTarget.All, -200);
             Debug.Log("Add Range of " + range + "%");
 
             HidePanel();
@@ -400,7 +405,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     {
         if (CanAfford(300))
         {
-            inv.addRune(-300);
+            PV.RPC("RPC_BuyItem", RpcTarget.All, -300);
             foreach (var Weapon in itemSetActive)
             {
                 float degats = Weapon.Value.itemScriptableObject.damage;

@@ -50,7 +50,7 @@ public class FlamoBook : Item
         foreach (Collider collider in colliders)
         {
                 var temp =collider.gameObject.GetComponent<IDamageable>(); 
-                temp?.TakeDamage(itemScriptableObject.damage/2);
+                temp?.TakeDamage(itemScriptableObject.damage);
         }
         Quaternion flatRotation = Quaternion.Euler(90f, 0f, 0f);
 

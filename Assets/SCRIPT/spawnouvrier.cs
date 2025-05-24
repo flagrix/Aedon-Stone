@@ -18,7 +18,7 @@ public class spawnouvrier : MonoBehaviour
     {
         foreach (var spawn in SpawnPoints)
         {
-            Instantiate(prefab, spawn.transform.position, transform.rotation);
+            Instantiate(prefab, spawn.transform.position, Quaternion.Euler(0, -90, 0));
         }
         
     }

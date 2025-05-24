@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 {
     private PhotonView photonView;
     private CharacterController characterController;
+    public PlayerItemInventory playerItemInventory;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -234,7 +235,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         {
             healthBar.maxValue += health;
             healthBar.value = health;
-            inventory.inv.addRune(-300);
+            photonView.RPC("RPC_BuyItem", RpcTarget.All, -300);
             Debug.Log("Add health of " + health);
         }
     }
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         {
             walkSpeed += speed / 2;
             runSpeed += speed;
-            inventory.inv.addRune(-250);
+            photonView.RPC("RPC_BuyItem", RpcTarget.All, -250);
             Debug.Log("Add Speed of " + speed);
         }
 }
@@ -255,7 +256,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         if (CanAfford(150))
         {
             jumpPower += jumpower;
-            inventory.inv.addRune(-150);
+            photonView.RPC("RPC_BuyItem", RpcTarget.All, -150);
             Debug.Log("Add jumpower of " + jumpower);
         }
     }
@@ -445,6 +446,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
             Die();
         }
     }
+   /* [PunRPC]
+    public void RPC_BuyItem(int price)
+    {
+        inventory.inv.addRune(-price);
+    }*/
 
     public void Heal(float amount)
     {

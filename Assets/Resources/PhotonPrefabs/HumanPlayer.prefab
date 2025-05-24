@@ -3799,6 +3799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5882042d5fefe1443ae5eb93f17ea617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerItemInventory: {fileID: 0}
   playerCamera: {fileID: 6809417956900630428}
   healthBar: {fileID: 5515934558681496333}
   damageImage: {fileID: 1592462243675123325}
@@ -3856,7 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df08d32ebb1bbfe4b9274b58408c3691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryList: 00000000050000000300000004000000
+  inventoryList: 00000000
   selectedItem: 0
   playerReach: 20
   throwItem_GameObject: {fileID: 1716475252784222956}
@@ -15827,7 +15828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &44080802476943472
 RectTransform:
   m_ObjectHideFlags: 0
