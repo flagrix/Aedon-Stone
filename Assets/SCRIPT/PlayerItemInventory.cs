@@ -19,6 +19,9 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField] GameObject throwItem_GameObject;
     [SerializeField] PhotonView PV;
     private string precompile;
+    [SerializeField] public float xbuy;
+    [SerializeField] public float ybuy;
+    [SerializeField] public float zbuy;
     
     
     [Space(20)]
@@ -272,7 +275,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public void HidePanel()
     {
-        Buy.SetActive(false); // Ferme le panel si tu veux
+        Buy.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -351,18 +354,12 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     }
     public void BuyWeapon(string Weapon)
     { 
-        ThrowItem(Weapon);
+        PhotonNetwork.Instantiate(Weapon,new Vector3(xbuy,ybuy, zbuy),Quaternion.Euler(0f, 0f, 0f));
         HidePanel();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        /* if (changedProps.ContainsKey("selectedItem") && targetPlayer == PV.Owner)
-         {
-            selectedItem= (int)changedProps["selectedItem"];
-            if(!PV.IsMine)
-                NewItemSelected();
-         } */
         if (changedProps == null || targetPlayer == null || PV == null)
         {
             Debug.LogWarning("Paramètres null dans OnPlayerPropertiesUpdate");

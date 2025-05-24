@@ -2882,7 +2882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 350 runes
+  m_text: 100 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3579,9 +3579,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryList: 00000000050000000300000004000000
   selectedItem: 0
-  playerReach: 5
+  playerReach: 20
   throwItem_GameObject: {fileID: 1716475252784222956}
   PV: {fileID: 0}
+  xbuy: 203
+  ybuy: 10
+  zbuy: -237
   throwItemKey: 103
   pickItemKey: 101
   Hammer_item: {fileID: 474790057041903013}
@@ -5974,7 +5977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500 runes
+  m_text: 300 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8865,7 +8868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 700 runes
+  m_text: 200 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14821,7 +14824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 350 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15093,7 +15096,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 350 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15398,7 +15401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &44080802476943472
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17694,7 +17697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 200 runes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21769,16 +21772,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 460066790052362306}
+      objectReference: {fileID: 8392610345625016559}
     - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuildTurret
+      value: BuyWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Inventory, Assembly-CSharp
+      value: PlayerItemInventory, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: PhotonPrefabs/LongSword (1)
       objectReference: {fileID: 0}
     - target: {fileID: 783612066839924998, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -21915,7 +21926,7 @@ PrefabInstance:
     - target: {fileID: 5016232481231317304, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 758713ce8a229c4449daceaa48640451, type: 3}
+      objectReference: {fileID: 21300000, guid: 104f1493984f69e41baa959b737682f0, type: 3}
     - target: {fileID: 5285287419573500457, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -22095,7 +22106,7 @@ PrefabInstance:
     - target: {fileID: 7962219875483679027, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 104f1493984f69e41baa959b737682f0, type: 3}
+      objectReference: {fileID: 21300000, guid: 758713ce8a229c4449daceaa48640451, type: 3}
     - target: {fileID: 8375662909164449809, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -250
