@@ -27,14 +27,16 @@ public class OuvrierDialogue : MonoBehaviour
     public float duree = 1f;
     public Image missionPanel;
     public TextMeshProUGUI missionText;
+    public GameObject mission;
     bool isDone = false;
     bool abandon = false;
+    bool parle = false;
     
     void Start()
     {
         try
         {
-            tableaurecords = Object.FindFirstObjectByType<TableauRcords>();
+            tableaurecords = (GameObject.Find("Tableaurecords")).GetComponent<TableauRcords>();
             if (!enabled)
                 Debug.LogWarning("SCRIPT OuvrierDialogue est desactive !");
             player = GameObject.FindGameObjectWithTag("Player"); // Trouve le joueur par son tag
@@ -46,6 +48,7 @@ public class OuvrierDialogue : MonoBehaviour
         catch (Exception e)
         {
             abandon = true;
+            missionPanel.gameObject.SetActive(false);
         }
         
        
@@ -56,6 +59,12 @@ public class OuvrierDialogue : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.T) && !abandon) // Verifie si le clic gauche est press�
         {
+            if (isDone)
+            {
+                missionText.text = "Mission :\nWin 10 Waves At least and come back to talk.";
+                StartCoroutine(FadeIn());
+                       
+            }
             Debug.Log("ouvrier");
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Rayon au centre de l'�cran
             RaycastHit hit;
@@ -66,8 +75,6 @@ public class OuvrierDialogue : MonoBehaviour
                 Debug.Log(ouvrier);
                 if (ouvrier != null && !tableaurecords.isInfini)
                 {
-                    missionText.text = "Well Done ! ";
-                    StartCoroutine(FadeOut());
                     Debug.Log("ouvrier qui parle");
                     if (!isTyping && currentPhraseIndex < dialoguePhrases.Count) // Si le texte n'est pas en train de s'afficher et qu'il reste des phrases
                     {
@@ -82,7 +89,7 @@ public class OuvrierDialogue : MonoBehaviour
                     {
                         missionText.text = "Mission :\nWin 10 Waves At least and come back to talk.";
                         StartCoroutine(FadeIn());
-                        isDone = true;
+                       
                     }
                 }
             }
@@ -126,6 +133,8 @@ public class OuvrierDialogue : MonoBehaviour
             missionPanel.color = couleur;
             yield return null;
         }
+
+        missionText.text = "";
     }
 
     IEnumerator TypeText(string text)
@@ -150,6 +159,9 @@ public class OuvrierDialogue : MonoBehaviour
         DialoguePanel.SetActive(false); // D�sactive le panel de dialogue
         dialogueUI.gameObject.SetActive(false); // D�sactive le texte UI
         currentPhraseIndex = 0; // R�initialise l'index pour la prochaine conversation
+        missionText.text = "Well Done ! ";
+        StartCoroutine(FadeOut());
+        isDone = true;
     }
 
     void OnDrawGizmosSelected()

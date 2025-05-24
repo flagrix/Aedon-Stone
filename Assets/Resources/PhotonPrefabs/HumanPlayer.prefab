@@ -3998,6 +3998,7 @@ MonoBehaviour:
   duree: 1
   missionPanel: {fileID: 3457524793003033530}
   missionText: {fileID: 7547120960196861180}
+  mission: {fileID: 2806299779449676205}
 --- !u!1 &1784702869088564999
 GameObject:
   m_ObjectHideFlags: 0
