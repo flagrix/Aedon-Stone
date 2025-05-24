@@ -6,36 +6,36 @@ using System.Collections.Generic;
 public class OuvrierDialogue : MonoBehaviour
 {
     public float interactionDistance = 5f; // Distance d'interaction
-    public List<string> dialoguePhrases = new List<string> { "AAAAAAAAHHHHHH", "UN QWERTIEN A L'AIDE", "HEIN ?", "Oh excusez moi je vous avait pris pour une de ces saletés de qwertiens.", "Excusez moi je suis assez sur les nerfs depuis que la barrière a été brisée et que les qwertiens attaquent." ,"Vous voyer cette tour ?", "C'est là où est caché le saphir de vie.", "Vous m'avez l'air dêtre quelqu'un de fort. Pourriez vous éliminez les qwertiens qui tentent de s'en prendre à cette tour.", "Si il la détruise l'humanité est perdue.", "Essayez de poser des bâtiments pour vous aider à défendre la tour." }; // Phrases du dialogue
-    public Text dialogueUI; // Référence au texte UI
+    public List<string> dialoguePhrases = new List<string> { "AAAAAAAAHHHHHH", "UN QWERTIEN A L'AIDE", "HEIN ?", "Oh excusez moi je vous avait pris pour une de ces saletï¿½s de qwertiens.", "Excusez moi je suis assez sur les nerfs depuis que la barriere a ete brisee et que les qwertiens attaquent." ,"Vous voyez cette tour ?", "C'est la ou est cache le saphir de vie.", "Vous m'avez l'air d'etre quelqu'un de fort. Pourriez vous eliminer les qwertiens qui tentent de s'en prendre a cette tour ?", "Si il la detruise l'humanite est perdue.", "Essayez de poser des batiments pour nous aider a defendre la tour!" }; // Phrases du dialogue
+    public Text dialogueUI; // Rï¿½fï¿½rence au texte UI
     public LayerMask OuvrierLayer; // Calque pour l'ouvrier
-    public Camera playerCamera; // Référence à la caméra du joueur
+    public Camera playerCamera; // Rï¿½fï¿½rence ï¿½ la camï¿½ra du joueur
     public float textSpeed = 0.05f; // Vitesse d'affichage du texte (en secondes par lettre)
-    public GameObject DialoguePanel; // Référence au panel de dialogue
+    public GameObject DialoguePanel; // Rï¿½fï¿½rence au panel de dialogue
 
-    private GameObject player; // Référence au joueur
-    private bool isTyping = false; // Pour vérifier si le texte est en train de s'afficher
+    private GameObject player; // Rï¿½fï¿½rence au joueur
+    private bool isTyping = false; // Pour vï¿½rifier si le texte est en train de s'afficher
     private int currentPhraseIndex = 0; // Index de la phrase actuelle
 
     void Start()
     {
 
         if (!enabled)
-            Debug.LogWarning("SCRIPT OuvrierDialogue est désactivé !");
+            Debug.LogWarning("SCRIPT OuvrierDialogue est desactive !");
         player = GameObject.FindGameObjectWithTag("Player"); // Trouve le joueur par son tag
-        dialogueUI.gameObject.SetActive(false); // Cache le texte au début
-        DialoguePanel.SetActive(false); // Cache le panel au début
+        dialogueUI.gameObject.SetActive(false); // Cache le texte au dï¿½but
+        DialoguePanel.SetActive(false); // Cache le panel au dï¿½but
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) // Vérifie si le clic gauche est pressé
+        if (Input.GetKeyDown(KeyCode.T)) // Verifie si le clic gauche est pressï¿½
         {
             Debug.Log("ouvrier");
-            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Rayon au centre de l'écran
+            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Rayon au centre de l'ï¿½cran
             RaycastHit hit;
 
-            if (IsPlayerCloseEnough() && Physics.Raycast(ray, out hit, interactionDistance, OuvrierLayer)) // Vérifie la distance et le calque
+            if (IsPlayerCloseEnough() && Physics.Raycast(ray, out hit, interactionDistance, OuvrierLayer)) // Vï¿½rifie la distance et le calque
             {
 
                 Ouvrier ouvrier = hit.collider.GetComponent<Ouvrier>();
@@ -45,9 +45,9 @@ public class OuvrierDialogue : MonoBehaviour
                     Debug.Log("ouvrier qui parle");
                     if (!isTyping && currentPhraseIndex < dialoguePhrases.Count) // Si le texte n'est pas en train de s'afficher et qu'il reste des phrases
                     {
-                        StartCoroutine(TypeText(dialoguePhrases[currentPhraseIndex])); // Démarre l'affichage de la phrase actuelle
+                        StartCoroutine(TypeText(dialoguePhrases[currentPhraseIndex])); // Dï¿½marre l'affichage de la phrase actuelle
                     }
-                    else if (!isTyping && currentPhraseIndex >= dialoguePhrases.Count) // Si toutes les phrases ont été affichées
+                    else if (!isTyping && currentPhraseIndex >= dialoguePhrases.Count) // Si toutes les phrases ont ï¿½tï¿½ affichï¿½es
                     {
                         CloseDialogue(); // Ferme le dialogue
                     }
@@ -67,28 +67,28 @@ public class OuvrierDialogue : MonoBehaviour
         isTyping = true; // Indique que le texte est en train de s'afficher
         DialoguePanel.SetActive(true); // Active le panel de dialogue
         dialogueUI.gameObject.SetActive(true); // Active le texte UI
-        dialogueUI.text = ""; // Réinitialise le texte
+        dialogueUI.text = ""; // Rï¿½initialise le texte
 
         foreach (char letter in text.ToCharArray()) // Parcourt chaque lettre du texte
         {
-            dialogueUI.text += letter; // Ajoute la lettre au texte affiché
+            dialogueUI.text += letter; // Ajoute la lettre au texte affichï¿½
             yield return new WaitForSeconds(textSpeed); // Attend avant d'afficher la lettre suivante
         }
 
-        isTyping = false; // Indique que l'affichage du texte est terminé
-        currentPhraseIndex++; // Passe à la phrase suivante
+        isTyping = false; // Indique que l'affichage du texte est terminï¿½
+        currentPhraseIndex++; // Passe ï¿½ la phrase suivante
     }
 
     void CloseDialogue()
     {
-        DialoguePanel.SetActive(false); // Désactive le panel de dialogue
-        dialogueUI.gameObject.SetActive(false); // Désactive le texte UI
-        currentPhraseIndex = 0; // Réinitialise l'index pour la prochaine conversation
+        DialoguePanel.SetActive(false); // Dï¿½sactive le panel de dialogue
+        dialogueUI.gameObject.SetActive(false); // Dï¿½sactive le texte UI
+        currentPhraseIndex = 0; // Rï¿½initialise l'index pour la prochaine conversation
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactionDistance); // Dessine une sphère pour visualiser la distance d'interaction
+        Gizmos.DrawWireSphere(transform.position, interactionDistance); // Dessine une sphï¿½re pour visualiser la distance d'interaction
     }
 }

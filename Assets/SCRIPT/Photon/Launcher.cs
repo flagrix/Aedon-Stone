@@ -23,12 +23,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();
     }
     public override void OnConnectedToMaster()
     {
-        Debug.Log("OnConnectedToMaster");
         PhotonNetwork.JoinLobby();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -36,7 +34,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         MenuManager.Instance.OpenMenu("Title");
-        Debug.Log("OnJoinedLobby");
         PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
     }
 

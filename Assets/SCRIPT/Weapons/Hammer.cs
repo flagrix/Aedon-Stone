@@ -20,10 +20,7 @@ public class Hammer : Item
             Build();
             itemScriptableObject.tempecoule = 0;
         }
-        else
-        {
-            Debug.Log("Hammer"+ itemScriptableObject.itemType.ToString());
-        }
+        
         
     }
 
@@ -44,8 +41,7 @@ public class Hammer : Item
                 temp?.overwiewOnMousseEnter();
                 temptarget = temp;
             }
-
-            Debug.Log("Hammer"+ temptarget);
+            
         }
     }
 
@@ -63,7 +59,6 @@ public class Hammer : Item
             float distance = Vector3.Distance(transform.position, hit.transform.position);
             if (distance <= itemScriptableObject.portee)
             {
-                Debug.Log("we hit " + hit.collider.gameObject.name);
                 var temp = hit.collider.gameObject.GetComponent<Node>();
                 temp?.OverviewOnMouseDown();
             }

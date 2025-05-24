@@ -45,8 +45,8 @@ public class Bullet : MonoBehaviour
         {
             Damage(target);
         }
-
-        Destroy(gameObject);
+        if(gameObject.GetComponent<Ouvrier>() == null)
+            Destroy(gameObject);
     }
 
 

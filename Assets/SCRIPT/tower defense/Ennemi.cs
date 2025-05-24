@@ -64,7 +64,8 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
         if (photonView.IsMine)
         {
             Debug.Log(gameObject.name + " is dead");
-            PhotonNetwork.Destroy(gameObject);
+            if(gameObject.GetComponent<Ouvrier>() == null)
+                PhotonNetwork.Destroy(gameObject);
         }
     }
 

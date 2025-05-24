@@ -18,6 +18,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     public float playerReach;
     [SerializeField] GameObject throwItem_GameObject;
     [SerializeField] PhotonView PV;
+    private string precompile;
     
     
     [Space(20)]
@@ -56,6 +57,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField]public Slider slot3;
     [SerializeField]public Slider slot4;
     public List<Slider> SliderList;
+    [SerializeField] public GameObject Buy;
     
     [SerializeField] Camera cam;
     [SerializeField] GameObject pickUpItem_gameobject;
@@ -89,11 +91,12 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         itemInstanciate.Add(itemType.Hallebarde, HallebardeItemPrefab);
         //
         stringprefab.Add(itemType.Arbalete, "PhotonPrefabs/arbalete");
-        stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/PharmacoBook (1)");
+        stringprefab.Add(itemType.FlameBook, "PhotonPrefabs/flamobook");
         stringprefab.Add(itemType.Hallebarde, "PhotonPrefabs/hallebarde (1)");
         stringprefab.Add(itemType.Axe, "PhotonPrefabs/MetallAx2 (1)");
         stringprefab.Add(itemType.PharmacoBook, "PhotonPrefabs/PharmacoBook (1)");
         stringprefab.Add(itemType.LongSword, "PhotonPrefabs/LongSword (1)");
+        stringprefab.Add(itemType.Hammer, "PhotonPrefabs/uploads_files_3650488_Blacksmith's+Rounding+Hammerno+sharps");
         //
         SliderList = new List<Slider>(){ slot1, slot2, slot3, slot4 };
         
@@ -111,112 +114,14 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         if(!PV.IsMine) return;
     
         //Item Pickup
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-    
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, playerReach) && inventoryList.Count < 4)
-        {
-            IPickable item = hitInfo.collider.GetComponent<IPickable>();
-            if (item != null)
-            {
-                pickUpItem_gameobject.SetActive(true);
-                if (Input.GetKey(pickItemKey))
-                {
-                    ItemPickable itemPickable = hitInfo.collider.GetComponent<ItemPickable>();
-                    if (itemPickable != null)
-                    {
-                        itemType pickedItemType = itemPickable.itemScriptableObject.itemType;
-                        
-                        inventoryList.Add(pickedItemType);
-                        
-                        item.PickItem();
-                        PhotonView itemPhotonView = hitInfo.collider.GetComponent<PhotonView>();
-                        if (itemPhotonView != null)
-                        {
-                            PhotonNetwork.Destroy(itemPhotonView.gameObject);
-                        }
-                        else
-                        {
-                            Debug.LogWarning("L'item n'a pas de PhotonView, destruction locale seulement");
-                            Destroy(hitInfo.collider.gameObject);
-                        }
-                        
-                        NewItemSelected();
-                    }
-                }
-            }
-            else
-            {
-                pickUpItem_gameobject.SetActive(false);
-            }
-        }
-        else
-        {
-            pickUpItem_gameobject.SetActive(false);
-        }
-        //Item Throw
-
-        if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1 && inventoryList[selectedItem] != itemType.Hammer)
-        {
-            //Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
-            PhotonNetwork.Instantiate(stringprefab[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position,Quaternion.Euler(
-                Random.Range(75f, 105f), 
-                Random.Range(0f, 360f), 
-                Random.Range(-15f, 15f)
-            ));
-            inventoryList.RemoveAt(selectedItem);
-            if (selectedItem != 0)
-            {
-                selectedItem--;
-            }
-            NewItemSelected();
-        }
-        //UI
-        for (int i = 0; i < 4; i++)
-        {
-            if (i < inventoryList.Count)
-            {
-                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.sprite;
-            }
-            else
-            {
-                inventorySlotImage[i].sprite = emptySlotSprite;
-            }
-        }
-
-        int a = 0;
-        foreach (var VARIABLE in inventoryBackgroundImage)
-        {
-            if (a == selectedItem)
-            {
-                VARIABLE.enabled = true;
-            }
-            else
-            {
-                //VARIABLE.color = Color.clear;
-                VARIABLE.enabled = false;
-            }
-
-            a++;
-        }
+        InteractItem();
         
-        for (int i = 0; i < inventoryList.Count; i++)
-        {
-            itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule += Time.deltaTime;
-            if (SliderList[i] != null)
-            {
-                var actualcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule;
-                var totalcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.cooldown;
-                if (actualcooldown / totalcooldown * 100 > 100)
-                {
-                    SliderList[i].value = 0;
-                }
-                else
-                {
-                    SliderList[i].value = actualcooldown / totalcooldown * 100;
-                }
-            }
-        }
+        //Item Throw
+        precompile = stringprefab[inventoryList[selectedItem]];
+        ThrowItem(precompile);
+       
+        //UI
+        AdaptUI();
         // overwiew du hammer
         if (inventoryList[selectedItem] == itemType.Hammer)
         {
@@ -225,26 +130,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         
 
         //Item selection
-        if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
-        {
-            selectedItem = 0;
-            NewItemSelected();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
-        {
-            selectedItem = 1;
-            NewItemSelected();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
-        {
-            selectedItem = 2;
-            NewItemSelected();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
-        {
-            selectedItem = 3;
-            NewItemSelected();
-        }
+        SelectItem();
         
         //Weapons Use
 
@@ -300,6 +186,173 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             hash.Add("selectedItem",selectedItem );
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
+    }
+
+    public void ThrowItem(string instanceObject )
+    {
+        if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 1 && inventoryList[selectedItem] != itemType.Hammer)
+        {
+            //Instantiate(itemInstanciate[inventoryList[selectedItem]], position: throwItem_GameObject.transform.position, new Quaternion());
+            PhotonNetwork.Instantiate(instanceObject, position: throwItem_GameObject.transform.position,Quaternion.Euler(
+                Random.Range(75f, 105f), 
+                Random.Range(0f, 360f), 
+                Random.Range(-15f, 15f)
+            ));
+            inventoryList.RemoveAt(selectedItem);
+            if (selectedItem != 0)
+            {
+                selectedItem--;
+            }
+            NewItemSelected();
+        }
+    }
+
+    public void InteractItem()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+    
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, playerReach))
+        {
+            IPickable item = hitInfo.collider.GetComponent<IPickable>();
+            Ouvrier ouvrier = hitInfo.collider.GetComponent<Ouvrier>();
+            //menu pick up weapon
+            if (item != null && inventoryList.Count < 4)
+            {
+                pickUpItem_gameobject.SetActive(true);
+                if (Input.GetKey(pickItemKey))
+                {
+                    ItemPickable itemPickable = hitInfo.collider.GetComponent<ItemPickable>();
+                    if (itemPickable != null)
+                    {
+                        itemType pickedItemType = itemPickable.itemScriptableObject.itemType;
+                        
+                        inventoryList.Add(pickedItemType);
+                        
+                        item.PickItem();
+                        PhotonView itemPhotonView = hitInfo.collider.GetComponent<PhotonView>();
+                        if (itemPhotonView != null)
+                        {
+                            PhotonNetwork.Destroy(itemPhotonView.gameObject);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("L'item n'a pas de PhotonView, destruction locale seulement");
+                            Destroy(hitInfo.collider.gameObject);
+                        }
+                        
+                        NewItemSelected();
+                    }
+                }
+            }
+            else
+            {
+                pickUpItem_gameobject.SetActive(false);
+            }
+            //menu ouvrier
+            if (ouvrier != null)
+            {
+                pickUpItem_gameobject.SetActive(true);
+                if (Input.GetKey(pickItemKey))
+                {
+                    ShowPanel();
+                }
+            }
+            
+        }
+    }
+    public void ShowPanel()
+    {
+        if (!photonView.IsMine) return;
+
+        Buy.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void HidePanel()
+    {
+        Buy.SetActive(false); // Ferme le panel si tu veux
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void AdaptUI()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (i < inventoryList.Count)
+            {
+                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.sprite;
+            }
+            else
+            {
+                inventorySlotImage[i].sprite = emptySlotSprite;
+            }
+        }
+
+        int a = 0;
+        foreach (var VARIABLE in inventoryBackgroundImage)
+        {
+            if (a == selectedItem)
+            {
+                VARIABLE.enabled = true;
+            }
+            else
+            {
+                //VARIABLE.color = Color.clear;
+                VARIABLE.enabled = false;
+            }
+
+            a++;
+        }
+        
+        for (int i = 0; i < inventoryList.Count; i++)
+        {
+            itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule += Time.deltaTime;
+            if (SliderList[i] != null)
+            {
+                var actualcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.tempecoule;
+                var totalcooldown = itemSetActive[inventoryList[i]].itemScriptableObject.cooldown;
+                if (actualcooldown / totalcooldown * 100 > 100)
+                {
+                    SliderList[i].value = 0;
+                }
+                else
+                {
+                    SliderList[i].value = actualcooldown / totalcooldown * 100;
+                }
+            }
+        }
+    }
+
+    public void SelectItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
+        {
+            selectedItem = 0;
+            NewItemSelected();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
+        {
+            selectedItem = 1;
+            NewItemSelected();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
+        {
+            selectedItem = 2;
+            NewItemSelected();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
+        {
+            selectedItem = 3;
+            NewItemSelected();
+        }
+    }
+    public void BuyWeapon(string Weapon)
+    { 
+        ThrowItem(Weapon);
+        HidePanel();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
