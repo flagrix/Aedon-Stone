@@ -2,30 +2,34 @@ using UnityEngine;
 
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+using Photon.Pun;
+
+public class Projectile : MonoBehaviourPun
 {
-    public float speed = 20f;
-    public float maxLifetime = 5f;
-    public GameObject impactEffect; // prefab d'explosion
+    private Vector3 target;
+    private float speed;
+    private bool initialized = false;
+    private float destroyDistance = 0.1f;
 
-    private Vector3 targetPoint;
-
-    public void SetTarget(Vector3 target)
+    public void Initialize(Vector3 targetPoint, float moveSpeed)
     {
-        targetPoint = target;
-        Destroy(gameObject, maxLifetime); // auto-détruire après X secondes si rien touché
+        target = targetPoint;
+        speed = moveSpeed;
+        initialized = true;
     }
 
     void Update()
     {
-        // Mouvement vers la cible
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint, speed * Time.deltaTime);
+        if (!photonView.IsMine) return; // 👈 Seul le propriétaire déplace l'objet
+        Debug.Log("Projectile Update");
+        if (!initialized) return;
 
-        // Détecte l’arrivée
-        if (Vector3.Distance(transform.position, targetPoint) < 0.1f)
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, target) < destroyDistance)
         {
-            Instantiate(impactEffect, transform.position, Quaternion.Euler(90f, 0, 0));
+            PhotonNetwork.Destroy(gameObject); // 🧨 Détruit sur tous les clients
         }
     }
-    
 }
+
