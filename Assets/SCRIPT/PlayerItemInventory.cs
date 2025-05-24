@@ -65,6 +65,26 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     float progressSpeed = Mathf.Clamp01(PlayerController.runSpeed / 150f);
     public float actualSpeedPrice = 200;
     public float Speedlvl = 1;
+    //
+    public float maxBonusJump = 10f;
+    float progressJump  = Mathf.Clamp01(PlayerController.jumpPower / 150f);
+    public float actualJumpPrice = 200;
+    public float Jumplvl = 1;
+    //
+    public float maxBonusHealth = 10f;
+    float progressHealth  = Mathf.Clamp01(PlayerController.maxHealth / 150f);
+    public float actualHealthPrice = 200;
+    public float Healthlvl = 1;
+    //
+    public float maxBonusRange = 10f;
+    float progressRange  = Mathf.Clamp01( 7/ 150f);
+    public float actualRangePrice = 200;
+    public float Rangelvl = 1;
+    //
+    public float maxBonusDamage = 10f;
+    float progressDamage  = Mathf.Clamp01(35 / 150f);
+    public float actualDamagePrice = 200;
+    public float Damagelvl = 1;
     
     [Space(20)]
     [Header("UI")]
@@ -397,21 +417,20 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
         return Inventory_global.runes >= amount;
     }
 
-    public void AddRange(float range)
+    public void AddRange()
     {
-        if (CanAfford(950))
+        if (CanAfford(actualHealthPrice))
         {
+            Rangelvl++;
+            PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualRangePrice));
+            priceTextRange.text = $"Damage\n{actualRangePrice} runes";
+            float bonusRange = progressRange * maxBonusRange;
             foreach (var Weapon in itemSetActive)
             {
-                float portee = Weapon.Value.itemScriptableObject.portee;
-
-                Weapon.Value.itemScriptableObject.portee += range / portee * 100;
+                float Range = Weapon.Value.itemScriptableObject.portee;
+                Range += bonusRange;
             }
-
-            PV.RPC("RPC_BuyItem", RpcTarget.All, -950);
-            Debug.Log("Add Range of " + range + "%");
-
-            HidePanel();
+            Debug.Log("you have a Damage boost of " + bonusRange);
         }
     }
     public void AddSpeed()
@@ -422,27 +441,53 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
             Speedlvl++;
             PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualSpeedPrice));
             priceTextSpeed.text = $"Speed\n{actualSpeedPrice} runes";
-            Debug.Log("Add Speed of "+ PlayerController.runSpeed);
+            Debug.Log("you have a Speed of "+ PlayerController.runSpeed);
             float bonusSpeed = progressSpeed * maxBonusSpeed;
-            PlayerController.runSpeed = PlayerController.runSpeed + bonusSpeed;
-            PlayerController.walkSpeed = PlayerController.walkSpeed + bonusSpeed/2;
+            PlayerController.runSpeed += bonusSpeed;
+            PlayerController.walkSpeed += bonusSpeed/2;
+        }
+    }
+    public void AddJump()
+    {
+        if (CanAfford(actualJumpPrice))
+        {
+            Jumplvl++;
+            PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualJumpPrice));
+            priceTextJump.text = $"Jump\n{actualJumpPrice} runes";
+            Debug.Log("you have a jumpower of " + PlayerController.jumpPower);
+            float bonusJump = progressJump * maxBonusSpeed;
+            PlayerController.jumpPower += bonusJump;
+        }
+    }
+    public void AddMaxHealth()
+    {
+        if (CanAfford(actualHealthPrice))
+        {
+            Healthlvl++;
+            PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualHealthPrice));
+            priceTextHealth.text = $"Health\n{actualHealthPrice} runes";
+            Debug.Log("you have a Health of " + PlayerController.maxHealth);
+            float bonusHealth = progressHealth * maxBonusSpeed;
+            PlayerController.maxHealth += bonusHealth;
+            PlayerController.currHealth += bonusHealth;
         }
     }
 
-    public void AddDamage(float damage)
+    public void AddDamage()
     {
-        if (CanAfford(1100))
+        if (CanAfford(actualHealthPrice))
         {
-            PV.RPC("RPC_BuyItem", RpcTarget.All, -1100);
+            Damagelvl++;
+            PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualDamagePrice));
+            priceTextDamage.text = $"Damage\n{actualDamagePrice} runes";
+            float bonusDamage = progressSpeed * maxBonusDamage;
             foreach (var Weapon in itemSetActive)
             {
-                float degats = Weapon.Value.itemScriptableObject.damage;
-
-                Weapon.Value.itemScriptableObject.damage += damage / degats * 100;
+                float damage = Weapon.Value.itemScriptableObject.damage;
+                damage += bonusDamage;
             }
-            Debug.Log("Add damage of " + damage + "%");
+            Debug.Log("you have a Damage boost of " + bonusDamage);
         }
-        HidePanel();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)

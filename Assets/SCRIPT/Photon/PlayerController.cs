@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private float flashTimer;
 
     [Header("Movement Settings")]
-    public static float walkSpeed = 10f;
-    public static float runSpeed = 16f;
+    public static float walkSpeed = 15f;
+    public static float runSpeed = 21f;
     public static float jumpPower = 7f;
     public float gravity = 20f;
 
@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     [Header("Attack Settings")]
     public LayerMask enemyLayer;
-    private static float maxHealth = 100f;
-    static float currHealth = 100f;
+    public static float maxHealth = 100f;
+    public static float currHealth = 100f;
 
     [Header("Animation Settings")]
     Animator Animator;
@@ -144,27 +144,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     void Update()
     {
-       
-           
         if (photonView.IsMine)
         {
             if (!EnPause) 
             {
-                /**if (Input.GetKeyDown(KeyCode.C))
-                {
-                    Debug.Log("aa");
-                    TakeDamage(20f);
-                }
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    inventory.addPotion(1);
-                }
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    inventory.UsePotion();
-                }**/
-
-                if (transform.position.y < -10f) //Die if you fall out
+                if (transform.position.y < -10f)
                 {
                     Animator.SetBool("MortEnSah", true);
                     Die();
@@ -177,6 +161,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
                     EnPause = true;
                 }
 
+                SetMaxHealth();
                 HandleMovement();
                 HandleCamera();
                 PlayFootstepSound();
@@ -223,35 +208,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
         }
     }
 
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth()
     {
-        healthBar.maxValue = health;
-        healthBar.value = health;
-    }
-
-    public void AddMaxHealth(int health)
-    {
-        if (CanAfford(800))
-        {
-            healthBar.maxValue += health;
-            healthBar.value += health;
-            maxHealth += health;
-            currHealth = maxHealth;
-            photonView.RPC("RPC_BuyItem", RpcTarget.All, -800);
-            Debug.Log("Add health of " + health);
-        }
-    }
-
-   
-
-    public void AddJump(float jumpower)
-    {
-        if (CanAfford(300))
-        {
-            jumpPower += jumpower;
-            photonView.RPC("RPC_BuyItem", RpcTarget.All, -300);
-            Debug.Log("Add jumpower of " + jumpower);
-        }
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currHealth;
     }
 
     public bool CanAfford(float amount)

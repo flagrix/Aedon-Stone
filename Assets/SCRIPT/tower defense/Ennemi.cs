@@ -74,6 +74,10 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     {
         speed = startSpeed * (1f - amount);
     }
+    
+    public GameObject prefab;
+    
+
       
 
 

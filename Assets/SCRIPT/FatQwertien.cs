@@ -74,6 +74,7 @@ public class FatQwertien : MonoBehaviour
             healthBar.value = Health;
         }
     }
+    
 
     private void AttackPlayer()
     {
