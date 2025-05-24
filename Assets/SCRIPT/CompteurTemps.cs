@@ -5,8 +5,8 @@ public class CompteurTemps : MonoBehaviour
 {
 
     public static CompteurTemps instance;
-    [SerializeField] public float timeBetweenWave = 120f;
-    public float countdown = 120f;
+    [SerializeField] public float timeBetweenWave = 45f;
+    public float countdown = 60f;
     public int waveNumber = 0; // Compteur de vagues
 
     [SerializeField] private Text waveCountTimer;

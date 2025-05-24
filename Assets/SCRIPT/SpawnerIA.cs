@@ -15,9 +15,9 @@ public class SpawnerIA : MonoBehaviour
     private Transform spawnPoint;
 
     [SerializeField]
-    private float timeBetweenWaves = 120f;
+    private float timeBetweenWaves = 45f;
 
-    private float countdown = 40f;
+    private float countdown = 60f;
 
     private int waveIndex = 0;
 
