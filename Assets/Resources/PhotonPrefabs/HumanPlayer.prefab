@@ -3804,9 +3804,6 @@ MonoBehaviour:
   healthBar: {fileID: 5515934558681496333}
   damageImage: {fileID: 1592462243675123325}
   flashDuration: 0.7
-  walkSpeed: 100
-  runSpeed: 20
-  jumpPower: 7
   gravity: 20
   lookSpeed: 2
   lookXLimit: 90
@@ -3882,6 +3879,14 @@ MonoBehaviour:
   ArbaleteItemPrefab: {fileID: 5992164415958169570, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
   FlameBookItemPrefab: {fileID: 3880795220011919504, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
   HallebardeItemPrefab: {fileID: 7054032234643475664}
+  priceTextHealth: {fileID: 0}
+  priceTextSpeed: {fileID: 0}
+  priceTextJump: {fileID: 0}
+  priceTextDamage: {fileID: 0}
+  priceTextRange: {fileID: 0}
+  maxBonusSpeed: 10
+  actualSpeedPrice: 200
+  Speedlvl: 1
   inventorySlotImage:
   - {fileID: 1701790140474277223}
   - {fileID: 2093673380698855261}
