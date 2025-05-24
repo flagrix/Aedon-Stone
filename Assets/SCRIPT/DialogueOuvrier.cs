@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class OuvrierDialogue : MonoBehaviour
 {
@@ -16,19 +17,34 @@ public class OuvrierDialogue : MonoBehaviour
     private GameObject player; // R�f�rence au joueur
     private bool isTyping = false; // Pour v�rifier si le texte est en train de s'afficher
     private int currentPhraseIndex = 0; // Index de la phrase actuelle
+    public TableauRcords tableaurecords;
 
+    [Space(10)]
+    [Header("missionOrder")]
+    [SerializeField]
+    public float duree = 1f;
+    public Image missionPanel;
+    public TextMeshProUGUI missionText;
+    bool deployement = true;
+    bool retrait = false;
+    bool isDone = false;
+    
     void Start()
     {
-
+        tableaurecords = FindObjectOfType<TableauRcords>();
         if (!enabled)
             Debug.LogWarning("SCRIPT OuvrierDialogue est desactive !");
         player = GameObject.FindGameObjectWithTag("Player"); // Trouve le joueur par son tag
         dialogueUI.gameObject.SetActive(false); // Cache le texte au d�but
         DialoguePanel.SetActive(false); // Cache le panel au d�but
+        missionText.text = "Mission :\nA Villager Want to talk to you !\nPress T to interact with him !";
+        if(!tableaurecords.isInfini)StartCoroutine(FadeIn());
+        
     }
 
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.T)) // Verifie si le clic gauche est press�
         {
             Debug.Log("ouvrier");
@@ -37,11 +53,13 @@ public class OuvrierDialogue : MonoBehaviour
 
             if (IsPlayerCloseEnough() && Physics.Raycast(ray, out hit, interactionDistance, OuvrierLayer)) // V�rifie la distance et le calque
             {
-
                 Ouvrier ouvrier = hit.collider.GetComponent<Ouvrier>();
                 Debug.Log(ouvrier);
-                if (ouvrier != null && !TableauRcords.instance.isInfini)
+                if (ouvrier != null && !tableaurecords.isInfini)
                 {
+                    missionText.text = "Well Done ! ";
+                    retrait = true;
+                    StartCoroutine(FadeOut());
                     Debug.Log("ouvrier qui parle");
                     if (!isTyping && currentPhraseIndex < dialoguePhrases.Count) // Si le texte n'est pas en train de s'afficher et qu'il reste des phrases
                     {
@@ -51,6 +69,10 @@ public class OuvrierDialogue : MonoBehaviour
                     {
                         CloseDialogue(); // Ferme le dialogue
                     }
+
+                    missionText.text = "Mission :\nWin 10 Waves At least and come back to talk.";
+                    StartCoroutine(FadeIn());
+                    StartCoroutine(FadeOut());
                 }
             }
         }
@@ -60,6 +82,39 @@ public class OuvrierDialogue : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         return distance <= interactionDistance;
+    }
+    public IEnumerator FadeIn()
+    {
+        float t = 0f;
+        Color couleur = missionPanel.color;
+        couleur.a = 0f;
+        missionPanel.color = couleur;
+
+        while (t < duree)
+        {
+            t += Time.deltaTime;
+            couleur.a = Mathf.Clamp01(t / duree);
+            missionPanel.color = couleur;
+            yield return null;
+        }
+
+        // Optionnel : attendre puis fade-out
+        yield return new WaitForSeconds(1f);
+    }
+    public IEnumerator FadeOut()
+    {
+        float t = 0f;
+        Color couleur = missionPanel.color;
+        couleur.a = 1f;
+        missionPanel.color = couleur;
+
+        while (t < duree)
+        {
+            t += Time.deltaTime;
+            couleur.a = 1f - Mathf.Clamp01(t / duree);
+            missionPanel.color = couleur;
+            yield return null;
+        }
     }
 
     IEnumerator TypeText(string text)

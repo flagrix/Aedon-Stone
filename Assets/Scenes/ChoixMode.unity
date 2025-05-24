@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -548,7 +549,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 898815d928b3bb441a4ffdb77fd8e3c1, type: 3}
   m_Name: 
@@ -575,6 +576,43 @@ MonoBehaviour:
   Croix: {fileID: 1408477272}
   isInfini: 0
   isSolo: 0
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57603ad09949414389fe48468face02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 5
+  dialoguePhrases:
+  - AAAAAAAAHHHHHH
+  - UN QWERTIEN A L'AIDE
+  - HEIN ?
+  - Oh excusez moi je vous avait pris pour une de ces saletes de qwertiens.
+  - Excusez moi je suis assez sur les nerfs depuis que la barriere a ete brisee et
+    que les qwertiens attaquent.
+  - Vous voyez cette tour ?
+  - C'est la ou est cache le saphir de vie.
+  - Vous m'avez l'air d'etre quelqu'un de fort. Pourriez vous eliminer les qwertiens
+    qui tentent de s'en prendre a cette tour ?
+  - Si ils la detruise l'humanite est perdue.
+  - Essayez de poser des batiments pour nous aider a defendre la tour!
+  dialogueUI: {fileID: 0}
+  OuvrierLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerCamera: {fileID: 0}
+  textSpeed: 0.05
+  DialoguePanel: {fileID: 0}
+  tableaurecords: {fileID: 0}
+  duree: 1
+  missionPanel: {fileID: 0}
+  missionText: {fileID: 0}
 --- !u!1 &392260765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,9 +1133,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 330585548}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 1484567199}
+        m_TargetAssemblyTypeName: TableauRcords, Assembly-CSharp
+        m_MethodName: BoutonInfini
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1107,9 +1145,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 330585549}
-        m_TargetAssemblyTypeName: TableauRcords, Assembly-CSharp
-        m_MethodName: BoutonInfini
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1322,6 +1360,18 @@ MonoBehaviour:
       - m_Target: {fileID: 330585548}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 330585549}
+        m_TargetAssemblyTypeName: TableauRcords, Assembly-CSharp
+        m_MethodName: BoutonFini
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2507,6 +2557,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408477270}
   m_CullTransparentMesh: 1
+--- !u!1 &1484567198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484567200}
+  - component: {fileID: 1484567199}
+  m_Layer: 0
+  m_Name: Tableaurecords
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1484567199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484567198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898815d928b3bb441a4ffdb77fd8e3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstSolo: {fileID: 965379908}
+  SecondSolo: {fileID: 1127507498}
+  ThirdSolo: {fileID: 510589993}
+  FourthSolo: {fileID: 98814610}
+  FifthSolo: {fileID: 929670563}
+  SixthSolo: {fileID: 1995800158}
+  SeventhSolo: {fileID: 72612013}
+  FirstDuo: {fileID: 393521567}
+  SecondDuo: {fileID: 668778557}
+  ThirdDuo: {fileID: 1594210881}
+  FourthDuo: {fileID: 2068651841}
+  FifthDuo: {fileID: 1026663738}
+  SixthDuo: {fileID: 1604645046}
+  SeventhDuo: {fileID: 1235070529}
+  Histoire: {fileID: 773031197}
+  Record: {fileID: 2088833753}
+  Infini: {fileID: 616916134}
+  Tableau: {fileID: 132913567}
+  Fond: {fileID: 828861592}
+  Croix: {fileID: 1408477272}
+  isInfini: 0
+  isSolo: 0
+--- !u!4 &1484567200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484567198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594210879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,9 +3144,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 330585549}
+      - m_Target: {fileID: 1484567199}
         m_TargetAssemblyTypeName: TableauRcords, Assembly-CSharp
-        m_MethodName: AffichageScores
+        m_MethodName: BoutonFini
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3085,5 +3213,6 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 1484567200}
   - {fileID: 1628790997}
   - {fileID: 392260768}

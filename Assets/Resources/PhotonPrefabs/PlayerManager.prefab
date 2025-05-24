@@ -432,6 +432,7 @@ MonoBehaviour:
   respawnannoncement: {fileID: 4906093984845164723}
   TimeRespawnCount: {fileID: 5042544701713497277}
   Reticule: {fileID: 7251041805298666091}
+  playerController: {fileID: 0}
   isGameOver: 0
 --- !u!1 &7251041805298666091
 GameObject:
