@@ -47,14 +47,15 @@ public class Arbelete : Item
             var temp = hit.collider.gameObject.GetComponent<IDamageable>();
             temp?.TakeDamage(itemScriptableObject.damage);
             Vector3 spawnPosition = cam.transform.position + cam.transform.forward * 0.5f;
-            Quaternion lookRotation = Quaternion.LookRotation(hit.point - spawnPosition);
+           /* Quaternion lookRotation = Quaternion.LookRotation(hit.point - spawnPosition);
             Quaternion correctedRotation = lookRotation * Quaternion.Euler(90f, 90f, 0);
             GameObject proj = Photon.Pun.PhotonNetwork.Instantiate(
               ("PhotonPrefabs/"+projectilePrefab.name), 
               projectileSpawnPoint.position, 
               correctedRotation
             );
-            proj.GetComponent<Projectile>().Initialize(hit.point, projectileSpeed);
+            proj.GetComponent<Projectile>().Initialize(hit.point, projectileSpeed);*/ //projectile cassé
+          
 
         }
     }
