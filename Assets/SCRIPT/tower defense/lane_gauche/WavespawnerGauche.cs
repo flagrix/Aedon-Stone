@@ -14,9 +14,9 @@ public class WavespawnerGauche : MonoBehaviour
     private Transform spawnPoint;
 
     [SerializeField]
-    private float timeBetweenWaves = 60f;
+    private float timeBetweenWaves = 120f;
 
-    private float countdown = 60f;
+    private float countdown = 40f;
 
     private int waveIndex = 0;
 
@@ -55,6 +55,10 @@ public class WavespawnerGauche : MonoBehaviour
                 {
                     SpawnEnemyfast();
                     yield return new WaitForSeconds(1f);
+
+                }
+                yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1f);
                     SpawnEnemyfast();
                     yield return new WaitForSeconds(1f);
                 }
@@ -65,10 +69,6 @@ public class WavespawnerGauche : MonoBehaviour
                     SpawnEnemy();
                     yield return new WaitForSeconds(1f);
                     SpawnEnemyfast();
-                    yield return new WaitForSeconds(1f);
-
-                }
-                yield return new WaitForSeconds(1.5f);
             }
         }
 

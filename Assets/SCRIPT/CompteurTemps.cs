@@ -6,7 +6,7 @@ public class CompteurTemps : MonoBehaviour
 
     public static CompteurTemps instance;
     [SerializeField] public float timeBetweenWave = 120f;
-    public float countdown = 0f;
+    public float countdown = 120f;
     public int waveNumber = 0; // Compteur de vagues
 
     [SerializeField] private Text waveCountTimer;
@@ -56,7 +56,7 @@ public class CompteurTemps : MonoBehaviour
         //timeBetweenWave += 10f; // Augmente le temps entre les vagues
         countdown = timeBetweenWave;
 
-        waveAnnouncement.text = "D�but Vague " + waveNumber + " !!!";
+        waveAnnouncement.text = "Debut Vague " + waveNumber + " !!!";
         waveAnnouncement.gameObject.SetActive(true);
         announcementTimer = Time.time + announcementDuration; // Planifier la d�sactivation
     }

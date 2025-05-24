@@ -79,6 +79,8 @@ MonoBehaviour:
   Damagenext: 90
   Rangenext: 20
   inv: {fileID: 0}
+  PV: {fileID: 0}
+  isupgratable: 0
 --- !u!114 &-7306335650801964733
 MonoBehaviour:
   m_ObjectHideFlags: 0

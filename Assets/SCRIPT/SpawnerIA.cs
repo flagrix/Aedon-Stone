@@ -15,9 +15,9 @@ public class SpawnerIA : MonoBehaviour
     private Transform spawnPoint;
 
     [SerializeField]
-    private float timeBetweenWaves = 60f;
+    private float timeBetweenWaves = 120f;
 
-    private float countdown = 60f;
+    private float countdown = 40f;
 
     private int waveIndex = 0;
 
@@ -45,6 +45,11 @@ public class SpawnerIA : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(1.5f);
+            if (i % 2 == 0)
+            {
+                SpawnEnemy();
+                yield return new WaitForSeconds(1.5f);
+            }
         }
 
     }
