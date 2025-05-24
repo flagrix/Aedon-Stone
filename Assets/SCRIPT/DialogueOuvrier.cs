@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class OuvrierDialogue : MonoBehaviour
 {
     public float interactionDistance = 5f; // Distance d'interaction
-    public List<string> dialoguePhrases = new List<string> { "AAAAAAAAHHHHHH", "UN QWERTIEN A L'AIDE", "HEIN ?", "Oh excusez moi je vous avait pris pour une de ces salet�s de qwertiens.", "Excusez moi je suis assez sur les nerfs depuis que la barriere a ete brisee et que les qwertiens attaquent." ,"Vous voyez cette tour ?", "C'est la ou est cache le saphir de vie.", "Vous m'avez l'air d'etre quelqu'un de fort. Pourriez vous eliminer les qwertiens qui tentent de s'en prendre a cette tour ?", "Si il la detruise l'humanite est perdue.", "Essayez de poser des batiments pour nous aider a defendre la tour!" }; // Phrases du dialogue
+    public List<string> dialoguePhrases = new List<string> { "AAAAAAAAHHHHHH", "UN QWERTIEN A L'AIDE", "HEIN ?", "Oh excusez moi je vous avait pris pour une de ces saletes de qwertiens.", "Excusez moi je suis assez sur les nerfs depuis que la barriere a ete brisee et que les qwertiens attaquent." ,"Vous voyez cette tour ?", "C'est la ou est cache le saphir de vie.", "Vous m'avez l'air d'etre quelqu'un de fort. Pourriez vous eliminer les qwertiens qui tentent de s'en prendre a cette tour ?", "Si ils la detruise l'humanite est perdue.", "Essayez de poser des batiments pour nous aider a defendre la tour!" }; // Phrases du dialogue
     public Text dialogueUI; // R�f�rence au texte UI
     public LayerMask OuvrierLayer; // Calque pour l'ouvrier
     public Camera playerCamera; // R�f�rence � la cam�ra du joueur

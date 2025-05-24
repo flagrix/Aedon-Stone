@@ -56,7 +56,7 @@ public class CompteurTemps : MonoBehaviour
         //timeBetweenWave += 10f; // Augmente le temps entre les vagues
         countdown = timeBetweenWave;
 
-        waveAnnouncement.text = "D�but Vague " + waveNumber + " !!!";
+        waveAnnouncement.text = "Debut Vague " + waveNumber + " !!!";
         waveAnnouncement.gameObject.SetActive(true);
         announcementTimer = Time.time + announcementDuration; // Planifier la d�sactivation
     }
