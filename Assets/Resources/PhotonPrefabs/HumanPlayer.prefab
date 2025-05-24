@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7637109254878080855}
   - component: {fileID: 8598252887457155218}
   m_Layer: 5
-  m_Name: Text (TMP) (4)
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dammage
+  m_text: 'Damage
 
     300 runes
 
@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 4091839340052938052}
   - component: {fileID: 3666140896580085504}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3804,9 +3804,6 @@ MonoBehaviour:
   healthBar: {fileID: 5515934558681496333}
   damageImage: {fileID: 1592462243675123325}
   flashDuration: 0.7
-  walkSpeed: 100
-  runSpeed: 20
-  jumpPower: 7
   gravity: 20
   lookSpeed: 2
   lookXLimit: 90
@@ -3882,6 +3879,14 @@ MonoBehaviour:
   ArbaleteItemPrefab: {fileID: 5992164415958169570, guid: 79c8a0798b23a444e9c39245e445667f, type: 3}
   FlameBookItemPrefab: {fileID: 3880795220011919504, guid: c5cc1401292869b4b977ed4b544cb89f, type: 3}
   HallebardeItemPrefab: {fileID: 7054032234643475664}
+  priceTextHealth: {fileID: 4222512723224811300}
+  priceTextSpeed: {fileID: 2615442893980158395}
+  priceTextJump: {fileID: 7432589582959075833}
+  priceTextDamage: {fileID: 8598252887457155218}
+  priceTextRange: {fileID: 3666140896580085504}
+  maxBonusSpeed: 70
+  actualSpeedPrice: 200
+  Speedlvl: 1
   inventorySlotImage:
   - {fileID: 1701790140474277223}
   - {fileID: 2093673380698855261}
@@ -5165,7 +5170,7 @@ GameObject:
   - component: {fileID: 9069076672468143040}
   - component: {fileID: 2615442893980158395}
   m_Layer: 5
-  m_Name: Text (TMP) (5)
+  m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15999,7 +16004,7 @@ GameObject:
   - component: {fileID: 248779385981784901}
   - component: {fileID: 7432589582959075833}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16581,7 +16586,7 @@ GameObject:
   - component: {fileID: 1361954475492402592}
   - component: {fileID: 4222512723224811300}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22204,7 +22209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6167902104859263901, guid: 68aa0f3c0afd67c479617802cfda2797, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6832834632836520231, guid: 68aa0f3c0afd67c479617802cfda2797, type: 3}
       propertyPath: m_LocalScale.x
@@ -23364,7 +23369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -23373,7 +23378,7 @@ PrefabInstance:
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6431144730691962546}
+      objectReference: {fileID: 8392610345625016559}
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -23396,7 +23401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
+      value: PlayerItemInventory, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 602957577135903083, guid: e52fa777ff5e8304890fe5866cc6b867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName

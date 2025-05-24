@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -53,6 +55,18 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
     [SerializeField] GameObject HallebardeItemPrefab;   
     
     [Space(20)]
+    [Header("Text Price")]
+    [SerializeField] public TextMeshProUGUI priceTextHealth;
+    [SerializeField] public TextMeshProUGUI priceTextSpeed;
+    [SerializeField] public TextMeshProUGUI priceTextJump;
+    [SerializeField] public TextMeshProUGUI priceTextDamage;
+    [SerializeField] public TextMeshProUGUI priceTextRange;
+    public float maxBonusSpeed = 10f;
+    float progressSpeed = Mathf.Clamp01(PlayerController.runSpeed / 150f);
+    public float actualSpeedPrice = 200;
+    public float Speedlvl = 1;
+    
+    [Space(20)]
     [Header("UI")]
     [SerializeField] Image[] inventorySlotImage = new Image[4];
     [SerializeField] Image[] inventoryBackgroundImage = new Image[4];
@@ -74,7 +88,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-       
+        
     }
     void Start()
     {
@@ -385,7 +399,7 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
 
     public void AddRange(float range)
     {
-        if (CanAfford(200))
+        if (CanAfford(950))
         {
             foreach (var Weapon in itemSetActive)
             {
@@ -394,18 +408,32 @@ public class PlayerItemInventory : MonoBehaviourPunCallbacks
                 Weapon.Value.itemScriptableObject.portee += range / portee * 100;
             }
 
-            PV.RPC("RPC_BuyItem", RpcTarget.All, -200);
+            PV.RPC("RPC_BuyItem", RpcTarget.All, -950);
             Debug.Log("Add Range of " + range + "%");
 
             HidePanel();
         }
     }
+    public void AddSpeed()
+    {
+         actualSpeedPrice = actualSpeedPrice* (Mathf.Pow((float)1.15, Speedlvl));
+        if (CanAfford(actualSpeedPrice))
+        {
+            Speedlvl++;
+            PV.RPC("RPC_BuyItem", RpcTarget.All, Convert.ToInt32(actualSpeedPrice));
+            priceTextSpeed.text = $"Speed\n{actualSpeedPrice} runes";
+            Debug.Log("Add Speed of "+ PlayerController.runSpeed);
+            float bonusSpeed = progressSpeed * maxBonusSpeed;
+            PlayerController.runSpeed = PlayerController.runSpeed + bonusSpeed;
+            PlayerController.walkSpeed = PlayerController.walkSpeed + bonusSpeed/2;
+        }
+    }
 
     public void AddDamage(float damage)
     {
-        if (CanAfford(300))
+        if (CanAfford(1100))
         {
-            PV.RPC("RPC_BuyItem", RpcTarget.All, -300);
+            PV.RPC("RPC_BuyItem", RpcTarget.All, -1100);
             foreach (var Weapon in itemSetActive)
             {
                 float degats = Weapon.Value.itemScriptableObject.damage;

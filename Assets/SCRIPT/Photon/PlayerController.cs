@@ -30,9 +30,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
     private float flashTimer;
 
     [Header("Movement Settings")]
-    public float walkSpeed = 3f;
-    public float runSpeed = 8f;
-    public float jumpPower = 7f;
+    public static float walkSpeed = 10f;
+    public static float runSpeed = 16f;
+    public static float jumpPower = 7f;
     public float gravity = 20f;
 
     [Header("Camera Settings")]
@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     [Header("Attack Settings")]
     public LayerMask enemyLayer;
-    private float maxHealth = 100f;
-    float currHealth = 100f;
+    private static float maxHealth = 100f;
+    static float currHealth = 100f;
 
     [Header("Animation Settings")]
     Animator Animator;
@@ -231,34 +231,25 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable, IDama
 
     public void AddMaxHealth(int health)
     {
-        if (CanAfford(300))
+        if (CanAfford(800))
         {
             healthBar.maxValue += health;
             healthBar.value += health;
             maxHealth += health;
             currHealth = maxHealth;
-            photonView.RPC("RPC_BuyItem", RpcTarget.All, -300);
+            photonView.RPC("RPC_BuyItem", RpcTarget.All, -800);
             Debug.Log("Add health of " + health);
         }
     }
 
-    public void AddSpeed(float speed)
-    {
-        if (CanAfford(250))
-        {
-            walkSpeed += speed / 2;
-            runSpeed += speed;
-            photonView.RPC("RPC_BuyItem", RpcTarget.All, -250);
-            Debug.Log("Add Speed of " + speed);
-        }
-}
+   
 
     public void AddJump(float jumpower)
     {
-        if (CanAfford(150))
+        if (CanAfford(300))
         {
             jumpPower += jumpower;
-            photonView.RPC("RPC_BuyItem", RpcTarget.All, -150);
+            photonView.RPC("RPC_BuyItem", RpcTarget.All, -300);
             Debug.Log("Add jumpower of " + jumpower);
         }
     }
