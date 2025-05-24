@@ -40,7 +40,7 @@ public class OuvrierDialogue : MonoBehaviour
 
                 Ouvrier ouvrier = hit.collider.GetComponent<Ouvrier>();
                 Debug.Log(ouvrier);
-                if (ouvrier != null)
+                if (ouvrier != null && !TableauRcords.instance.isInfini)
                 {
                     Debug.Log("ouvrier qui parle");
                     if (!isTyping && currentPhraseIndex < dialoguePhrases.Count) // Si le texte n'est pas en train de s'afficher et qu'il reste des phrases

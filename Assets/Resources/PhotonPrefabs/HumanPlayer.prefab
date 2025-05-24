@@ -3804,7 +3804,7 @@ MonoBehaviour:
   healthBar: {fileID: 5515934558681496333}
   damageImage: {fileID: 1592462243675123325}
   flashDuration: 0.7
-  walkSpeed: 100
+  walkSpeed: 15
   runSpeed: 20
   jumpPower: 7
   gravity: 20

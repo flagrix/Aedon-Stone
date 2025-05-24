@@ -115,6 +115,8 @@ MonoBehaviour:
   Damagenext: 90
   Rangenext: 20
   inv: {fileID: 0}
+  PV: {fileID: 0}
+  isupgratable: 0
 --- !u!114 &4259785534815498741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +279,7 @@ MonoBehaviour:
   vendre_baliste: {fileID: 0}
   vendre_tde: {fileID: 0}
   vendre: {fileID: 0}
+  inv: {fileID: 0}
 --- !u!114 &3924108506015040027
 MonoBehaviour:
   m_ObjectHideFlags: 0
