@@ -76,14 +76,20 @@ public class WavespawnerGauche : MonoBehaviour
 
     void SpawnEnemy()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien_gauche"), spawnPoint.position, spawnPoint.rotation, 0);
+        GameObject enemyObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien_gauche"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20 * (waveIndex - 1));
     }
     void SpawnEnemyfast()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FastQwert_g"), spawnPoint.position, spawnPoint.rotation, 0);
+        GameObject enemyObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FastQwert_g"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20 * (waveIndex - 1));
     }
     void SpawnEnemyfat()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FatQwert_g"), spawnPoint.position,spawnPoint.rotation, 0);
+        GameObject enemyObj =PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FatQwert_g"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20 * (waveIndex - 1));
     }
 }

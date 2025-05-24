@@ -10,7 +10,6 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private Transform enemyPrefab;
 
-
     [SerializeField]
     private Transform spawnPoint;
 
@@ -74,14 +73,20 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien"), spawnPoint.position, spawnPoint.rotation, 0);
+        GameObject enemyObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "qwertien"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20*(waveIndex-1));
     }
     void SpawnEnemyfast()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FastQwert"), spawnPoint.position, spawnPoint.rotation, 0);
+       GameObject enemyObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FastQwert"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20*(waveIndex-1));
     }
     void SpawnEnemyfat()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FatQwert"), spawnPoint.position,spawnPoint.rotation, 0);
+        GameObject enemyObj =PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FatQwert"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20*(waveIndex-1));
     }
 }

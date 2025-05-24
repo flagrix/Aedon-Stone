@@ -23,6 +23,15 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
             PV = GetComponentInParent<PhotonView>();
         if (PV== null)
             PV = GetComponentInChildren<PhotonView>();
+         object[] instantiationData = photonView.InstantiationData;
+        if (instantiationData != null && instantiationData.Length > 0)
+        {
+            int wave = (int)instantiationData[0];
+            float multiplier = 1f + (wave * 0.2f); // 20% de PV en plus par vague
+            startHealth *= multiplier;
+            health = startHealth;
+        }
+        PV.RPC("SetHealth", RpcTarget.All);
     }
 
     public void Start()
@@ -35,7 +44,7 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     {
         if (PV != null)
             PV.RPC("RPC_TakeDamage", RpcTarget.All, amount);
-            
+
     }
 
     public void FinalTakeDamage(float amount)
@@ -74,6 +83,7 @@ public class ennemy : MonoBehaviourPunCallbacks, IDamageable
     {
         speed = startSpeed * (1f - amount);
     }
+    
     
     public GameObject prefab;
     

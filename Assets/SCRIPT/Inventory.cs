@@ -45,6 +45,15 @@ public class Inventory : MonoBehaviourPun
         Cursor.visible = true;
     }
 
+     public void Quitter()
+    {
+        if (!photonView.IsMine) return;
+
+        panelToShow.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
       public void ShowUpgradePanel(defense defense)
     {
         defenseUI.Show(defense);

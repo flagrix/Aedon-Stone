@@ -56,6 +56,8 @@ public class SpawnerIA : MonoBehaviour
 
     void SpawnEnemy()
     {
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "BasicQwertien"), spawnPoint.position, spawnPoint.rotation, 0);
+        GameObject enemyObj =PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "BasicQwertien"), spawnPoint.position, spawnPoint.rotation, 0);
+        ennemy e = enemyObj.GetComponent<ennemy>();
+        e.FinalTakeDamage(-20 * (waveIndex - 1));
     }
 }
